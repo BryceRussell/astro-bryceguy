@@ -2,6 +2,8 @@
 
 A pagination component that uses [astro-json-element](https://github.com/BryceRussell/astro-json-element) to give you full control over every aspect of your pagination element
 
+[Tailwindcss](https://tailwindcss.com) is an easy way to style [astro-json-elements](https://github.com/BryceRussell/astro-json-element) without having to create global stylesheet or use inline styles
+
 ## How to use
 
 __Install package:__
@@ -19,29 +21,30 @@ npm i astro-ryce/pagination
 
 ## API
 
-### Slots
+## Slots
 
-#### Default
+### Default
 
-Children will be slotted after all page elements by default
+Children will be slotted after all page number elements by default
 
-#### first
+### first
 
-Use slot "first" to slot children in front of any page elements
+Use slot "first" to slot children in front of all page number elements
 
-### Props
+## Props
 
 ```
 export interface Props {
 	url: string;
 	total: string|number;
 	current: string|number;
-	ends?: string|number;
+	start: string|number;
+	end?: string|number;
 	middle?: string|number;
 	button?: {};
 	active?: {};
 	disabled?: {};
-	style?: boolean;
+	defaults?: boolean;
 	commas?: boolean;
 	collapse?: boolean;
 	[attrs: string]: any;
@@ -51,7 +54,7 @@ export interface Props {
 ### url
 Type|Default|Description
 ---|---|---
-string||root url for page link: "blog/posts" --> "blog/posts/1", "blog/posts/2", etc
+string||root url for page link: ```"blog/posts"``` -> ```"blog/posts/1", "blog/posts/2"```, etc
 
 ### total
 Type|Default|Description
@@ -81,17 +84,17 @@ string \| number|2|number of pages to display on either side of the current acti
 ### button
 Type|Default|Description
 ---|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the default button element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
+[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the default page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
 
 ### active
 Type|Default|Description
 ---|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the active button element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
+[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the active page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
 
 ### disabled
 Type|Default|Description
 ---|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the disabled button element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
+[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the disabled page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
 
 ### defaults
 Type|Default|Description
@@ -106,7 +109,7 @@ boolean|true|uses commas in page numbers if true
 ### collapse
 Type|Default|Description
 ---|---|---
-boolean|true|if true only the pages defined using the current, ends, and middle props will be shown, if false an element will appear for every page in the total
+boolean|true|if true only the pages defined using the current, ends, and middle props will be shown, if false a page number element will appear for every page number
 
 ### ...attrs
 Type|Default|Description
@@ -127,6 +130,7 @@ Type|Default|Description
 <Pagination url="/posts" total="9999" current="1000" commas={false}></Pagination>
 <Pagination url="/posts" total="12" current="6" collapse={false}></Pagination>
 <Pagination url="/posts" total="12" current="6" style="display:flex;gap:.5rem;" defaults={false}></Pagination>
+<!-- Custom Tailwindcss Example -->
 <Pagination {...{
     url: "/posts",
     total: "9999",
@@ -134,14 +138,14 @@ Type|Default|Description
     defaults: false,
     class: "flex items-center gap-1",
     button: {
-        class: "relative flex-nowrap inline-flex items-center px-2 py-1 rounded-3xl border text-sm font-medium"
+        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border text-sm font-medium"
     },
     active: {
-        class: "relative flex-nowrap inline-flex items-center px-2 py-1 rounded-3xl border border-green-800 text-sm font-medium bg-green-700 text-white"
+        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border border-purple-400 text-sm font-medium bg-purple-500 text-white"
     },
     disabled: {
-        text: "-",
-        class: "relative flex-nowrap inline-flex items-center px-2 py-1 rounded-3xl border text-sm font-medium opacity-25"
+        text: "",
+        class: "leading-none flex items-center px-3"
     },
 }}></Pagination>
 ```
