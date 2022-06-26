@@ -1,4 +1,6 @@
-# Astro Ryce Pagination
+# astro-bryceguy/pagination
+
+This component is a fork/refactor of [https://github.com/iozcelik/SarissaPagination](https://github.com/iozcelik/SarissaPagination)
 
 A pagination component that uses [astro-json-element](https://github.com/BryceRussell/astro-json-element) to give you full control over every aspect of your pagination element
 
@@ -9,10 +11,10 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 __Install package:__
 
 ```
-npm i astro-ryce/pagination
+npm i astro-bryceguy/pagination
 ```
 
-![Default](https://raw.githubusercontent.com/BryceRussell/astro-ryce/master/packages/pagination/examples/default.PNG)
+![Default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/default.PNG)
 
 ```
 //Default
@@ -118,7 +120,7 @@ Type|Default|Description
 
 ## Examples
 
-![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-ryce/master/packages/pagination/examples/pagination.PNG)
+![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/pagination.PNG)
 
 ```
 <Pagination url="/posts" total="22" current="11"></Pagination>
