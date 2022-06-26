@@ -11,14 +11,47 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 __Install package:__
 
 ```
-npm i astro-bryceguy/pagination
+npm i @astro-bryceguy/pagination
 ```
 
 ![Default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/default.PNG)
 
 ```
-//Default
-<Pagination url="/posts" total="22" current="11" />
+//Default styling
+<Pagination url="/posts" total="22" current="11" defaults={true}></Pagination>
+```
+
+## Examples
+
+![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/pagination.PNG)
+
+```
+<Pagination url="/posts" total="22" current="11" defaults={true}></Pagination>
+<Pagination url="/posts" total="22" current="11" start="5" end="1" middle="1" defaults={true}></Pagination>
+<Pagination url="/posts" total="22" current="11" start="1" end="5" middle="1" defaults={true}></Pagination>
+<Pagination url="/posts" total="22" current="11" start="5" end="5" middle="1" defaults={true}></Pagination>
+<Pagination url="/posts" total="22" current="11" start="1" end="1" middle="5" defaults={true}></Pagination>
+<Pagination url="/posts" total="9999" current="1000" defaults={true}></Pagination>
+<Pagination url="/posts" total="9999" current="1000" commas={false} defaults={true}></Pagination>
+<Pagination url="/posts" total="12" current="6" collapse={false} defaults={true}></Pagination>
+<Pagination url="/posts" total="12" current="6" style="display:flex;gap:.5rem;"></Pagination>
+<!-- Custom Tailwindcss Example -->
+<Pagination {...{
+    url: "/posts",
+    total: "9999",
+    current: "1000",
+    class: "flex items-center gap-1",
+    button: {
+        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border text-sm font-medium"
+    },
+    active: {
+        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border border-purple-400 text-sm font-medium bg-purple-500 text-white"
+    },
+    disabled: {
+        text: "",
+        class: "leading-none flex items-center px-3"
+    },
+}}></Pagination>
 ```
 
 ## API
@@ -101,7 +134,7 @@ Type|Default|Description
 ### defaults
 Type|Default|Description
 ---|---|---
-boolean|true|uses built in default styling if true
+boolean|false|uses built in default styling if true
 
 ### commas
 Type|Default|Description
@@ -117,37 +150,3 @@ boolean|true|if true only the pages defined using the current, ends, and middle 
 Type|Default|Description
 ---|---|---
 [astro-json-element](https://github.com/BryceRussell/astro-json-element) object||all other props will define the div wrapper using [astro-json-element](https://github.com/BryceRussell/astro-json-element) object attributes
-
-## Examples
-
-![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/pagination.PNG)
-
-```
-<Pagination url="/posts" total="22" current="11"></Pagination>
-<Pagination url="/posts" total="22" current="11" start="5" end="1" middle="1"></Pagination>
-<Pagination url="/posts" total="22" current="11" start="1" end="5" middle="1"></Pagination>
-<Pagination url="/posts" total="22" current="11" start="5" end="5" middle="1"></Pagination>
-<Pagination url="/posts" total="22" current="11" start="1" end="1" middle="5"></Pagination>
-<Pagination url="/posts" total="9999" current="1000"></Pagination>
-<Pagination url="/posts" total="9999" current="1000" commas={false}></Pagination>
-<Pagination url="/posts" total="12" current="6" collapse={false}></Pagination>
-<Pagination url="/posts" total="12" current="6" style="display:flex;gap:.5rem;" defaults={false}></Pagination>
-<!-- Custom Tailwindcss Example -->
-<Pagination {...{
-    url: "/posts",
-    total: "9999",
-    current: "1000",
-    defaults: false,
-    class: "flex items-center gap-1",
-    button: {
-        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border text-sm font-medium"
-    },
-    active: {
-        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border border-purple-400 text-sm font-medium bg-purple-500 text-white"
-    },
-    disabled: {
-        text: "",
-        class: "leading-none flex items-center px-3"
-    },
-}}></Pagination>
-```

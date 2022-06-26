@@ -1,17 +1,17 @@
 {
   "author": "Bryce Russell",
   "license": "MIT",
-  "name": "@bryceguy/pagination",
+  "name": "@astro-bryceguy/pagination",
   "version": "0.0.5",
-  "description": "Fully controlable and customizable page number pagination",
-  "homepage": "https://github.com/BryceRussell/astro-ryce/tree/master/packages/pagination#readme",
+  "description": "Fully controlable and customizable page number pagination component for astro",
+  "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/pagination#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BryceRussell/astro-ryce",
+    "url": "git+https://github.com/BryceRussell/astro-bryceguy.git",
     "directory": "packages/pagination"
   },
   "bugs": {
-    "url": "https://github.com/BryceRussell/astro-ryce/issues"
+    "url": "https://github.com/BryceRussell/astro-bryceguy/issues"
   },
   "keywords": [
     "astro",
@@ -21,6 +21,7 @@
     "ui"
   ],
   "type": "module",
+  "main": "index.js",
   "exports": {
     ".": "./index.js",
     "./pagination": "./Pagination.astro"

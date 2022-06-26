@@ -1,18 +1,19 @@
 {
-  "name": "bryceguy",
+  "name": "@example/component",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "dev": "astro --root demo dev",
     "build": "astro --root demo build",
     "preview": "astro --root demo preview"
   },
+  "devDependencies": {
+    "astro": "^1.0.0-beta.20"
+  },
   "workspaces": [
-    "packages/*",
+    "./packages/*",
     "./demo"
   ],
-  "devDependencies": {
-    "@astrojs/tailwind": "^0.2.1",
-    "astro": "^1.0.0-beta.56"
+  "dependencies": {
+    "@astrojs/tailwind": "^0.2.1"
   }
 }

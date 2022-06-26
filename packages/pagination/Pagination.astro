@@ -7,7 +7,7 @@ export interface Props {
 	url: string;
 	total: string|number;
 	current: string|number;
-	start: string|number;
+	start?: string|number;
 	end?: string|number;
 	middle?: string|number;
 	button?: {};
@@ -28,7 +28,7 @@ const {
 	button,
 	active,
 	disabled,
-	defaults=true,
+	defaults=false,
 	commas=true,
 	collapse=true,
 	...attrs
