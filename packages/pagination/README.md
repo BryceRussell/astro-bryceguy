@@ -1,5 +1,7 @@
 # Astro Ryce Pagination
 
+A pagination component that uses [astro-json-element](https://github.com/BryceRussell/astro-json-element) to give you full control over every aspect of your pagination element
+
 ## How to use
 
 __Install package:__
@@ -8,20 +10,26 @@ __Install package:__
 npm i astro-ryce/pagination
 ```
 
-__Example:__
-
-![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-ryce/master/packages/pagination/examples/pagination.PNG)
+![Default](https://raw.githubusercontent.com/BryceRussell/astro-ryce/master/packages/pagination/examples/default.PNG)
 
 ```
-<Pagination url="" total="99999" current="999" ends="2" middle="2"></Pagination>
-<Pagination url="" total="99999" current="999" ends="2" middle="2" commas={false}></Pagination>
-<Pagination url="" total="99" current="33" ends="1" middle="3"></Pagination>
-<Pagination url="" total="99" current="66" ends="4" middle="1"></Pagination>
-<Pagination url="" total="8" current="3" collapse={false}></Pagination>
-<Pagination url="" total="99999" current="999" ends="2" middle="2" style={false}></Pagination>
+//Default
+<Pagination url="/posts" total="22" current="11" />
 ```
 
 ## API
+
+### Slots
+
+#### Default
+
+Children will be slotted after all page elements by default
+
+#### first
+
+Use slot "first" to slot children in front of any page elements
+
+### Props
 
 ```
 export interface Props {
@@ -55,10 +63,15 @@ Type|Default|Description
 ---|---|---
 string \| number||current page number
 
-### ends
+### start
 Type|Default|Description
 ---|---|---
-string \| number|2|number of pages to display at start and end
+string \| number|2|number of pages to display at the start
+
+### end
+Type|Default|Description
+---|---|---
+string \| number|2|number of pages to display at the end
 
 ### middle
 Type|Default|Description
@@ -80,7 +93,7 @@ Type|Default|Description
 ---|---|---
 [astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the disabled button element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
 
-### style
+### defaults
 Type|Default|Description
 ---|---|---
 boolean|true|uses built in default styling if true
@@ -99,3 +112,36 @@ boolean|true|if true only the pages defined using the current, ends, and middle 
 Type|Default|Description
 ---|---|---
 [astro-json-element](https://github.com/BryceRussell/astro-json-element) object||all other props will define the div wrapper using [astro-json-element](https://github.com/BryceRussell/astro-json-element) object attributes
+
+## Examples
+
+![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-ryce/master/packages/pagination/examples/pagination.PNG)
+
+```
+<Pagination url="/posts" total="22" current="11"></Pagination>
+<Pagination url="/posts" total="22" current="11" start="5" end="1" middle="1"></Pagination>
+<Pagination url="/posts" total="22" current="11" start="1" end="5" middle="1"></Pagination>
+<Pagination url="/posts" total="22" current="11" start="5" end="5" middle="1"></Pagination>
+<Pagination url="/posts" total="22" current="11" start="1" end="1" middle="5"></Pagination>
+<Pagination url="/posts" total="9999" current="1000"></Pagination>
+<Pagination url="/posts" total="9999" current="1000" commas={false}></Pagination>
+<Pagination url="/posts" total="12" current="6" collapse={false}></Pagination>
+<Pagination url="/posts" total="12" current="6" style="display:flex;gap:.5rem;" defaults={false}></Pagination>
+<Pagination {...{
+    url: "/posts",
+    total: "9999",
+    current: "1000",
+    defaults: false,
+    class: "flex items-center gap-1",
+    button: {
+        class: "relative flex-nowrap inline-flex items-center px-2 py-1 rounded-3xl border text-sm font-medium"
+    },
+    active: {
+        class: "relative flex-nowrap inline-flex items-center px-2 py-1 rounded-3xl border border-green-800 text-sm font-medium bg-green-700 text-white"
+    },
+    disabled: {
+        text: "-",
+        class: "relative flex-nowrap inline-flex items-center px-2 py-1 rounded-3xl border text-sm font-medium opacity-25"
+    },
+}}></Pagination>
+```

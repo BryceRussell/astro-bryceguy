@@ -1,5 +1,5 @@
 ---
-//This componenet is a fork of https://github.com/iozcelik/SarissaPagination/blob/master/packages/pagination/Pagination.astro
+//This componenet is a fork of https://github.com/iozcelik/SarissaPagination
 
 import { Element } from 'astro-json-element';
 
@@ -7,12 +7,13 @@ export interface Props {
 	url: string;
 	total: string|number;
 	current: string|number;
-	ends?: string|number;
+	start: string|number;
+	end?: string|number;
 	middle?: string|number;
 	button?: {};
 	active?: {};
 	disabled?: {};
-	style?: boolean;
+	defaults?: boolean;
 	commas?: boolean;
 	collapse?: boolean;
 	[attrs: string]: any;
@@ -21,12 +22,13 @@ const {
 	url,
 	total,
 	current,
-	ends=2,
+	start=2,
+	end=2,
 	middle=2,
 	button,
 	active,
 	disabled,
-	style=true,
+	defaults=true,
 	commas=true,
 	collapse=true,
 	...attrs
@@ -35,22 +37,27 @@ const {
 //astro-json-element defaults
 const default_attrs = {
 	tag: "div",
-	style: style?"display:flex;justify-content:center;align-items:center;gap:.25rem;":null,
+	style: defaults?"display:flex;justify-content:center;align-items:center;gap:.25rem;":null,
 };
 
-const default_style = `position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.125rem;border:1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;`;
+const default_style = `cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.125rem;border:1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;`;
 
 const default_button = {
 	tag: "a",
-	style: style?`${default_style}`:null
+	style: defaults?`${default_style}`:null,
+	onmouseover: defaults?"this.style.textDecoration='underline';this.style.backgroundColor='#fafafa';":null,
+	onmouseout: defaults?"this.style.textDecoration='none';this.style.backgroundColor='#fff';":null
 };
 const default_active = {
 	tag: "a",
-	style: style?`${default_style}border-color:#29314D;background-color:#414E7D;color:white;`:null
+	style: defaults?`${default_style}border-color:#0EA5E9;background-color:#0EA5E9;color:white;`:null,
+	onmouseover: defaults?"this.style.textDecoration='underline'":null,
+	onmouseout: defaults?"this.style.textDecoration='none'":null
 };
 const default_disabled = {
 	tag: "a",
-	style: style?`${default_style}opacity:.25;`:null
+	text: "...",
+	style: defaults?`${default_style}cursor:default;opacity:.25;`:null
 };
 
 //Create array of pages to map over
@@ -69,12 +76,13 @@ function isDisabled(i){
 	//Toggle collapsing
 	if(!collapse) return false;
 	//Calc End Pages
-	if(i <= +ends || i >= +total - (+ends-1)) return false;
+	if(i <= +start || i >= +total - (+end-1)) return false;
 	//Calc Middle Pages
 	if(Math.abs(i - +current) <= middle) return false;
 	return true;
 }
 
+//create number string with commas using string or number
 function addCommas(num) {
     if (typeof num == 'number') return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     if (typeof num == 'string') return num.replace(/[^\d]/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -83,9 +91,26 @@ function addCommas(num) {
 ---
 
 <Element {...{...default_attrs, ...attrs}}>
+	<slot name="first"/>
 	{ pages.map((page, i) => {
-		return page.active?<Element {...{...default_active, ...active}}>{commas?addCommas(current):current}</Element>:
-			(page.disable && !pages[i-1].disable?<Element {...{...default_disabled, ...disabled}}>...</Element>:
-				(!page.disable && <Element {...{href: `${url}/${page.number}`, ...default_button, ...button}}>{commas?addCommas(page.number):page.number}</Element>
+		//Active Element
+ 		return page.active?<Element {...{
+			text: commas?addCommas(current):current,
+			...default_active,
+			...active
+		}}/>:
+		//Disabled Element
+		(page.disable && !pages[i-1].disable?<Element {...{
+			...default_disabled,
+			...disabled
+		}}/>:
+		//Default Element
+		(!page.disable && <Element {...{
+			text: commas?addCommas(page.number):page.number,
+			href: `${url}/${page.number}`,
+			...default_button,
+			...button
+		}}/>
 	))})}
+	<slot />
 </Element>
