@@ -1,0 +1,91 @@
+---
+//This componenet is a fork of https://github.com/iozcelik/SarissaPagination/blob/master/packages/pagination/Pagination.astro
+
+import { Element } from 'astro-json-element';
+
+export interface Props {
+	url: string;
+	total: string|number;
+	current: string|number;
+	ends?: string|number;
+	middle?: string|number;
+	button?: {};
+	active?: {};
+	disabled?: {};
+	style?: boolean;
+	commas?: boolean;
+	collapse?: boolean;
+	[attrs: string]: any;
+}
+const {
+	url,
+	total,
+	current,
+	ends=2,
+	middle=2,
+	button,
+	active,
+	disabled,
+	style=true,
+	commas=true,
+	collapse=true,
+	...attrs
+} = Astro.props as Props;
+
+//astro-json-element defaults
+const default_attrs = {
+	tag: "div",
+	style: style?"display:flex;justify-content:center;align-items:center;gap:.25rem;":null,
+};
+
+const default_style = `position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.125rem;border:1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;`;
+
+const default_button = {
+	tag: "a",
+	style: style?`${default_style}`:null
+};
+const default_active = {
+	tag: "a",
+	style: style?`${default_style}border-color:#29314D;background-color:#414E7D;color:white;`:null
+};
+const default_disabled = {
+	tag: "a",
+	style: style?`${default_style}opacity:.25;`:null
+};
+
+//Create array of pages to map over
+var pages = Array.from({ length: +total }, (v, i) => i + 1).map((i) => {
+  	let page = {
+		number: i,
+		active: +current == i,
+		disable: isDisabled(i)
+	};
+	return page;
+});
+
+//Calculate pages to display
+function isDisabled(i){
+	if(current == i) return false
+	//Toggle collapsing
+	if(!collapse) return false;
+	//Calc End Pages
+	if(i <= +ends || i >= +total - (+ends-1)) return false;
+	//Calc Middle Pages
+	if(Math.abs(i - +current) <= middle) return false;
+	return true;
+}
+
+function addCommas(num) {
+    if (typeof num == 'number') return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    if (typeof num == 'string') return num.replace(/[^\d]/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return "0"
+}
+---
+
+<Element {...{...default_attrs, ...attrs}}>
+	{ pages.map((page, i) => {
+		return page.active?<Element {...{...default_active, ...active}}>{commas?addCommas(current):current}</Element>:
+			(page.disable && !pages[i-1].disable?<Element {...{...default_disabled, ...disabled}}>...</Element>:
+				(!page.disable && <Element {...{href: `${url}/${page.number}`, ...default_button, ...button}}>{commas?addCommas(page.number):page.number}</Element>
+	))})}
+</Element>

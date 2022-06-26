@@ -1,0 +1,21 @@
+{
+  "name": "@astro-ryce/pagination",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./pagination": "./Pagination.astro"
+  },
+  "files": [
+    "index.js",
+    "Pagination.astro"
+  ],
+  "keywords": [
+    "astro-component",
+    "pagination"
+  ],
+  "dependencies": {
+    "astro-json-element": "^0.1.0"
+  }
+}
