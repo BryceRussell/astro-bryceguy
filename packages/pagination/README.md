@@ -1,4 +1,4 @@
-# astro-bryceguy/pagination
+# @astro-bryceguy/pagination
 
 This component is a fork/refactor of [https://github.com/iozcelik/SarissaPagination](https://github.com/iozcelik/SarissaPagination)
 
