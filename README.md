@@ -1,6 +1,6 @@
-# Astro Ryce
+# astro-bryceguy
 
-Astro component library
+Bryce's astro component library
 
 ## Components
 
