@@ -6,6 +6,13 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 
 [Tailwindcss](https://tailwindcss.com) is an easy way to style [astro-json-elements](https://github.com/BryceRussell/astro-json-element) without having to create global stylesheet or use inline styles
 
+## Features
+
+- Customize how many page numbers are shown at the start, middle, and end
+- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+- Add commas to page numbers
+- String number compatibility
+
 ## How to use
 
 __Install package:__
