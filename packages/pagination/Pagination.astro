@@ -38,6 +38,7 @@ const {
 const default_attrs = {
 	tag: "div",
 	style: defaults?"display:flex;justify-content:center;align-items:center;gap:.25rem;":null,
+	...attrs
 };
 
 const default_style = `cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.125rem;border:1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;`;
@@ -46,18 +47,22 @@ const default_button = {
 	tag: "a",
 	style: defaults?`${default_style}`:null,
 	onmouseover: defaults?"this.style.textDecoration='underline';this.style.backgroundColor='#fafafa';":null,
-	onmouseout: defaults?"this.style.textDecoration='none';this.style.backgroundColor='#fff';":null
+	onmouseout: defaults?"this.style.textDecoration='none';this.style.backgroundColor='#fff';":null,
+	...button
 };
 const default_active = {
 	tag: "a",
+	text: commas?addCommas(current):current,
 	style: defaults?`${default_style}border-color:#0EA5E9;background-color:#0EA5E9;color:white;`:null,
 	onmouseover: defaults?"this.style.textDecoration='underline'":null,
-	onmouseout: defaults?"this.style.textDecoration='none'":null
+	onmouseout: defaults?"this.style.textDecoration='none'":null,
+	...active
 };
 const default_disabled = {
 	tag: "a",
 	text: "...",
-	style: defaults?`${default_style}cursor:default;opacity:.25;`:null
+	style: defaults?`${default_style}cursor:default;opacity:.25;`:null,
+	...disabled
 };
 
 //Create array of pages to map over
@@ -90,26 +95,18 @@ function addCommas(num) {
 }
 ---
 
-<Element {...{...default_attrs, ...attrs}}>
+<Element {...{...default_attrs}}>
 	<slot name="first"/>
 	{ pages.map((page, i) => {
 		//Active Element
- 		return page.active?<Element {...{
-			text: commas?addCommas(current):current,
-			...default_active,
-			...active
-		}}/>:
+ 		return page.active?<Element {...default_active}/>:
 		//Disabled Element
-		(page.disable && !pages[i-1].disable?<Element {...{
-			...default_disabled,
-			...disabled
-		}}/>:
+		(page.disable && !pages[i-1].disable?<Element {...default_disabled}/>:
 		//Default Element
 		(!page.disable && <Element {...{
 			text: commas?addCommas(page.number):page.number,
 			href: `${url}/${page.number}`,
-			...default_button,
-			...button
+			...default_button
 		}}/>
 	))})}
 	<slot />

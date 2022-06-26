@@ -1,14 +1,14 @@
 {
   "author": "Bryce Russell",
   "license": "MIT",
-  "name": "@astro-bryceguy/pagination",
-  "version": "0.0.6",
-  "description": "Fully customizable/controllable page number pagination component for astro",
-  "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/pagination#readme",
+  "name": "@astro-bryceguy/rating",
+  "version": "0.0.1",
+  "description": "Astro component that uses star icons to display the rating of a product, post, comment, etc.",
+  "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/rating#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BryceRussell/astro-bryceguy.git",
-    "directory": "packages/pagination"
+    "directory": "packages/rating"
   },
   "bugs": {
     "url": "https://github.com/BryceRussell/astro-bryceguy/issues"
@@ -17,18 +17,18 @@
     "astro",
     "astro-component",
     "astro-bryceguy",
-    "pagination",
+    "rating",
     "ui"
   ],
   "type": "module",
   "main": "index.js",
   "exports": {
     ".": "./index.js",
-    "./pagination": "./Pagination.astro"
+    "./rating": "./Rating.astro"
   },
   "files": [
     "index.js",
-    "Pagination.astro"
+    "Rating.astro"
   ],
   "dependencies": {
     "astro-json-element": "^0.1.0"

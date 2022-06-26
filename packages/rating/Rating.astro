@@ -1,0 +1,76 @@
+---
+import { Element } from 'astro-json-element';
+import { Icon } from 'astro-icon';
+
+export interface Props {
+    rate?: string|number;
+    max?: string|number;
+    total?: string|number;
+    full?: string;
+    half?: string;
+    empty?: string;
+    span?: {};
+    stars?: {};
+    star?: {};
+    [attrs: string]: any;
+}
+const { 
+    max=5,
+    rate=0,
+    total,
+    full="star-full",
+    half="star-half",
+    empty="star-empty",
+    span,
+    stars,
+    icon,
+    ...attrs
+} = Astro.props as Props;
+
+const default_attrs = {
+	tag: "div",
+    style: "display:flex;align-items:center;gap:.25rem;",
+	...attrs
+};
+
+const default_span= {
+	tag: "span",
+	text: `(${addCommas(total)})`,
+    style: "line-height:1;font-size:14px;color:#ccc;",
+	...span
+};
+
+const default_stars = {
+	tag: "div",
+    style: "display:flex;align-items:center;",
+	...stars
+};
+
+const default_icon = {
+    style: "height:1rem;width:1rem;",
+	...icon
+};
+
+const fullStars = Math.floor(+rate);
+const halfStars = +rate - fullStars
+const emptyStars = Math.floor(+max - +rate);
+
+function addCommas(num) {
+    if (typeof num == 'number') return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    if (typeof num == 'string') return num.replace(/[^\d]/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return "0"
+}
+---
+
+<Element {...default_attrs}>
+    {total !== undefined && <Element {...default_span}/>}
+    <Element {...default_stars}>
+        {[...Array(fullStars)].map(() => {
+            return <Icon name={full} {...default_icon}/>
+        })}
+        {halfStars > 0 && <Icon name={half} {...default_icon}/>}
+        {emptyStars > 0 && [...Array(emptyStars)].map(() => {
+            return <Icon name={empty} {...default_icon}/>
+        })}
+    </Element>
+</Element>
