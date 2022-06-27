@@ -1,6 +1,6 @@
 ---
 import { Element } from 'astro-json-element';
-import { Icon } from 'astro-icon';
+//import { Icon } from 'astro-icon';
 
 export interface Props {
     rate?: string|number;
@@ -66,11 +66,11 @@ function addCommas(num) {
     {total !== undefined && <Element {...default_span}/>}
     <Element {...default_stars}>
         {[...Array(fullStars)].map(() => {
-            return <Icon name={full} {...default_icon}/>
+            return <div name={full} {...default_icon}/>
         })}
-        {halfStars > 0 && <Icon name={half} {...default_icon}/>}
+        {halfStars > 0 && <div name={half} {...default_icon}/>}
         {emptyStars > 0 && [...Array(emptyStars)].map(() => {
-            return <Icon name={empty} {...default_icon}/>
+            return <div name={empty} {...default_icon}/>
         })}
     </Element>
 </Element>
