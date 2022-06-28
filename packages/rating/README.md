@@ -151,6 +151,12 @@ Toggles commas on string numbers for the default span element `_span` when using
 
 If true use the built in default in-line styling and `_span` element for displaying total number of ratings
 
+#### `...attrs`
+
+**Type**: `{}`
+
+Any of the other keys not above will be added as a prop to the main rating container's astro-json-element
+
 
 ## Examples
 
