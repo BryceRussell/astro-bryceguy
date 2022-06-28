@@ -9,7 +9,7 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 ## Features
 
 - Customize how many page numbers are shown at the start, middle, and end
-- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-elements](https://github.com/BryceRussell/astro-json-element)
 - Add commas to page numbers
 - String number compatibility
 

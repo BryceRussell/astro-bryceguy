@@ -1,159 +1,158 @@
-# @astro-bryceguy/pagination
+# @astro-bryceguy/rating
 
-This component is a fork/refactor of [https://github.com/iozcelik/SarissaPagination](https://github.com/iozcelik/SarissaPagination)
-
-A pagination component that uses [astro-json-element](https://github.com/BryceRussell/astro-json-element) to give you full control over every aspect of your pagination element
-
-[Tailwindcss](https://tailwindcss.com) is an easy way to style [astro-json-elements](https://github.com/BryceRussell/astro-json-element) without having to create global stylesheet or use inline styles
+A component that uses stars to display a rating for reviews, products, comments, etc
 
 ## Features
 
-- Customize how many page numbers are shown at the start, middle, and end
-- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-- Add commas to page numbers
-- String number compatibility
+- Shows a rate (2/5, 7.5/10, etc) using stars
+- Supports displaying half stars
+- Uses astro-icon to serve star icon svgs
+- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-elements](https://github.com/BryceRussell/astro-json-element)
+
+__NOTE:__ astro-json-elements can only be styled using inline styles or global stylesheets with classes, use [Tailwindcss](https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#readme) for easy styling
 
 ## How to use
 
-__Install package:__
+__Install:__
+```
+npm i @astro-bryceguy-rating
+```
+
+__Add to astro config:__
+```
+export default defineConfig({
+  vite: {
+    ssr: {
+      external: ["svgo"],
+    },
+  },
+});
+```
+
+__Default Styling:__
+```
+<Rating max="10" rate="10" total="1289" defaults={true}/>
+```
+
+## astro-icon
+
+Define the ```active```, ```half```, and ```inactive``` stars [astro-icons](https://github.com/natemoo-re/astro-icon#readme) properties inside of the ```icon``` prop
 
 ```
-npm i @astro-bryceguy/pagination
-```
-
-![Default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/default.PNG)
-
-```
-//Default styling
-<Pagination url="/posts" total="22" current="11" defaults={true}></Pagination>
+//Uses tailwindcss to style
+<Rating {...{
+    rate: "4.5",
+    max: "9",
+    class: "flex items-center gap-1",
+    icon: {
+        active: {
+            name: "line-md:heart-filled"
+        },
+        half: {
+            name: "line-md:heart-filled-half"
+        },
+        inactive: {
+            name: "line-md:heart"
+        },
+        class: "text-pink-300 w-4 h-4"
+    }
+}}/>
 ```
 
 ## Examples
 
-![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/pagination.PNG)
+```
+<Rating {...{
+    rate: "3",
+    max: "5",
+    tag: "section",
+    class: "flex flex-col-reverse items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300",
+    icon: {
+        active: {
+            name: "mdi:star"
+        },
+        half: {
+            name: "mdi:star-half-full"
+        },
+        inactive: {
+            name: "mdi:star-outline"
+        },
+        class: "text-blue-300 w-4 h-4"
+    }
+}}/>
+```
 
 ```
-<Pagination url="/posts" total="22" current="11" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="5" end="1" middle="1" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="1" end="5" middle="1" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="5" end="5" middle="1" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="1" end="1" middle="5" defaults={true}></Pagination>
-<Pagination url="/posts" total="9999" current="1000" defaults={true}></Pagination>
-<Pagination url="/posts" total="9999" current="1000" commas={false} defaults={true}></Pagination>
-<Pagination url="/posts" total="12" current="6" collapse={false} defaults={true}></Pagination>
-<Pagination url="/posts" total="12" current="6" style="display:flex;gap:.5rem;"></Pagination>
-<!-- Custom Tailwindcss Example -->
-<Pagination {...{
-    url: "/posts",
-    total: "9999",
-    current: "1000",
-    class: "flex items-center gap-1",
-    button: {
-        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border text-sm font-medium"
+<Rating {...{
+    rate: "7.5",
+    max: "10",
+    class: "flex flex-col-reverse items-end gap-1 py-1 px-2 bg-neutral-50",
+    _span: {
+        tag: "span",
+        text: "873",
+        class: "text-xs text-blue-300"
     },
-    active: {
-        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border border-purple-400 text-sm font-medium bg-purple-500 text-white"
+    icons: {
+        class: "flex flex-row-reverse items-center"
     },
-    disabled: {
-        text: "",
-        class: "leading-none flex items-center px-3"
+    icon: {
+        half: {
+            style: "transform:scale(-1, 1);"
+        },
+        class: "text-yellow-300 w-4 h-4"
+    }
+}}/>
+```
+
+```
+<Rating {...{
+    rate: "2.5",
+    max: "5",
+    class: "flex flex-row-reverse items-center gap-1 py-1 px-2 rounded-md border",
+    _span: {
+        tag: "span",
+        text: "72",
+        class: "text-xs text-blue-300"
     },
-}}></Pagination>
+    icons: {
+        class: "flex items-center"
+    },
+    icon: {
+        active: {
+            name: "mdi:star"
+        },
+        half: {
+            name: "mdi:star-half-full"
+        },
+        inactive: {
+            name: "mdi:star-outline"
+        },
+        class: "text-yellow-300 w-4 h-4",
+    }
+}}/>
 ```
 
-## API
-
-## Slots
-
-### Default
-
-Children will be slotted after all page number elements by default
-
-### first
-
-Use slot "first" to slot children in front of all page number elements
-
-## Props
-
 ```
-export interface Props {
-	url: string;
-	total: string|number;
-	current: string|number;
-	start: string|number;
-	end?: string|number;
-	middle?: string|number;
-	button?: {};
-	active?: {};
-	disabled?: {};
-	defaults?: boolean;
-	commas?: boolean;
-	collapse?: boolean;
-	[attrs: string]: any;
-}
+<Rating {...{
+    rate: "2.5",
+    max: "3",
+    class: "flex flex-col-reverse items-center py-1 px-2 rounded-md border border-pink-300",
+    _span: {
+        tag: "span",
+        text: "Healthy!",
+        class: "text-xs text-pink-300"
+    },
+    icon: {
+        active: {
+            name: "line-md:heart-filled"
+        },
+        half: {
+            name: "line-md:heart-filled-half"
+        },
+        inactive: {
+            name: "line-md:heart"
+        },
+        class: "text-pink-300 w-4 h-4"
+    }
+}}/>
 ```
-
-### url
-Type|Default|Description
----|---|---
-string||root url for page link: ```"blog/posts"``` -> ```"blog/posts/1", "blog/posts/2"```, etc
-
-### total
-Type|Default|Description
----|---|---
-string \| number||total number of pages
-
-### current
-Type|Default|Description
----|---|---
-string \| number||current page number
-
-### start
-Type|Default|Description
----|---|---
-string \| number|2|number of pages to display at the start
-
-### end
-Type|Default|Description
----|---|---
-string \| number|2|number of pages to display at the end
-
-### middle
-Type|Default|Description
----|---|---
-string \| number|2|number of pages to display on either side of the current active page
-
-### button
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the default page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
-
-### active
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the active page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
-
-### disabled
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the disabled page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
-
-### defaults
-Type|Default|Description
----|---|---
-boolean|false|uses built in default styling if true
-
-### commas
-Type|Default|Description
----|---|---
-boolean|true|uses commas in page numbers if true
-
-### collapse
-Type|Default|Description
----|---|---
-boolean|true|if true only the pages defined using the current, ends, and middle props will be shown, if false a page number element will appear for every page number
-
-### ...attrs
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||all other props will define the div wrapper using [astro-json-element](https://github.com/BryceRussell/astro-json-element) object attributes

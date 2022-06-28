@@ -14,11 +14,11 @@ import { Rating } from '@astro-bryceguy/rating';
 			<Rating />
 			<Rating defaults={true}/>
 			<Rating rate="2.5" defaults={true}/>
-			<Rating rate="5" defaults={true}/>
-			<Rating max="10" rate="5" total="17" defaults={true}/>
-			<Rating max="10" rate="7.5" total="803" defaults={true}/>
+			<Rating rate="4.5" total="56" defaults={true}/>
+			<Rating max="10" rate="5" total="2635" commas={false} defaults={true}/>
 			<Rating max="10" rate="10" total="1289" defaults={true}/>
-			<Rating max="15" rate="7.5" defaults={true}/>
+			<Rating max="12" rate="6" defaults={true}/>
+			<Rating max="3" rate="1.5" defaults={true}/>
 			<h2 class="m-auto font-bold">astro-icon Support</h2>
 			<!-- Phosphor Icons with Tailwindcss -->
 			<Rating {...{
@@ -67,9 +67,6 @@ import { Rating } from '@astro-bryceguy/rating';
 				rate: "4.5",
 				max: "9",
 				class: "flex items-center gap-1",
-				icons: {
-					class: "flex items-center"
-				},
 				icon: {
 					active: {
 						name: "line-md:heart-filled"
@@ -88,10 +85,8 @@ import { Rating } from '@astro-bryceguy/rating';
 			<Rating {...{
 				rate: "3",
 				max: "5",
+				tag: "section",
 				class: "flex flex-col-reverse items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300",
-				icons: {
-					class: "flex items-center"
-				},
 				icon: {
 					active: {
 						name: "mdi:star"
@@ -157,9 +152,6 @@ import { Rating } from '@astro-bryceguy/rating';
 					tag: "span",
 					text: "Healthy!",
 					class: "text-xs text-pink-300"
-				},
-				icons: {
-					class: "flex items-center"
 				},
 				icon: {
 					active: {

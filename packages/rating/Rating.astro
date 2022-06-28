@@ -49,12 +49,12 @@ const default_attrs = {
 
 const default_icons = {
 	tag: "div",
-    style: "display:flex;align-items:center;",
+    style: icons&&"display:flex;align-items:center;",
     ...icons
 };
 
 const default_icon = {
-    style: `min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
+    style: icon_attrs&&`min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
 	...icon_attrs
 };
 

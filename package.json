@@ -13,5 +13,8 @@
   "workspaces": [
     "./packages/*",
     "./demo"
-  ]
+  ],
+  "dependencies": {
+    "astro-json-element": "^0.1.0"
+  }
 }
