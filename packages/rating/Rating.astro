@@ -49,12 +49,12 @@ const default_attrs = {
 
 const default_icons = {
 	tag: "div",
-    style: icons&&"display:flex;align-items:center;",
+    style: isEmpty(icons)&&"display:flex;align-items:center;",
     ...icons
 };
 
 const default_icon = {
-    style: icon_attrs&&`min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
+    style: isEmpty(icon_attrs)&&`min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
 	...icon_attrs
 };
 
@@ -85,6 +85,12 @@ function addCommas(num) {
     if (typeof num == 'number') return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     if (typeof num == 'string') return num.replace(/[^\d]/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     return "0"
+}
+
+function isEmpty(obj) {
+    let empty = true
+    obj.constructor === Object?Object.entries(obj).length === 0?empty = true:empty = false:empty = true
+    return empty;
 }
 ---
 

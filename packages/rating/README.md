@@ -9,16 +9,18 @@ A component that uses stars to display a rating for reviews, products, comments,
 - Uses astro-icon to serve star icon svgs
 - Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-elements](https://github.com/BryceRussell/astro-json-element)
 
-__NOTE:__ astro-json-elements can only be styled using inline styles or global stylesheets with classes, use [Tailwindcss](https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#readme) for easy styling
+__NOTE:__ astro-json-element objects can only be styled using inline styles or global stylesheets and classes, this project uses [Tailwindcss](https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#readme) to make styling easier
 
 ## How to use
 
 __Install:__
+
 ```
 npm i @astro-bryceguy-rating
 ```
 
 __Add to astro config:__
+
 ```
 export default defineConfig({
   vite: {
@@ -29,17 +31,23 @@ export default defineConfig({
 });
 ```
 
+
 __Default Styling:__
+
+![default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/default.PNG)
+
 ```
-<Rating max="10" rate="10" total="1289" defaults={true}/>
+<Rating rate="4.5" total="56" defaults={true}/>
 ```
 
 ## astro-icon
 
-Define the ```active```, ```half```, and ```inactive``` stars [astro-icons](https://github.com/natemoo-re/astro-icon#readme) properties inside of the ```icon``` prop
+Use [astro-icons](https://github.com/natemoo-re/astro-icon#readme) to customize the icons
+
+![hearts](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/hearts.PNG)
 
 ```
-//Uses tailwindcss to style
+//Using tailwindcss classes to style
 <Rating {...{
     rate: "4.5",
     max: "9",
@@ -59,7 +67,94 @@ Define the ```active```, ```half```, and ```inactive``` stars [astro-icons](http
 }}/>
 ```
 
+## API
+
+#### `max`
+
+**Type**: `string | number`
+**Default**: `5`
+
+Max number of stars to display
+
+#### `rate`
+
+**Type**: `string | number`
+**Default**: `0`
+
+A fraction of max, number of activated stars
+
+
+#### `total`
+
+**Type**: `string | number`
+
+
+Total number of ratings
+
+if `defaults` is true it creates a span element that displays the total: `(1,503)`
+
+Use `_span` key to override the default span element with a astro-json-element child
+
+Remove commas by setting `commas` to false
+
+#### `icons`
+
+**Type**: `object`
+
+**Default**:
+```
+{
+    tag: "div",
+    style: icons&&"display:flex;align-items:center;",
+    ...icons
+}
+```
+
+#### `icon`
+
+**Type**: `object`
+
+**Default**:
+```
+{
+    active: {
+        name: "star-active"
+    },
+    half: {
+        name: "star-half"
+    },
+    inactive: {
+        name: "star-inactive"
+    },
+    style: `min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`
+}
+```
+
+Define the props that will be shared with all across all icon svgs
+
+Define icon specific props using [astro-icon](https://github.com/natemoo-re/astro-icon#readme) for the `active`, `half`, and `inactive` icon props
+
+The default icon names: `star-active`, `star-half`, and `star-inactive` take advantage of the [local icons](https://github.com/natemoo-re/astro-icon#local-icons) feature in astro-icon to serve a local icon svg by default
+
+
+#### `commas`
+
+**Type**: `boolean`
+**Default**:`true`
+
+Toggles commas on string numbers for the default span element `_span` when using the `total` prop and `defaults` set to true
+
+#### `defaults`
+
+**Type**: `boolean`
+**Default**:`false`
+
+If true use the built in default in-line styling and `_span` element for displaying total number of ratings
+
+
 ## Examples
+
+![custom_1](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_1.PNG)
 
 ```
 <Rating {...{
@@ -82,6 +177,9 @@ Define the ```active```, ```half```, and ```inactive``` stars [astro-icons](http
 }}/>
 ```
 
+![custom_2](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_2.PNG)
+
+
 ```
 <Rating {...{
     rate: "7.5",
@@ -103,6 +201,8 @@ Define the ```active```, ```half```, and ```inactive``` stars [astro-icons](http
     }
 }}/>
 ```
+
+![custom_3](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_3.PNG)
 
 ```
 <Rating {...{
@@ -131,6 +231,9 @@ Define the ```active```, ```half```, and ```inactive``` stars [astro-icons](http
     }
 }}/>
 ```
+
+![custom_4](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_4.PNG)
+
 
 ```
 <Rating {...{
