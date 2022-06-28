@@ -7,14 +7,11 @@
     "preview": "astro --root demo preview"
   },
   "devDependencies": {
+    "@astrojs/tailwind": "^0.2.1",
     "astro": "^1.0.0-beta.20"
   },
   "workspaces": [
     "./packages/*",
     "./demo"
-  ],
-  "dependencies": {
-    "@astrojs/tailwind": "^0.2.1",
-    "astro-icon": "^0.7.1"
-  }
+  ]
 }

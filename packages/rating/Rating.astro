@@ -1,60 +1,86 @@
 ---
 import { Element } from 'astro-json-element';
-//import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon';
 
 export interface Props {
-    rate?: string|number;
     max?: string|number;
+    rate?: string|number;
     total?: string|number;
-    full?: string;
-    half?: string;
-    empty?: string;
-    span?: {};
-    stars?: {};
-    star?: {};
+    icons?: {};
+    icon?: {
+        active?: {};
+        half?: {};
+        inactive?: {};
+        [attrs: string]: any;
+    };
+    commas?: boolean;
+    defaults?: boolean;
     [attrs: string]: any;
 }
 const { 
     max=5,
     rate=0,
     total,
-    full="star-full",
-    half="star-half",
-    empty="star-empty",
-    span,
-    stars,
-    icon,
+    icons={},
+    icon={},
+    commas=true,
+    defaults=false,
     ...attrs
 } = Astro.props as Props;
 
+const {
+    active={},
+    half={},
+    inactive={},
+    ...icon_attrs
+} = icon;
+
+//Default login
 const default_attrs = {
 	tag: "div",
-    style: "display:flex;align-items:center;gap:.25rem;",
+    style: defaults&&"display:flex;align-items:center;gap:.25rem;",
+    _span: defaults&&total&&{
+        tag: "span",
+        text: `(${commas?addCommas(total):total})`,
+        style: "line-height:1;font-size:14px;color:#ccc;",
+    },
 	...attrs
 };
 
-const default_span= {
-	tag: "span",
-	text: `(${addCommas(total)})`,
-    style: "line-height:1;font-size:14px;color:#ccc;",
-	...span
-};
-
-const default_stars = {
+const default_icons = {
 	tag: "div",
     style: "display:flex;align-items:center;",
-	...stars
+    ...icons
 };
 
 const default_icon = {
-    style: "height:1rem;width:1rem;",
-	...icon
+    style: `min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
+	...icon_attrs
 };
 
-const fullStars = Math.floor(+rate);
-const halfStars = +rate - fullStars
-const emptyStars = Math.floor(+max - +rate);
+const default_active = {
+    name: "star-active",
+    ...default_icon,
+    ...active
+};
+const default_half = {
+    name: "star-half",
+    ...default_icon,
+    ...half,
+};
 
+const default_inactive = {
+    name: "star-inactive",
+    ...default_icon,
+    ...inactive
+};
+
+//Clac
+const activeStars = Math.floor(+rate);
+const halfStars = +rate - activeStars
+const inactiveStars = Math.floor(+max - +rate);
+
+//Utility
 function addCommas(num) {
     if (typeof num == 'number') return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     if (typeof num == 'string') return num.replace(/[^\d]/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -63,14 +89,15 @@ function addCommas(num) {
 ---
 
 <Element {...default_attrs}>
-    {total !== undefined && <Element {...default_span}/>}
-    <Element {...default_stars}>
-        {[...Array(fullStars)].map(() => {
-            return <div name={full} {...default_icon}/>
+    <Element {...default_icons}>
+        {[...Array(activeStars)].map(() => {
+            return <Icon {...default_active}/>
         })}
-        {halfStars > 0 && <div name={half} {...default_icon}/>}
-        {emptyStars > 0 && [...Array(emptyStars)].map(() => {
-            return <div name={empty} {...default_icon}/>
+        
+        {halfStars > 0 && <Icon {...default_half}/>}
+
+        {inactiveStars > 0 && [...Array(inactiveStars)].map(() => {
+            return <Icon {...default_inactive}/>
         })}
     </Element>
 </Element>

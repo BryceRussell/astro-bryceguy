@@ -8,7 +8,172 @@ import { Rating } from '@astro-bryceguy/rating';
 		<meta name="viewport" content="width=device-width" />
 		<title>Welcome to Astro</title>
 	</head>
-	<body style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin:3rem;">
-		<Rating max="5" rate="2.5" total="6503"/>
+	<body style="display:flex;justify-content:center;width:100%;">
+		<ul style="display:flex;flex-direction:column;gap:1rem;align-items:end;margin:3rem;">
+			<h2 class="m-auto font-bold">Default Style</h2>
+			<Rating />
+			<Rating defaults={true}/>
+			<Rating rate="2.5" defaults={true}/>
+			<Rating rate="5" defaults={true}/>
+			<Rating max="10" rate="5" total="17" defaults={true}/>
+			<Rating max="10" rate="7.5" total="803" defaults={true}/>
+			<Rating max="10" rate="10" total="1289" defaults={true}/>
+			<Rating max="15" rate="7.5" defaults={true}/>
+			<h2 class="m-auto font-bold">astro-icon Support</h2>
+			<!-- Phosphor Icons with Tailwindcss -->
+			<Rating {...{
+				rate: "4.5",
+				max: "9",
+				class: "flex items-center gap-1",
+				icons: {
+					class: "flex items-center"
+				},
+				icon: {
+					active: {
+						name: "ph:star-fill"
+					},
+					half: {
+						name: "ph:star-half-fill"
+					},
+					inactive: {
+						name: "ph:star"
+					},
+					class: "text-yellow-400 w-4 h-4"
+				}
+			}}/>
+			<!-- Material Design Icons with Tailwindcss -->
+			<Rating {...{
+				rate: "4.5",
+				max: "9",
+				class: "flex items-center gap-1",
+				icons: {
+					class: "flex items-center"
+				},
+				icon: {
+					active: {
+						name: "mdi:star"
+					},
+					half: {
+						name: "mdi:star-half-full"
+					},
+					inactive: {
+						name: "mdi:star-outline"
+					},
+					class: "text-yellow-400 w-4 h-4"
+				}
+			}}/>
+			<!-- Material Line Icons with Tailwindcss -->
+			<Rating {...{
+				rate: "4.5",
+				max: "9",
+				class: "flex items-center gap-1",
+				icons: {
+					class: "flex items-center"
+				},
+				icon: {
+					active: {
+						name: "line-md:heart-filled"
+					},
+					half: {
+						name: "line-md:heart-filled-half"
+					},
+					inactive: {
+						name: "line-md:heart"
+					},
+					class: "text-pink-300 w-4 h-4"
+				}
+			}}/>
+			<!-- Tailwindcss Custom Styling -->
+			<h2 class="m-auto font-bold">Customize Elements</h2>
+			<Rating {...{
+				rate: "3",
+				max: "5",
+				class: "flex flex-col-reverse items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300",
+				icons: {
+					class: "flex items-center"
+				},
+				icon: {
+					active: {
+						name: "mdi:star"
+					},
+					half: {
+						name: "mdi:star-half-full"
+					},
+					inactive: {
+						name: "mdi:star-outline"
+					},
+					class: "text-blue-300 w-4 h-4"
+				}
+			}}/>
+			<Rating {...{
+				rate: "7.5",
+				max: "10",
+				class: "flex flex-col-reverse items-end gap-1 py-1 px-2 bg-neutral-50",
+				_span: {
+					tag: "span",
+					text: "873",
+					class: "text-xs text-blue-300"
+				},
+				icons: {
+					class: "flex flex-row-reverse items-center"
+				},
+				icon: {
+					half: {
+						style: "transform:scale(-1, 1);"
+					},
+					class: "text-yellow-300 w-4 h-4"
+				}
+			}}/>
+			<Rating {...{
+				rate: "2.5",
+				max: "5",
+				class: "flex flex-row-reverse items-center gap-1 py-1 px-2 rounded-md border",
+				_span: {
+					tag: "span",
+					text: "72",
+					class: "text-xs text-blue-300"
+				},
+				icons: {
+					class: "flex items-center"
+				},
+				icon: {
+					active: {
+						name: "mdi:star"
+					},
+					half: {
+						name: "mdi:star-half-full"
+					},
+					inactive: {
+						name: "mdi:star-outline"
+					},
+					class: "text-yellow-300 w-4 h-4",
+				}
+			}}/>
+			<Rating {...{
+				rate: "2.5",
+				max: "3",
+				class: "flex flex-col-reverse items-center py-1 px-2 rounded-md border border-pink-300",
+				_span: {
+					tag: "span",
+					text: "Healthy!",
+					class: "text-xs text-pink-300"
+				},
+				icons: {
+					class: "flex items-center"
+				},
+				icon: {
+					active: {
+						name: "line-md:heart-filled"
+					},
+					half: {
+						name: "line-md:heart-filled-half"
+					},
+					inactive: {
+						name: "line-md:heart"
+					},
+					class: "text-pink-300 w-4 h-4"
+				}
+			}}/>
+		</ul>
 	</body>
 </html>

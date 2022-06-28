@@ -21,16 +21,15 @@
     "ui"
   ],
   "type": "module",
-  "main": "index.js",
-  "exports": {
-    ".": "./index.js",
-    "./rating": "./Rating.astro"
-  },
+  "main": "./index.js",
+  "exports": "./index.js",
   "files": [
     "index.js",
+    "/src/*",
     "Rating.astro"
   ],
   "dependencies": {
+    "astro-icon": "^0.7.1",
     "astro-json-element": "^0.1.0"
   }
 }

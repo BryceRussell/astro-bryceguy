@@ -8,7 +8,9 @@
     "build": "astro build",
     "preview": "astro preview"
   },
-  "devDependencies": {
-    "astro": "^1.0.0-beta.56"
+  "dependencies": {
+    "@astrojs/tailwind": "^0.2.1",
+    "astro": "^1.0.0-beta.44",
+    "astro-icon": "^0.7.1"
   }
 }
