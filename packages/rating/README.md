@@ -72,6 +72,7 @@ Use [astro-icons](https://github.com/natemoo-re/astro-icon#readme) to customize 
 #### `max`
 
 **Type**: `string | number`
+
 **Default**: `5`
 
 Max number of stars to display
@@ -79,6 +80,7 @@ Max number of stars to display
 #### `rate`
 
 **Type**: `string | number`
+
 **Default**: `0`
 
 A fraction of max, number of activated stars
@@ -91,9 +93,9 @@ A fraction of max, number of activated stars
 
 Total number of ratings
 
-if `defaults` is true it creates a span element that displays the total: `(1,503)`
+if `defaults` is true it creates a span element that displays the total: (1,503)
 
-Use `_span` key to override the default span element with a astro-json-element child
+Use `_span` key to override the default span element with a [astro-json-element](https://github.com/BryceRussell/astro-json-element#readme) child
 
 Remove commas by setting `commas` to false
 
@@ -140,6 +142,7 @@ The default icon names: `star-active`, `star-half`, and `star-inactive` take adv
 #### `commas`
 
 **Type**: `boolean`
+
 **Default**:`true`
 
 Toggles commas on string numbers for the default span element `_span` when using the `total` prop and `defaults` set to true
@@ -147,6 +150,7 @@ Toggles commas on string numbers for the default span element `_span` when using
 #### `defaults`
 
 **Type**: `boolean`
+
 **Default**:`false`
 
 If true use the built in default in-line styling and `_span` element for displaying total number of ratings
