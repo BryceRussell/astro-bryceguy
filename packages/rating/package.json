@@ -25,7 +25,7 @@
   "exports": "./index.js",
   "files": [
     "index.js",
-    "/src/*",
+    "/icons",
     "Rating.astro"
   ],
   "dependencies": {
