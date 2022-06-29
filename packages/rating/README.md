@@ -6,7 +6,7 @@ A component that uses stars to display a rating for reviews, products, comments,
 
 - Shows a rate (2/5, 7.5/10, etc) using stars
 - Supports displaying half stars
-- Uses astro-icon to serve star icon svgs
+- Uses [astro-icon](https://github.com/natemoo-re/astro-icon) to serve thousands of popular icon svgs
 - Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-elements](https://github.com/BryceRussell/astro-json-element)
 
 __NOTE:__ astro-json-element objects can only be styled using inline styles or global stylesheets and classes, this project uses [Tailwindcss](https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#readme) to make styling easier
@@ -16,7 +16,7 @@ __NOTE:__ astro-json-element objects can only be styled using inline styles or g
 __Install:__
 
 ```
-npm i @astro-bryceguy-rating
+npm i @astro-bryceguy/rating
 ```
 
 __Add to astro config:__
@@ -31,9 +31,13 @@ export default defineConfig({
 });
 ```
 
-__Add default star icons to 'src/icons' folder__
+__Define default icon svgs:__
 
-[Default Icons](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/rating/icons)
+[Icon Defaults](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/rating/icons)
+
+If these icons are not added the default style of the icon will load in as a black box and there will be console errors
+
+Define the default icon svgs inside the `src/icons` folder using the names `star-active`, `star-half`, and `star-inactive`.
 
 ```
 src/
@@ -45,6 +49,7 @@ src/
     layouts
     pages
 ```
+[Read more about how icons work using astro-icon](https://github.com/natemoo-re/astro-icon)
 
 
 __Default Styling:__
