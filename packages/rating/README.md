@@ -31,6 +31,21 @@ export default defineConfig({
 });
 ```
 
+__Add default star icons to 'src/icons' folder__
+
+[Default Icons](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/rating/icons)
+
+```
+src/
+    icons/
+        star-active.svg
+        star-half.svg
+        star-inactive.svg
+    components
+    layouts
+    pages
+```
+
 
 __Default Styling:__
 
