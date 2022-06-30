@@ -7,12 +7,10 @@ export interface Props {
     rate?: string|number;
     total?: string|number;
     icons?: {};
-    icon?: {
-        active?: {};
-        half?: {};
-        inactive?: {};
-        [attrs: string]: any;
-    };
+    icon?: {};
+    active?: {};
+    half?: {};
+    inactive?: {};
     commas?: boolean;
     defaults?: boolean;
     [attrs: string]: any;
@@ -23,17 +21,13 @@ const {
     total,
     icons={},
     icon={},
+    active={},
+    half={},
+    inactive={},
     commas=true,
     defaults=false,
     ...attrs
 } = Astro.props as Props;
-
-const {
-    active={},
-    half={},
-    inactive={},
-    ...icon_attrs
-} = icon;
 
 //Default login
 const default_attrs = {
@@ -54,8 +48,8 @@ const default_icons = {
 };
 
 const default_icon = {
-    style: isEmpty(icon_attrs)&&`min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
-	...icon_attrs
+    style: isEmpty(icon)&&`min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
+	...icon
 };
 
 const default_active = {

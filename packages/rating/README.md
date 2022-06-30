@@ -64,6 +64,8 @@ __Default Styling:__
 
 Use [astro-icons](https://github.com/natemoo-re/astro-icon#readme) to customize the icons
 
+The default icon names: `star-active`, `star-half`, and `star-inactive` take advantage of the [local icons](https://github.com/natemoo-re/astro-icon#local-icons) feature in astro-icon to serve a local icon svg by default
+
 ![hearts](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/hearts.PNG)
 
 ```
@@ -73,17 +75,17 @@ Use [astro-icons](https://github.com/natemoo-re/astro-icon#readme) to customize 
     max: "9",
     class: "flex items-center gap-1",
     icon: {
-        active: {
-            name: "line-md:heart-filled"
-        },
-        half: {
-            name: "line-md:heart-filled-half"
-        },
-        inactive: {
-            name: "line-md:heart"
-        },
         class: "text-pink-300 w-4 h-4"
-    }
+    },
+    active: {
+        name: "line-md:heart-filled"
+    },
+    half: {
+        name: "line-md:heart-filled-half"
+    },
+    inactive: {
+        name: "line-md:heart"
+    },
 }}/>
 ```
 
@@ -132,6 +134,8 @@ Remove commas by setting `commas` to false
 }
 ```
 
+astro-json-element `div` element  that hols all icons svgs
+
 #### `icon`
 
 **Type**: `object`
@@ -139,25 +143,51 @@ Remove commas by setting `commas` to false
 **Default**:
 ```
 {
-    active: {
-        name: "star-active"
-    },
-    half: {
-        name: "star-half"
-    },
-    inactive: {
-        name: "star-inactive"
-    },
     style: `min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`
 }
 ```
 
-Define the props that will be shared with all across all icon svgs
+Attributes to apply to all icon scs
 
-Define icon specific props using [astro-icon](https://github.com/natemoo-re/astro-icon#readme) for the `active`, `half`, and `inactive` icon props
 
-The default icon names: `star-active`, `star-half`, and `star-inactive` take advantage of the [local icons](https://github.com/natemoo-re/astro-icon#local-icons) feature in astro-icon to serve a local icon svg by default
+#### `active`
 
+**Type**: `object`
+
+**Default**:
+```
+active: {
+    name: "star-active"
+}
+```
+
+Attributes to apply to all active stars
+
+#### `half`
+
+**Type**: `object`
+
+**Default**:
+```
+half: {
+    name: "star-half"
+}
+```
+
+Attributes to apply to all half stars
+
+#### `inactive`
+
+**Type**: `object`
+
+**Default**:
+```
+inactive: {
+    name: "star-inactive"
+}
+```
+
+Attributes to apply to all inactive stars
 
 #### `commas`
 
@@ -193,16 +223,16 @@ Any of the other keys not above will be added as a prop to the main rating conta
     tag: "section",
     class: "flex flex-col-reverse items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300",
     icon: {
-        active: {
-            name: "mdi:star"
-        },
-        half: {
-            name: "mdi:star-half-full"
-        },
-        inactive: {
-            name: "mdi:star-outline"
-        },
         class: "text-blue-300 w-4 h-4"
+    },
+    active: {
+        name: "mdi:star"
+    },
+    half: {
+        name: "mdi:star-half-full"
+    },
+    inactive: {
+        name: "mdi:star-outline"
     }
 }}/>
 ```
@@ -224,10 +254,10 @@ Any of the other keys not above will be added as a prop to the main rating conta
         class: "flex flex-row-reverse items-center"
     },
     icon: {
-        half: {
-            style: "transform:scale(-1, 1);"
-        },
         class: "text-yellow-300 w-4 h-4"
+    },
+    half: {
+        style: "transform:scale(-1, 1);"
     }
 }}/>
 ```
@@ -248,17 +278,17 @@ Any of the other keys not above will be added as a prop to the main rating conta
         class: "flex items-center"
     },
     icon: {
-        active: {
-            name: "mdi:star"
-        },
-        half: {
-            name: "mdi:star-half-full"
-        },
-        inactive: {
-            name: "mdi:star-outline"
-        },
         class: "text-yellow-300 w-4 h-4",
-    }
+    },
+    active: {
+        name: "mdi:star"
+    },
+    half: {
+        name: "mdi:star-half-full"
+    },
+    inactive: {
+        name: "mdi:star-outline"
+    },
 }}/>
 ```
 
@@ -276,16 +306,16 @@ Any of the other keys not above will be added as a prop to the main rating conta
         class: "text-xs text-pink-300"
     },
     icon: {
-        active: {
-            name: "line-md:heart-filled"
-        },
-        half: {
-            name: "line-md:heart-filled-half"
-        },
-        inactive: {
-            name: "line-md:heart"
-        },
         class: "text-pink-300 w-4 h-4"
+    },
+    active: {
+        name: "line-md:heart-filled"
+    },
+    half: {
+        name: "line-md:heart-filled-half"
+    },
+    inactive: {
+        name: "line-md:heart"
     }
 }}/>
 ```

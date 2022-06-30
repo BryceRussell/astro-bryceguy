@@ -24,7 +24,7 @@ import { Pagination } from '@astro-bryceguy/pagination';
 			total: "9999",
 			current: "1000",
 			class: "flex items-center gap-1",
-			button: {
+			link: {
 				class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border text-sm font-medium"
 			},
 			active: {
@@ -33,7 +33,41 @@ import { Pagination } from '@astro-bryceguy/pagination';
 			disabled: {
 				text: "",
 				class: "leading-none flex items-center px-3"
-			},
+			}
 		}}></Pagination>
+		<Pagination {...{
+			url: "/posts",
+			total: "9999",
+			current: "1000",
+			start: 1,
+			end: 1,
+			middle: 0,
+			style: "display:flex;align-items:center;",
+			first: {
+				text: "<",
+				style: "font-family:monospace;padding: 0 0.5rem;border-radius:3px;border: 1px solid #ccc;font-weight:bold;font-size:1rem;"
+			},
+			active: {
+				style: "display:flex;align-items:center;gap:.5rem;font-weight:bold;",
+				_page: {
+					slot: "before",
+					text: "Page",
+					style: "font-weight:normal"
+				},
+				_of: {
+					text: "of",
+					style: "font-weight:normal"
+				}
+			},
+			disabled: {
+				text: "",
+				style: "margin: 0 3rem"
+			},
+			last: {
+				text: ">",
+				style: "font-family:monospace;padding: 0 0.5rem;border-radius:3px;border: 1px solid #ccc;font-weight:bold;font-size:1rem;"
+			},
+		}}>
+		</Pagination>
 	</body>
 </html>

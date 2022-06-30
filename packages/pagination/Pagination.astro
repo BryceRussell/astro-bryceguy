@@ -1,8 +1,7 @@
 ---
-//This componenet is a fork of https://github.com/iozcelik/SarissaPagination
-
 import { Element } from 'astro-json-element';
 
+//This componenet is a fork of https://github.com/iozcelik/SarissaPagination
 export interface Props {
 	url: string;
 	total: string|number;
@@ -10,9 +9,11 @@ export interface Props {
 	start?: string|number;
 	end?: string|number;
 	middle?: string|number;
-	button?: {};
+	link?: {};
 	active?: {};
 	disabled?: {};
+	first?: {};
+	last?: {};
 	defaults?: boolean;
 	commas?: boolean;
 	collapse?: boolean;
@@ -25,9 +26,11 @@ const {
 	start=2,
 	end=2,
 	middle=2,
-	button,
+	link,
 	active,
 	disabled,
+	first,
+	last,
 	defaults=false,
 	commas=true,
 	collapse=true,
@@ -43,19 +46,21 @@ const default_attrs = {
 
 const default_style = `cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.125rem;border:1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;`;
 
-const default_button = {
+const default_link = {
 	tag: "a",
 	style: defaults&&`${default_style}`,
 	onmouseover: defaults&&"this.style.textDecoration='underline';this.style.backgroundColor='#fafafa';",
 	onmouseout: defaults&&"this.style.textDecoration='none';this.style.backgroundColor='#fff';",
-	...button
+	...link
 };
+
 const default_active = {
 	tag: "a",
 	text: commas?addCommas(current):current,
 	style: defaults&&`${default_style}border-color:#0EA5E9;background-color:#0EA5E9;color:white;`,
 	...active
 };
+
 const default_disabled = {
 	tag: "a",
 	text: "...",
@@ -95,16 +100,21 @@ function addCommas(num) {
 <Element {...{...default_attrs}}>
 	<slot name="first"/>
 	{ pages.map((page, i) => {
-		//Active Element
- 		return page.active?<Element {...default_active}/>:
-		//Disabled Element
-		(page.disable && !pages[i-1].disable?<Element {...default_disabled}/>:
-		//Default Element
-		(!page.disable && <Element {...{
+		const page_attrs = {
 			text: commas?addCommas(page.number):page.number,
 			href: `${url}/${page.number}`,
-			...default_button
-		}}/>
-	))})}
+			...default_link
+		}
+		//Active
+		if (page.active) return <Element {...default_active}/>
+		//Disabled
+		if (page.disable && !pages[i-1].disable) return <Element {...default_disabled}/>
+		//Firt link
+		if (!page.disable && page.number == 1) return <Element {...{...page_attrs, ...first}}/>
+		//Last link
+		if (!page.disable && page.number == total) return <Element {...{...page_attrs, ...last}}/>
+		//Links (default, first, last)
+		if (!page.disable) return <Element {...page_attrs}/>
+	})}
 	<slot />
 </Element>
