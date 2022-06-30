@@ -55,7 +55,6 @@ npm i @astro-bryceguy/pagination
         class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border border-purple-400 text-sm font-medium bg-purple-500 text-white"
     },
     disabled: {
-        text: "",
         class: "leading-none flex items-center px-3"
     },
 }}></Pagination>
@@ -65,95 +64,119 @@ npm i @astro-bryceguy/pagination
 
 ## Slots
 
-### Default
+### `Default`
 
 Children will be slotted after all page number elements by default
 
-### first
+### `before`
 
-Use slot "first" to slot children in front of all page number elements
+Slot children before all link elements
 
-## Props
+## API
 
+### `url`
+
+**Type**: `string`
+
+root url for page link: `blog/posts` > `blog/posts/1, blog/posts/2`, etc
+
+### `total`
+
+**Type**: `string | number`
+
+Total number of pages
+
+### `current`
+
+**Type**: `string | number`
+
+Current page number
+
+### `start`
+
+**Type**: `string | number`
+**Default**: `2`
+
+number of pages to display at the start
+
+### `end`
+
+**Type**: `string | number`
+**Default**: `2`
+
+number of pages to display at the end
+
+### `middle`
+
+**Type**: `string | number`
+**Default**: `2`
+
+number of pages to display on either side of the current active page
+
+### `link`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+Define default element for all links
+
+### `active`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+Define element for the active link
+
+### `disabled`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+Define element to display between start middle and end
+
+### `first`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+Define element for the first link
+
+### `last`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+Define element for the last link
+
+### `defaults`
+
+**Type**: `boolean`
+**Default**: `false`
+
+uses built in default styling if true
+
+### `commas`
+
+**Type**: `boolean`
+**Default**: `true`
+
+uses commas in page numbers if true
+
+### `collapse`
+
+**Type**: `boolean`
+**Default**: `true`
+
+if true only the pages defined using the start, current, middle, and end props will be shown
+
+if link element will appear for every page number in the total
+
+### `...attrs`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+**Default**:
 ```
-export interface Props {
-	url: string;
-	total: string|number;
-	current: string|number;
-	start: string|number;
-	end?: string|number;
-	middle?: string|number;
-	button?: {};
-	active?: {};
-	disabled?: {};
-	defaults?: boolean;
-	commas?: boolean;
-	collapse?: boolean;
-	[attrs: string]: any;
+{
+    tag: "div",
+    style: defaults&&"display:flex;justify-content:center;align-items:center;gap:.25rem;",
 }
 ```
 
-### url
-Type|Default|Description
----|---|---
-string||root url for page link: ```"blog/posts"``` -> ```"blog/posts/1", "blog/posts/2"```, etc
+use [astro-json-element](https://github.com/BryceRussell/astro-json-element) to define the main `div` element for your rating
 
-### total
-Type|Default|Description
----|---|---
-string \| number||total number of pages
-
-### current
-Type|Default|Description
----|---|---
-string \| number||current page number
-
-### start
-Type|Default|Description
----|---|---
-string \| number|2|number of pages to display at the start
-
-### end
-Type|Default|Description
----|---|---
-string \| number|2|number of pages to display at the end
-
-### middle
-Type|Default|Description
----|---|---
-string \| number|2|number of pages to display on either side of the current active page
-
-### button
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the default page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
-
-### active
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the active page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
-
-### disabled
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||define the disabled page number element using [astro-json-element](https://github.com/BryceRussell/astro-json-element) objects
-
-### defaults
-Type|Default|Description
----|---|---
-boolean|false|uses built in default styling if true
-
-### commas
-Type|Default|Description
----|---|---
-boolean|true|uses commas in page numbers if true
-
-### collapse
-Type|Default|Description
----|---|---
-boolean|true|if true only the pages defined using the current, ends, and middle props will be shown, if false a page number element will appear for every page number
-
-### ...attrs
-Type|Default|Description
----|---|---
-[astro-json-element](https://github.com/BryceRussell/astro-json-element) object||all other props will define the div wrapper using [astro-json-element](https://github.com/BryceRussell/astro-json-element) object attributes

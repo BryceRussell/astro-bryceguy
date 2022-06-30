@@ -2,7 +2,7 @@
   "author": "Bryce Russell",
   "license": "MIT",
   "name": "@astro-bryceguy/rating",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Astro component that uses star icons to display the rating of a product, post, comment, etc.",
   "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/rating#readme",
   "repository": {
