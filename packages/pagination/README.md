@@ -95,6 +95,7 @@ Current page number
 ### `start`
 
 **Type**: `string | number`
+
 **Default**: `2`
 
 number of pages to display at the start
@@ -102,6 +103,7 @@ number of pages to display at the start
 ### `end`
 
 **Type**: `string | number`
+
 **Default**: `2`
 
 number of pages to display at the end
@@ -109,6 +111,7 @@ number of pages to display at the end
 ### `middle`
 
 **Type**: `string | number`
+
 **Default**: `2`
 
 number of pages to display on either side of the current active page
@@ -146,6 +149,7 @@ Define element for the last link
 ### `defaults`
 
 **Type**: `boolean`
+
 **Default**: `false`
 
 uses built in default styling if true
@@ -153,6 +157,7 @@ uses built in default styling if true
 ### `commas`
 
 **Type**: `boolean`
+
 **Default**: `true`
 
 uses commas in page numbers if true
@@ -160,6 +165,7 @@ uses commas in page numbers if true
 ### `collapse`
 
 **Type**: `boolean`
+
 **Default**: `true`
 
 if true only the pages defined using the start, current, middle, and end props will be shown

@@ -56,7 +56,7 @@ const default_link = {
 
 const default_active = {
 	tag: "a",
-	text: commas?addCommas(current):current,
+	text: commas?addCommas(current):current.toString(),
 	style: defaults&&`${default_style}border-color:#0EA5E9;background-color:#0EA5E9;color:white;`,
 	...active
 };
@@ -101,7 +101,7 @@ function addCommas(num) {
 	<slot name="first"/>
 	{ pages.map((page, i) => {
 		const page_attrs = {
-			text: commas?addCommas(page.number):page.number,
+			text: commas?addCommas(page.number):page.number.toString(),
 			href: `${url}/${page.number}`,
 			...default_link
 		}

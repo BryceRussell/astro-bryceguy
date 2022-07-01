@@ -21,11 +21,12 @@
     "ui"
   ],
   "type": "module",
-  "main": "./index.js",
-  "exports": "./index.js",
+  "types": "./index.d.ts",
+  "main": "./index.mjs",
+  "exports": "./index.mjs",
   "files": [
-    "index.js",
-    "/icons",
+    "index.mjs",
+    "index.d.ts",
     "Rating.astro"
   ],
   "dependencies": {
