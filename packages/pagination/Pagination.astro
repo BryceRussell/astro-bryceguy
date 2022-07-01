@@ -13,6 +13,8 @@ export interface Props {
 	active?: {};
 	disabled?: {};
 	first?: {};
+	before?: {};
+	after?: {};
 	last?: {};
 	defaults?: boolean;
 	commas?: boolean;
@@ -30,6 +32,8 @@ const {
 	active,
 	disabled,
 	first,
+	before,
+	after,
 	last,
 	defaults=false,
 	commas=true,
@@ -44,20 +48,22 @@ const default_attrs = {
 	...attrs
 };
 
-const default_style = `cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.125rem;border:1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;`;
+const default_style = `cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;`;
 
 const default_link = {
 	tag: "a",
 	style: defaults&&`${default_style}`,
-	onmouseover: defaults&&"this.style.textDecoration='underline';this.style.backgroundColor='#fafafa';",
-	onmouseout: defaults&&"this.style.textDecoration='none';this.style.backgroundColor='#fff';",
+	onmouseover: defaults&&"this.style.textDecoration='underline';",
+	onmouseout: defaults&&"this.style.textDecoration='none';",
 	...link
 };
 
 const default_active = {
 	tag: "a",
 	text: commas?addCommas(current):current.toString(),
-	style: defaults&&`${default_style}border-color:#0EA5E9;background-color:#0EA5E9;color:white;`,
+	style: defaults&&`${default_style}border: 1px solid #ccc;color:#0EA5E9;`,
+	onmouseover: defaults&&"this.style.textDecoration='underline';",
+	onmouseout: defaults&&"this.style.textDecoration='none';",
 	...active
 };
 
@@ -80,13 +86,13 @@ var pages = Array.from({ length: +total }, (v, i) => i + 1).map((i) => {
 
 //Calculate pages to display
 function isDisabled(i){
-	if(current == i) return false
+	if(+current == i) return false
 	//Toggle collapsing
 	if(!collapse) return false;
 	//Calc End Pages
 	if(i <= +start || i >= +total - (+end-1)) return false;
 	//Calc Middle Pages
-	if(Math.abs(i - +current) <= middle) return false;
+	if(Math.abs(i - +current) <= +middle) return false;
 	return true;
 }
 
@@ -99,22 +105,26 @@ function addCommas(num) {
 
 <Element {...{...default_attrs}}>
 	<slot name="first"/>
-	{ pages.map((page, i) => {
+	{pages.map((page, i) => {
 		const page_attrs = {
 			text: commas?addCommas(page.number):page.number.toString(),
 			href: `${url}/${page.number}`,
 			...default_link
-		}
+		};
 		//Active
 		if (page.active) return <Element {...default_active}/>
 		//Disabled
-		if (page.disable && !pages[i-1].disable) return <Element {...default_disabled}/>
+		else if (page.number != 1 && page.disable && !pages[i-1].disable) return <Element {...default_disabled}/>
 		//Firt link
-		if (!page.disable && page.number == 1) return <Element {...{...page_attrs, ...first}}/>
-		//Last link
-		if (!page.disable && page.number == total) return <Element {...{...page_attrs, ...last}}/>
+		else if (!page.disable && page.number == 1) return <Element {...{...page_attrs, ...first}}/>
+		//Link Before Active Link
+		else if (!page.disable && page.number == +current - 1) return <Element {...{...page_attrs, ...before}}/>
+		//Link After Active Link
+		else if (!page.disable && page.number == +current + 1) return <Element {...{...page_attrs, ...after}}/>
+		///Last link
+		else if (!page.disable && page.number == +total) return <Element {...{...page_attrs, ...last}}/>
 		//Links (default, first, last)
-		if (!page.disable) return <Element {...page_attrs}/>
+		else if (!page.disable) return <Element {...page_attrs}/>
 	})}
 	<slot />
 </Element>

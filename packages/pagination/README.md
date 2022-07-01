@@ -48,7 +48,7 @@ npm i @astro-bryceguy/pagination
     total: "9999",
     current: "1000",
     class: "flex items-center gap-1",
-    button: {
+    link: {
         class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border text-sm font-medium"
     },
     active: {
@@ -139,6 +139,19 @@ Define element to display between start middle and end
 **Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
 
 Define element for the first link
+
+### `before`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+Define element before active link
+
+
+### `after`
+
+**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+
+Define element after active link
 
 ### `last`
 
