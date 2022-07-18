@@ -1,11 +1,6 @@
 ---
 import { Dropdown } from '@astro-bryceguy/dropdown';
 ---
-<style is:global>
-	summary + *:focus-within {
-		background-color: red;
-	}
-</style>
 
 <html lang="en">
 	<head>
@@ -22,7 +17,7 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 		</Dropdown>
 		<Dropdown lock={true} id="default-input" text="Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} ></Dropdown>
 		<Dropdown collapse={false}  is="div" id="default-text" text="Hidden Text">
-			<p class="max-w-[50%]">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
 		</Dropdown>
 		<h2>Inline theme</h2>
 		<Dropdown theme='inline' id="inline-navigation" text="Inline Navigation">
@@ -38,11 +33,11 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 		</Dropdown>
 		<h2>Tailwind Theme</h2>
         <Dropdown id="tailwind-hamburger" theme="tailwindHamburger">
-			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">Home</a>
-			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">Products</a>
-			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">Services</a>
-			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">About</a>
-			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">Contact Us</a>
+			<a href="/">Home</a>
+			<a href="/">Products</a>
+			<a href="/">Services</a>
+			<a href="/">About</a>
+			<a href="/">Contact Us</a>
 		</Dropdown>
 		<Dropdown theme="tailwind" id="tailwind-navigation" text="Tailwind Navigation">
 			<a href="/">Link 1</a>
