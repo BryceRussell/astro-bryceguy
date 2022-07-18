@@ -1,14 +1,14 @@
 {
   "author": "Bryce Russell",
   "license": "MIT",
-  "name": "@astro-bryceguy/pagination",
+  "name": "@astro-bryceguy/dropdown",
   "version": "1.1.0",
-  "description": "Fully customizable/controllable page number pagination component for astro",
-  "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/pagination#readme",
+  "description": "Easy to use dropdown component made using XElement",
+  "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/dropdown#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BryceRussell/astro-bryceguy.git",
-    "directory": "packages/pagination"
+    "directory": "packages/dropdown"
   },
   "bugs": {
     "url": "https://github.com/BryceRussell/astro-bryceguy/issues"
@@ -17,7 +17,7 @@
     "astro",
     "astro-component",
     "astro-bryceguy",
-    "pagination",
+    "dropdown",
     "ui"
   ],
   "type": "module",
@@ -27,9 +27,10 @@
   "files": [
     "index.mjs",
     "index.d.ts",
-    "Pagination.astro"
+    "themes.js",
+    "Dropdown.astro"
   ],
-  "dependencies": {
-    "astro-json-element": "^0.1.0"
+  "devDependencies": {
+    "astro-xelement": "^3.2.0"
   }
 }

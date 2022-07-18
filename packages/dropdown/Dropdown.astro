@@ -1,0 +1,122 @@
+---
+import XElement from 'astro-xelement'
+import * as themes from './themes.js'
+
+const {
+    details: Details,
+    summary: Summary,
+    button: Button
+} = XElement
+
+interface Props {
+    is?: string;
+    id: string;
+    text?: string;
+    value?: string;
+    options?: {};
+    lock?: boolean;
+    collapse?: boolean;
+    theme?: string|{};
+}
+
+const {
+    is="menu",
+    id,
+    text,
+    value,
+    options={},
+    lock=false,
+    collapse=true,
+    theme={}
+} = Astro.props as Props
+
+let theme_object = {
+    container: {},
+    toggle: {},
+    content: {},
+    options: {},
+    ...theme
+}
+
+//Load theme if specified
+Object.entries(themes).forEach(([key, value]) => {
+	if (theme === key) theme_object = {...theme_object, ...value};
+})
+---
+
+<Details
+    id={id}
+	value={value}
+    {...theme_object.container}
+>
+	<slot name="first" />
+    <Summary
+		id={`${id}-toggle`}
+		{...theme_object.toggle}
+        define:vars={{
+            collapse
+        }}
+        @focusout={(e) => {
+			//Close dropdown when it loses focus
+            if (collapse && !e.target.nextElementSibling.contains(e.relatedTarget)) e.target.parentElement.removeAttribute('open');
+        }}
+    >
+		<slot name="toggle-before" />
+		{text}
+		<slot name="toggle-after" />
+    </Summary>
+
+    <XElement
+        @is={is}
+        id={`${id}-content`}
+        {...theme_object.content}
+        define:vars={{
+            lock,
+            collapse
+        }}
+        @do={(element) => {
+			//Make all child elements tab navigatable
+            Array.from(element.children).forEach(child => { child.setAttribute("tabindex","0") });
+        }}
+        @focusout={(e) => {
+			console.log(e)
+            if (!e.target.parentElement.contains(e.relatedTarget)) {
+				lock?
+				//Loops focus back to toggle element, stops focus from leaving dropdown using tab navigation
+				e.target.parentElement.previousElementSibling.focus():
+				collapse && e.target.parentElement.previousElementSibling != e.relatedTarget?
+				//Close dropdown when it loses focus
+				e.target.parentElement.parentElement.removeAttribute('open'):
+				null
+			}
+        }}
+        @click={(e) => {
+			//refocus toggle after click, prevents dropdown from losing focus after clicking a non-focusable element inside of a dropdown like a <p>
+            if (lock) e.target.parentElement.previousElementSibling.focus()
+        }}
+    >
+        <slot name="content-before" />
+        {Object.entries(options).map(([k,v], i) => {
+            return  <Button
+                        id={`${id}-item-${i}`}
+                        {...theme_object.options}
+                        define:vars={{
+                            k,
+                            v
+                        }}
+                        @click={(e) => {
+							//Set the value of the dropdown
+                            e.path[2].value = v;
+							//Change the dropdown toggle textContent to match name of option
+                            e.path[1].previousElementSibling.textContent = k;
+							//Close dropdown
+                            e.path[2].removeAttribute('open');
+                        }}
+                    >
+                        {k}
+                    </Button>
+        })}
+        <slot />
+    </XElement>
+	<slot name="last" />
+</Details>
