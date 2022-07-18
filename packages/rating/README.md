@@ -1,273 +1,321 @@
-# @astro-bryceguy/dropdown
+# @astro-bryceguy/rating
 
-A dropdown component made using XElement
+A component that uses stars to display a rating for reviews, products, comments, etc
 
 ## Features
 
-- Use the `options` prop to create a selection input
-- Tab accessible
-- Toggle focus locking
-- Toggle collapse on focus lost
-- Customizable
-- Themes
+- Shows a rate (2/5, 7.5/10, etc) using stars
+- Supports displaying half stars
+- Uses [astro-icon](https://github.com/natemoo-re/astro-icon) to serve thousands of popular icon svgs
+- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-elements](https://github.com/BryceRussell/astro-json-element)
+
+__NOTE:__ astro-json-element objects can only be styled using inline styles or global stylesheets and classes, this project uses [Tailwindcss](https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#readme) to make styling easier
 
 ## How to use
 
-**Install:**
+__Install:__
 
 ```
-npm i @astro-bryceguy/dropdown
+npm i @astro-bryceguy/rating
 ```
 
-**Basic Dropdowns:**
-
-![Basic Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/default-textbox.PNG)
+__Add to astro config:__
 
 ```
-<Dropdown collapse={false}  is="section" id="default-text" text="Hidden Text">
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
-</Dropdown>
+export default defineConfig({
+  vite: {
+    ssr: {
+      external: ["svgo"],
+    },
+  },
+});
 ```
 
-![Basic Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/default-navigation.PNG)
+__Define default icon svgs:__
+
+[Icon Defaults](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/rating/icons)
+
+If these icons are not added the default style of the icon will load in as a black box and there will be console errors
+
+Define the default icon svgs inside the `src/icons` folder using the names `star-active`, `star-half`, and `star-inactive`.
 
 ```
-<Dropdown id="default-nav" text="Navigation">
-    <a href="/">Link 1</a>
-    <a href="/">Link 2</a>
-    <a href="/">Link 3</a>
-</Dropdown>
+src/
+    icons/
+        star-active.svg
+        star-half.svg
+        star-inactive.svg
+    components
+    layouts
+    pages
 ```
+[Read more about how icons work using astro-icon](https://github.com/natemoo-re/astro-icon)
 
-**Themes:**
 
-Use built in themes or create your own
+__Default Styling:__
 
-![Tailwind Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-hamburger.PNG)
-
-```
-<Dropdown id="tailwind-hamburger" theme="tailwindHamburger">
-    <a href="/">Home</a>
-    <a href="/">Products</a>
-    <a href="/">Services</a>
-    <a href="/">About</a>
-    <a href="/">Contact Us</a>
-</Dropdown>
-```
-
-![Tailwind Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-textbox.PNG)
+![default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/default.PNG)
 
 ```
-<Dropdown theme="tailwind" collapse={false} is="section" id="tailwind-text" text="Tailwind Hidden Text">
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
-</Dropdown>
+<Rating rate="4.5" total="56" defaults={true}/>
 ```
 
+## astro-icon
 
-**Selection Input:**
+Use [astro-icons](https://github.com/natemoo-re/astro-icon#readme) to customize the icons
 
-![Tailwind Input](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind.PNG)
+The default icon names: `star-active`, `star-half`, and `star-inactive` take advantage of the [local icons](https://github.com/natemoo-re/astro-icon#local-icons) feature in astro-icon to serve a local icon svg by default
 
-```
-<Dropdown
-    lock={true}
-    theme="tailwind"
-    id="tailwind-input"
-    text="Tailwind Input"
-    value="option-1"
-    options={{
-        'Option 1': 'option-1',
-        'Option 2': 'option-2',
-        'Option 3': 'option-3',
-        'Option 4': 'option-4',
-        'Option 5': 'option-5'
-    }} 
-/>
-```
-
-## Styling
-
-**Using Props**:
-
-Style your drop down using the `theme` prop using built in themes making your own
-
-**Using a stylesheet**:
-
-You can also import a style sheet using the following selectors for a global dropdown style
+![hearts](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/hearts.PNG)
 
 ```
-//All dropdown toggles
-summary {
-    display: flex;
-    align-items: center;
-    gap: .2rem;
-}
-
-//Remove default marker
-summary::marker {
-    content: none;
-}
-
-//Create custom marker
-summary::before {
-    content: '>';
-    display: inline-block;
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 1.25rem;
-}
-
-//Style custom marker if open
-details[open] summary::before {
-    transform: rotate(90deg);
-}
-
-summary:focus {
-    border-color: red;
-}
-
-//Style content element if focused
-summary + *:focus-within {
-    border-color: red;
-}
+//Using tailwindcss classes to style
+<Rating {...{
+    rate: "4.5",
+    max: "9",
+    class: "flex items-center gap-1",
+    icon: {
+        class: "text-pink-300 w-4 h-4"
+    },
+    active: {
+        name: "line-md:heart-filled"
+    },
+    half: {
+        name: "line-md:heart-filled-half"
+    },
+    inactive: {
+        name: "line-md:heart"
+    },
+}}/>
 ```
 
 ## API
 
-#### `is`
+#### `max`
 
-**Type**: `string`
+**Type**: `string | number`
 
-**Default**: `menu`
+**Default**: `5`
 
-Defines the tag for the dropdown's content element (the element being hidden)
+Max number of stars to display
 
-#### `id`
+#### `rate`
 
-**Type**: `string`
+**Type**: `string | number`
 
-Set the id of the dropdown, used to create id for toggle and content elements
+**Default**: `0`
 
-#### `text`
+A fraction of max, number of activated stars
 
-**Type**: `string`
 
-Set the text inside of the toggle element
+#### `total`
 
-#### `value`
+**Type**: `string | number`
 
-**Type**: `string`
 
-Set the value of the dropdown, use `id` prop to retrieve value
+Total number of ratings
 
-`document.getElementByID('id').value`
+if `defaults` is true it creates a span element that displays the total: (1,503)
 
-#### `options`
+Use `_span` key to override the default span element with a [astro-json-element](https://github.com/BryceRussell/astro-json-element#readme) child
 
-**Type**: `{}`
+Remove commas by setting `commas` to false
 
-Each key/value pair creates a button inside of the content element turning the dropdown into a user input with selectable options
+#### `icons`
 
-`key`: Defines the name/text inside of the button
-`value`: Defines the value that will be applied to the dropdown element
+**Type**: `object`
 
-#### `lock`
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-Focus lock, if using tab to navigate you cannot leave dropdown unless you close it, tab navigation loop
-
-#### `collapse`
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-Close dropdown when focus is lost
-
-#### `theme`
-
-**Type**: `string | {}`
-
-Built in themes: `inline`, `tailwind`, `tailwindHamburger`
-
-or make your own:
-
+**Default**:
 ```
 {
-    container: {},
-    toggle: {},
-    content: {},
-    options: {}
+    tag: "div",
+    style: icons&&"display:flex;align-items:center;",
+    ...icons
 }
 ```
 
-Customize the attributes of each elemenet inside of your drop down
+astro-json-element `div` element  that hols all icons svgs
 
+#### `icon`
+
+**Type**: `object`
+
+**Default**:
 ```
-<details {...container}>
-    <summary {...toggle}>
-    </summary>
-    <{is} {...content}>
-        <Button {...options}></Button>
-    <{is}>
-</details>
-```
-
-
-## Custom Theme Examples
-
-![Custom Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/custom-navigation.PNG)
-```
-<Dropdown
-    id="custom-nav"
-    text="Settings"
-    theme={{
-        container: {
-            class: 'group flex items-center',
-        },
-        toggle: {
-            class: "relative flex items-end gap-1 px-3 py-1 rounded-sm border-2 select-none leading-none whitespace-nowrap text-lg marker:content-none after:inline-block after:leading-none after:font-mono after:font-bold after:text-sm after:content-['...'] focus-visible:outline-none focus:border-fuchsia-800 group-open:after:animate-pulse"
-        },
-        content: {
-            class: 'z-10 absolute flex flex-col justify-start mt-1 rounded-sm bg-white border-2 border-gray-100 focus-within:border-fuchsia-800 focus-within:[&>*]:outline-none hover:[&>*]:bg-gray-100 focus:[&>*]:bg-gray-100'
-        },
-        options: {
-            class: 'overflow-hidden px-2 py-0.5 hover:bg-neutral-100 text-left'
-        }
-    }}
->
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Account</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Schedule</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">General</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Files</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Theme</a>
-</Dropdown>
+{
+    style: `min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`
+}
 ```
 
-![Custom Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/custom-textbox.PNG)
+Attributes to apply to all icon scs
+
+
+#### `active`
+
+**Type**: `object`
+
+**Default**:
+```
+active: {
+    name: "star-active"
+}
+```
+
+Attributes to apply to all active stars
+
+#### `half`
+
+**Type**: `object`
+
+**Default**:
+```
+half: {
+    name: "star-half"
+}
+```
+
+Attributes to apply to all half stars
+
+#### `inactive`
+
+**Type**: `object`
+
+**Default**:
+```
+inactive: {
+    name: "star-inactive"
+}
+```
+
+Attributes to apply to all inactive stars
+
+#### `commas`
+
+**Type**: `boolean`
+
+**Default**:`true`
+
+Toggles commas on string numbers for the default span element `_span` when using the `total` prop and `defaults` set to true
+
+#### `defaults`
+
+**Type**: `boolean`
+
+**Default**:`false`
+
+If true use the built in default in-line styling and `_span` element for displaying total number of ratings
+
+#### `...attrs`
+
+**Type**: `{}`
+
+Any of the other keys not above will be added as a prop to the main rating container's astro-json-element
+
+
+## Examples
+
+![custom_1](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_1.PNG)
 
 ```
-<Dropdown
-    collapse={false}
-    is="section"
-    id="custom-text"
-    text="Hidden Textbox"
-    theme={{
-        container: {
-            class: 'group flex items-center w-6/12',
-        },
-        toggle: {
-            class: "flex items-center gap-1 px-2 pt-0.5 pb-1 bg-fuchsia-800 rounded-md group-open:rounded-t-md group-open:rounded-b-none select-none leading-none whitespace-nowrap text-white text-xl marker:content-none before:inline-block before:leading-none before:font-mono before:font-bold before:content-['>'] focus-visible:outline-none group-open:before:rotate-90"
-        },
-        content: {
-            class: 'flex flex-col justify-start bg-white rounded-b-md border-2 border-fuchsia-100 text-fuchsia-900 focus-within:border-fuchsia-800 [&>*]:px-2 [&>*]:py-0.5 [&>*]:text-left focus-within:[&>*]:outline-none'
-        },
-        options: {}
-    }}
->
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, reiciendis culpa facilis nesciunt harum assumenda, velit quidem, quas quasi quod excepturi dolorum. Eos fugiat obcaecati quae in, iste nobis fugit cumque quos vitae totam! A sunt corrupti blanditiis, sequi perferendis quos earum. Sit nihil provident dolor? Aspernatur dolorum eos fuga.</p>
-</Dropdown>
+<Rating {...{
+    rate: "3",
+    max: "5",
+    tag: "section",
+    class: "flex flex-col-reverse items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300",
+    icon: {
+        class: "text-blue-300 w-4 h-4"
+    },
+    active: {
+        name: "mdi:star"
+    },
+    half: {
+        name: "mdi:star-half-full"
+    },
+    inactive: {
+        name: "mdi:star-outline"
+    }
+}}/>
+```
+
+![custom_2](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_2.PNG)
+
+
+```
+<Rating {...{
+    rate: "7.5",
+    max: "10",
+    class: "flex flex-col-reverse items-end gap-1 py-1 px-2 bg-neutral-50",
+    _span: {
+        tag: "span",
+        text: "873",
+        class: "text-xs text-blue-300"
+    },
+    icons: {
+        class: "flex flex-row-reverse items-center"
+    },
+    icon: {
+        class: "text-yellow-300 w-4 h-4"
+    },
+    half: {
+        style: "transform:scale(-1, 1);"
+    }
+}}/>
+```
+
+![custom_3](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_3.PNG)
+
+```
+<Rating {...{
+    rate: "2.5",
+    max: "5",
+    class: "flex flex-row-reverse items-center gap-1 py-1 px-2 rounded-md border",
+    _span: {
+        tag: "span",
+        text: "72",
+        class: "text-xs text-blue-300"
+    },
+    icons: {
+        class: "flex items-center"
+    },
+    icon: {
+        class: "text-yellow-300 w-4 h-4",
+    },
+    active: {
+        name: "mdi:star"
+    },
+    half: {
+        name: "mdi:star-half-full"
+    },
+    inactive: {
+        name: "mdi:star-outline"
+    },
+}}/>
+```
+
+![custom_4](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_4.PNG)
+
+
+```
+<Rating {...{
+    rate: "2.5",
+    max: "3",
+    class: "flex flex-col-reverse items-center py-1 px-2 rounded-md border border-pink-300",
+    _span: {
+        tag: "span",
+        text: "Healthy!",
+        class: "text-xs text-pink-300"
+    },
+    icon: {
+        class: "text-pink-300 w-4 h-4"
+    },
+    active: {
+        name: "line-md:heart-filled"
+    },
+    half: {
+        name: "line-md:heart-filled-half"
+    },
+    inactive: {
+        name: "line-md:heart"
+    }
+}}/>
 ```

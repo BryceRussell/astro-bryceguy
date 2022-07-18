@@ -1,260 +1,273 @@
-# @astro-bryceguy/pagination
+# @astro-bryceguy/dropdown
 
-This component is a fork/refactor of [https://github.com/iozcelik/SarissaPagination](https://github.com/iozcelik/SarissaPagination)
-
-A pagination component that uses [astro-json-element](https://github.com/BryceRussell/astro-json-element) to give you full control over every aspect of your pagination element
-
-[Tailwindcss](https://tailwindcss.com) is an easy way to style [astro-json-elements](https://github.com/BryceRussell/astro-json-element) without having to create global stylesheet or use inline styles
+A dropdown component made using XElement
 
 ## Features
 
-- Customize how many page numbers are shown at the start, middle, and end
-- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-elements](https://github.com/BryceRussell/astro-json-element)
-- Add commas to page numbers
-- String number compatibility
+- Use the `options` prop to create a selection input
+- Tab accessible
+- Toggle focus locking
+- Toggle collapse on focus lost
+- Customizable
+- Themes
 
 ## How to use
 
-__Install package:__
+**Install:**
 
 ```
-npm i @astro-bryceguy/pagination
+npm i @astro-bryceguy/dropdown
 ```
 
-![Default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/default.PNG)
+**Basic Dropdowns:**
+
+![Basic Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/default-textbox.PNG)
 
 ```
-//Default styling
-<Pagination url="/posts" total="22" current="11" defaults={true}></Pagination>
+<Dropdown collapse={false}  is="section" id="default-text" text="Hidden Text">
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
+</Dropdown>
 ```
 
-## Examples
-
-![Pagination](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/pagination.PNG)
+![Basic Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/default-navigation.PNG)
 
 ```
-<Pagination url="/posts" total="12" current="6"></Pagination>
-<Pagination url="/posts" total="22" current="11" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="5" end="1" middle="1" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="1" end="5" middle="1" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="5" end="5" middle="1" defaults={true}></Pagination>
-<Pagination url="/posts" total="22" current="11" start="1" end="1" middle="5" defaults={true}></Pagination>
-<Pagination url="/posts" total="9999" current="1000" defaults={true}></Pagination>
-<Pagination url="/posts" total="9999" current="1000" commas={false} defaults={true}></Pagination>
-<Pagination url="/posts" total="12" current="6" collapse={false} defaults={true}></Pagination>
-<!-- Custom Tailwindcss Example -->
-<Pagination {...{
-    url: "/posts",
-    total: "9999",
-    current: "1000",
-    class: "flex items-center gap-1",
-    link: {
-        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border text-sm font-medium"
-    },
-    active: {
-        class: "relative flex-nowrap inline-flex items-center px-3 py-1 rounded-3xl border border-purple-400 text-sm font-medium bg-purple-500 text-white"
-    },
-    disabled: {
-        text: "",
-        class: "leading-none flex items-center px-3"
-    }
-}}></Pagination>
-<Pagination {...{
-    url: "/posts",
-    total: "11",
-    current: "5",
-    start: 0,
-    end: 0,
-    middle: 1,
-    style: "display:flex;align-items:center;",
-    active: {
-        style: "display:flex;align-items:center;gap:.5rem;margin: 0 3rem;font-weight:bold;",
-        _page: {
-            slot: "before",
-            text: "Page",
-            style: "font-weight:normal"
-        },
-        _of: {
-            text: "of",
-            style: "font-weight:normal"
-        }
-    },
-    disabled: {
-        text: ""
-    },
-    before: {
-        text: "<",
-        style: "font-family:monospace;padding: 0 0.5rem;border-radius:3px;border: 1px solid #ccc;font-weight:bold;font-size:1rem;"
-    },
-    after: {
-        text: ">",
-        style: "font-family:monospace;padding: 0 0.5rem;border-radius:3px;border: 1px solid #ccc;font-weight:bold;font-size:1rem;"
-    },
-}}/>
-<Pagination {...{
-    url: "/posts",
-    total: "31",
-    current: "9",
-    start: 1,
-    end: 1,
-    middle: 3,
-    style: "display:flex;align-items:center;gap:.25rem;",
-    active: {
-        style: "cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;background-color:#0EA5E9;border-radius:50%;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;color:white;",
-    },
-    link: {
-        style: "cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;"
-    },
-    first: {
-        text: "<",
-        style: "font-family:monospace;padding: 0 0.5rem;border-radius:50%;border: 1px solid #ccc;font-weight:bold;font-size:1rem;"
-    },
-    last: {
-        text: ">",
-        style: "font-family:monospace;padding: 0 0.5rem;border-radius:50%;border: 1px solid #ccc;font-weight:bold;font-size:1rem;"
-    },
-    disabled: {
-        text: ""
-    }
-}}/>
+<Dropdown id="default-nav" text="Navigation">
+    <a href="/">Link 1</a>
+    <a href="/">Link 2</a>
+    <a href="/">Link 3</a>
+</Dropdown>
+```
+
+**Themes:**
+
+Use built in themes or create your own
+
+![Tailwind Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-hamburger.PNG)
+
+```
+<Dropdown id="tailwind-hamburger" theme="tailwindHamburger">
+    <a href="/">Home</a>
+    <a href="/">Products</a>
+    <a href="/">Services</a>
+    <a href="/">About</a>
+    <a href="/">Contact Us</a>
+</Dropdown>
+```
+
+![Tailwind Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-textbox.PNG)
+
+```
+<Dropdown theme="tailwind" collapse={false} is="section" id="tailwind-text" text="Tailwind Hidden Text">
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
+</Dropdown>
+```
+
+
+**Selection Input:**
+
+![Tailwind Input](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind.PNG)
+
+```
+<Dropdown
+    lock={true}
+    theme="tailwind"
+    id="tailwind-input"
+    text="Tailwind Input"
+    value="option-1"
+    options={{
+        'Option 1': 'option-1',
+        'Option 2': 'option-2',
+        'Option 3': 'option-3',
+        'Option 4': 'option-4',
+        'Option 5': 'option-5'
+    }} 
+/>
+```
+
+## Styling
+
+**Using Props**:
+
+Style your drop down using the `theme` prop using built in themes making your own
+
+**Using a stylesheet**:
+
+You can also import a style sheet using the following selectors for a global dropdown style
+
+```
+//All dropdown toggles
+summary {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+}
+
+//Remove default marker
+summary::marker {
+    content: none;
+}
+
+//Create custom marker
+summary::before {
+    content: '>';
+    display: inline-block;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+//Style custom marker if open
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+summary:focus {
+    border-color: red;
+}
+
+//Style content element if focused
+summary + *:focus-within {
+    border-color: red;
+}
 ```
 
 ## API
 
-## Slots
-
-### `Default`
-
-Children will be slotted after all page number elements by default
-
-### `before`
-
-Slot children before all link elements
-
-## API
-
-### `url`
+#### `is`
 
 **Type**: `string`
 
-root url for page link: `blog/posts` > `blog/posts/1, blog/posts/2`, etc
+**Default**: `menu`
 
-### `total`
+Defines the tag for the dropdown's content element (the element being hidden)
 
-**Type**: `string | number`
+#### `id`
 
-Total number of pages
+**Type**: `string`
 
-### `current`
+Set the id of the dropdown, used to create id for toggle and content elements
 
-**Type**: `string | number`
+#### `text`
 
-Current page number
+**Type**: `string`
 
-### `start`
+Set the text inside of the toggle element
 
-**Type**: `string | number`
+#### `value`
 
-**Default**: `2`
+**Type**: `string`
 
-number of pages to display at the start
+Set the value of the dropdown, use `id` prop to retrieve value
 
-### `end`
+`document.getElementByID('id').value`
 
-**Type**: `string | number`
+#### `options`
 
-**Default**: `2`
+**Type**: `{}`
 
-number of pages to display at the end
+Each key/value pair creates a button inside of the content element turning the dropdown into a user input with selectable options
 
-### `middle`
+`key`: Defines the name/text inside of the button
+`value`: Defines the value that will be applied to the dropdown element
 
-**Type**: `string | number`
-
-**Default**: `2`
-
-number of pages to display on either side of the current active page
-
-### `link`
-
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-
-Define default element for all links
-
-### `active`
-
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-
-Define element for the active link
-
-### `disabled`
-
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-
-Define element to display between start middle and end
-
-### `first`
-
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-
-Define element for the first link
-
-### `before`
-
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-
-Define element before active link
-
-
-### `after`
-
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-
-Define element after active link
-
-### `last`
-
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
-
-Define element for the last link
-
-### `defaults`
+#### `lock`
 
 **Type**: `boolean`
 
 **Default**: `false`
 
-uses built in default styling if true
+Focus lock, if using tab to navigate you cannot leave dropdown unless you close it, tab navigation loop
 
-### `commas`
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-uses commas in page numbers if true
-
-### `collapse`
+#### `collapse`
 
 **Type**: `boolean`
 
 **Default**: `true`
 
-if true only the pages defined using the start, current, middle, and end props will be shown
+Close dropdown when focus is lost
 
-if link element will appear for every page number in the total
+#### `theme`
 
-### `...attrs`
+**Type**: `string | {}`
 
-**Type**: [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+Built in themes: `inline`, `tailwind`, `tailwindHamburger`
 
-**Default**:
+or make your own:
+
 ```
 {
-    tag: "div",
-    style: defaults&&"display:flex;justify-content:center;align-items:center;gap:.25rem;",
+    container: {},
+    toggle: {},
+    content: {},
+    options: {}
 }
 ```
 
-use [astro-json-element](https://github.com/BryceRussell/astro-json-element) to define the main `div` element for your rating
+Customize the attributes of each elemenet inside of your drop down
 
+```
+<details {...container}>
+    <summary {...toggle}>
+    </summary>
+    <{is} {...content}>
+        <Button {...options}></Button>
+    <{is}>
+</details>
+```
+
+
+## Custom Theme Examples
+
+![Custom Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/custom-navigation.PNG)
+```
+<Dropdown
+    id="custom-nav"
+    text="Settings"
+    theme={{
+        container: {
+            class: 'group flex items-center',
+        },
+        toggle: {
+            class: "relative flex items-end gap-1 px-3 py-1 rounded-sm border-2 select-none leading-none whitespace-nowrap text-lg marker:content-none after:inline-block after:leading-none after:font-mono after:font-bold after:text-sm after:content-['...'] focus-visible:outline-none focus:border-fuchsia-800 group-open:after:animate-pulse"
+        },
+        content: {
+            class: 'z-10 absolute flex flex-col justify-start mt-1 rounded-sm bg-white border-2 border-gray-100 focus-within:border-fuchsia-800 focus-within:[&>*]:outline-none hover:[&>*]:bg-gray-100 focus:[&>*]:bg-gray-100'
+        },
+        options: {
+            class: 'overflow-hidden px-2 py-0.5 hover:bg-neutral-100 text-left'
+        }
+    }}
+>
+    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Account</a>
+    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Schedule</a>
+    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">General</a>
+    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Files</a>
+    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Theme</a>
+</Dropdown>
+```
+
+![Custom Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/custom-textbox.PNG)
+
+```
+<Dropdown
+    collapse={false}
+    is="section"
+    id="custom-text"
+    text="Hidden Textbox"
+    theme={{
+        container: {
+            class: 'group flex items-center w-6/12',
+        },
+        toggle: {
+            class: "flex items-center gap-1 px-2 pt-0.5 pb-1 bg-fuchsia-800 rounded-md group-open:rounded-t-md group-open:rounded-b-none select-none leading-none whitespace-nowrap text-white text-xl marker:content-none before:inline-block before:leading-none before:font-mono before:font-bold before:content-['>'] focus-visible:outline-none group-open:before:rotate-90"
+        },
+        content: {
+            class: 'flex flex-col justify-start bg-white rounded-b-md border-2 border-fuchsia-100 text-fuchsia-900 focus-within:border-fuchsia-800 [&>*]:px-2 [&>*]:py-0.5 [&>*]:text-left focus-within:[&>*]:outline-none'
+        },
+        options: {}
+    }}
+>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, reiciendis culpa facilis nesciunt harum assumenda, velit quidem, quas quasi quod excepturi dolorum. Eos fugiat obcaecati quae in, iste nobis fugit cumque quos vitae totam! A sunt corrupti blanditiis, sequi perferendis quos earum. Sit nihil provident dolor? Aspernatur dolorum eos fuga.</p>
+</Dropdown>
+```
