@@ -239,11 +239,11 @@ Customize the attributes of each elemenet inside of your drop down
         }
     }}
 >
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Account</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Schedule</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">General</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Files</a>
-    <a href="/" class="px-2 py-0.5 hover:bg-gray-50">Theme</a>
+    <a href="/">Account</a>
+    <a href="/">Schedule</a>
+    <a href="/">General</a>
+    <a href="/">Files</a>
+    <a href="/">Theme</a>
 </Dropdown>
 ```
 
