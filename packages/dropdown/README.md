@@ -177,10 +177,7 @@ summary + *:focus-within > *:focus-within {
     
 }
 ```
-
-## API
-
-### Slots
+## Slots
 
 ```
 <details>
@@ -199,6 +196,8 @@ summary + *:focus-within > *:focus-within {
     <slot name=last" />
 </details>
 ```
+
+## API
 
 #### `is`
 
@@ -226,7 +225,7 @@ Set the text inside of the toggle element
 
 **Type**: `string`
 
-Set the value of the dropdown. Acts a default value when using dropdown as an input
+Set the value of the dropdown, acts a default value when using dropdown as an input
 
 Use `id` to retrieve value
 
