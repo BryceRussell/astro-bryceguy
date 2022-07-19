@@ -4,14 +4,15 @@ Bryce's WIP Astro component library
 
 ## Dropdown
 
-Create easy dropdowns made using XElement
+A easy to use dropdown component made using XElement
 
 [__README__](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/dropdown#readme)
 
-### Features
+## Features
 
-- Use the `options` prop to create a selection input
-- Tab accessible
+- Can be used as a user selection input
+- Tab navigatable
+- Toggle focus opening
 - Toggle focus locking
 - Toggle collapse on focus lost
 - Customizable
