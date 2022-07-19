@@ -14,6 +14,7 @@ interface Props {
     text?: string;
     value?: string;
     options?: {};
+	open?: boolean;
     lock?: boolean;
     collapse?: boolean;
     theme?: string|{};
@@ -25,6 +26,7 @@ const {
     text,
     value,
     options={},
+	open=false,
     lock=false,
     collapse=true,
     theme={}
@@ -54,45 +56,54 @@ Object.entries(themes).forEach(([key, value]) => {
 		id={`${id}-toggle`}
 		{...theme_object.toggle}
         define:vars={{
+			open,
             collapse
         }}
+        @mousedown:prevent={(e) => {
+            //Stop double toggling on click/focus when the 'open' prop is true
+            if (!open) e.target.focus()
+        }}
+        @click:prevent={(e) => {
+            e.target.parentElement.toggleAttribute('open')
+            //Reassign focus after toggle when the 'open' prop is true
+            if (open) e.target.focus()
+        }}
+        @focus={(e) => {
+            //Opens dropdown on focus when using tab navigation when 'open' prop is true 
+            if (open) e.target.parentElement.open = true   
+        }}
         @focusout={(e) => {
-			//Close dropdown when it loses focus
-            if (collapse && !e.target.nextElementSibling.contains(e.relatedTarget)) e.target.parentElement.removeAttribute('open');
+            //Collapse dropdown if it looses focus
+			if (collapse && !e.target.nextElementSibling.contains(e.relatedTarget)) e.target.parentElement.removeAttribute('open')
         }}
     >
 		<slot name="toggle-before" />
 		{text}
 		<slot name="toggle-after" />
     </Summary>
-
+	<slot name="before">
     <XElement
         @is={is}
         id={`${id}-content`}
         {...theme_object.content}
         define:vars={{
+			open,
             lock,
             collapse
         }}
         @do={(element) => {
-			//Make all child elements tab navigatable
+            //Make all child elements inside the dropdown content element tab navigatable
             Array.from(element.children).forEach(child => { child.setAttribute("tabindex","0") });
         }}
         @focusout={(e) => {
-			console.log(e)
-            if (!e.target.parentElement.contains(e.relatedTarget)) {
-				lock?
-				//Loops focus back to toggle element, stops focus from leaving dropdown using tab navigation
-				e.target.parentElement.previousElementSibling.focus():
-				collapse && e.target.parentElement.previousElementSibling != e.relatedTarget?
-				//Close dropdown when it loses focus
-				e.target.parentElement.parentElement.removeAttribute('open'):
-				null
-			}
-        }}
-        @click={(e) => {
-			//refocus toggle after click, prevents dropdown from losing focus after clicking a non-focusable element inside of a dropdown like a <p>
-            if (lock) e.target.parentElement.previousElementSibling.focus()
+            //This took me three days to write idk how to explain it
+            if (collapse && !e.target.parentElement.contains(e.relatedTarget)) {
+                if (lock) {
+                    if (e.relatedTarget) e.relatedTarget.focus()
+                    else if (!open) e.target.parentElement.parentElement.open = true;
+                    e.target.parentElement.previousElementSibling.focus()
+                } else e.target.parentElement.parentElement.removeAttribute('open');
+            }
         }}
     >
         <slot name="content-before" />
@@ -105,8 +116,9 @@ Object.entries(themes).forEach(([key, value]) => {
                             v
                         }}
                         @click={(e) => {
-							//Set the value of the dropdown
+							//Set the value of the dropdown and dropdown toggle to option value
                             e.path[2].value = v;
+                            e.path[1].previousElementSibling.value = v;
 							//Change the dropdown toggle textContent to match name of option
                             e.path[1].previousElementSibling.textContent = k;
 							//Close dropdown

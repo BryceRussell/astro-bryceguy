@@ -1,11 +1,12 @@
 # @astro-bryceguy/dropdown
 
-A dropdown component made using XElement
+A easy to use dropdown component made using XElement
 
 ## Features
 
-- Use the `options` prop to create a selection input
-- Tab accessible
+- Can be used as a user selection input
+- Tab navigatable
+- Toggle focus opening
 - Toggle focus locking
 - Toggle collapse on focus lost
 - Customizable
@@ -70,6 +71,7 @@ Use built in themes or create your own
 
 ```
 <Dropdown
+    open={true}
     lock={true}
     theme="tailwind"
     id="tailwind-input"
@@ -89,50 +91,114 @@ Use built in themes or create your own
 
 **Using Props**:
 
-Style your drop down using the `theme` prop using built in themes making your own
+Style using the `theme` prop using the built in themes: `inline`, `tailwind`, `tailwindHamburger` or by making your own
+
+**Community Themes**:
+
+If you want to add your themes to the project add them to the themes.js file and submit a PR
+
+Themes defined inside the themes.js file can be refrenced using a string of its exported name
 
 **Using a stylesheet**:
 
 You can also import a style sheet using the following selectors for a global dropdown style
 
-```
-//All dropdown toggles
-summary {
-    display: flex;
-    align-items: center;
-    gap: .2rem;
-}
+_This stylesheet is styled like the built in tailwind theme_
 
-//Remove default marker
+```
+/* Dropdown container */
+details {
+	outline: none;
+}
+/* Dropdown toggle */
+summary {
+    cursor: pointer;
+    outline: none;
+    line-height: 1;
+    display: flex !important;
+    align-items: center;
+    gap: .25rem;
+    padding: .2rem .5rem .25rem .5rem;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+}
+/* Remove default marker */
 summary::marker {
     content: none;
 }
-
-//Create custom marker
+/* Custom dropdown marker */
 summary::before {
     content: '>';
+    line-height: 1;
     display: inline-block;
     font-family: monospace;
     font-weight: bold;
     font-size: 1.25rem;
 }
-
-//Style custom marker if open
+/* Style toggle element if dropdown is open */
 details[open] summary::before {
     transform: rotate(90deg);
 }
-
+/* Remove default outline style */
+summary:focus-visible {
+    outline: none;
+}
 summary:focus {
-    border-color: red;
+    border-color: #0284C7;
 }
 
-//Style content element if focused
+/* Dropdown content element */
+summary + * {
+    z-index: 10;
+    overflow: hidden;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: .25rem !important;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+}
 summary + *:focus-within {
-    border-color: red;
+    border: 2px solid #0284C7;
+}
+
+/* Children inside of dropdown content */
+summary + * > * {
+    outline: none;
+    padding: .2rem .5rem !important; 
+}
+summary + * > *:hover {
+    background-color: lightgrey;
+    
+}
+summary + *:focus-within > *:focus-within {
+    background-color: lightgrey;
+    
 }
 ```
 
 ## API
+
+### Slots
+
+```
+<details>
+    <slot name="first" />
+    <summary>
+        <slot name="toggle-before" />
+        {text}
+        <slot name="toggle-after" />
+    </summary>
+    <slot nmae="before" >
+    <{is}>
+        <slot name="content-before" />
+        {options}
+        <slot />
+    <{is}>
+    <slot name=last" />
+</details>
+```
 
 #### `is`
 
@@ -140,13 +206,15 @@ summary + *:focus-within {
 
 **Default**: `menu`
 
-Defines the tag for the dropdown's content element (the element being hidden)
+Defines the dropdown content element's tag (the element being hidden). Default assumes a menu element for navigations/selection list, if using for different purpose redefine as a 'section' or 'div' for HTML semantics
 
 #### `id`
 
 **Type**: `string`
 
-Set the id of the dropdown, used to create id for toggle and content elements
+Set the id of the dropdown, used to create id for toggle and content elements. , use `id` prop to retrieve value set using the `value` prop or an clicking an option created using the `options` prop
+
+`document.getElementByID('id').value`
 
 #### `text`
 
@@ -158,7 +226,9 @@ Set the text inside of the toggle element
 
 **Type**: `string`
 
-Set the value of the dropdown, use `id` prop to retrieve value
+Set the value of the dropdown. Acts a default value when using dropdown as an input
+
+Use `id` to retrieve value
 
 `document.getElementByID('id').value`
 
@@ -171,13 +241,21 @@ Each key/value pair creates a button inside of the content element turning the d
 `key`: Defines the name/text inside of the button
 `value`: Defines the value that will be applied to the dropdown element
 
+#### `open`
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+Opens drop down when focused, useful for automatically opening for tab navigation
+
 #### `lock`
 
 **Type**: `boolean`
 
 **Default**: `false`
 
-Focus lock, if using tab to navigate you cannot leave dropdown unless you close it, tab navigation loop
+Focus lock, if using tab to navigate you cannot leave dropdown unless you lose focus on it, loops tab navigation back to dropdown toggle
 
 #### `collapse`
 
@@ -185,17 +263,14 @@ Focus lock, if using tab to navigate you cannot leave dropdown unless you close 
 
 **Default**: `true`
 
-Close dropdown when focus is lost
+Close dropdown if focus is lost on dropdown
 
 #### `theme`
 
-**Type**: `string | {}`
-
-Built in themes: `inline`, `tailwind`, `tailwindHamburger`
-
-or make your own:
+**Type**:
 
 ```
+'inline', 'tailwind', 'tailwindHamburger' |
 {
     container: {},
     toggle: {},
@@ -206,12 +281,16 @@ or make your own:
 
 Customize the attributes of each elemenet inside of your drop down
 
+Themes defined inside the themes.js file can be refrenced using a string of its exported name
+
+How theme attributes are spread to dropdown elements:
+
 ```
 <details {...container}>
     <summary {...toggle}>
     </summary>
     <{is} {...content}>
-        <Button {...options}></Button>
+        <buttons {...options}></buttons>
     <{is}>
 </details>
 ```
