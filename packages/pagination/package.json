@@ -27,6 +27,7 @@
   "files": [
     "index.mjs",
     "index.d.ts",
+    "themes.js",
     "Pagination.astro"
   ],
   "dependencies": {

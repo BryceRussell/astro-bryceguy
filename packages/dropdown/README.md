@@ -5,7 +5,7 @@ A easy to use dropdown component made using XElement
 ## Features
 
 - Can be used as a user selection input
-- Tab navigatable
+- Tab navigable
 - Toggle focus opening
 - Toggle focus locking
 - Toggle collapse on focus lost
@@ -25,7 +25,7 @@ npm i @astro-bryceguy/dropdown
 ![Basic Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/default-textbox.PNG)
 
 ```
-<Dropdown collapse={false}  is="section" id="default-text" text="Hidden Text">
+<Dropdown collapse={false}  is="section" text="Hidden Text">
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
 </Dropdown>
 ```
@@ -33,7 +33,7 @@ npm i @astro-bryceguy/dropdown
 ![Basic Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/default-navigation.PNG)
 
 ```
-<Dropdown id="default-nav" text="Navigation">
+<Dropdown text="Navigation">
     <a href="/">Link 1</a>
     <a href="/">Link 2</a>
     <a href="/">Link 3</a>
@@ -47,7 +47,7 @@ Use built in themes or create your own
 ![Tailwind Navigation](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-hamburger.PNG)
 
 ```
-<Dropdown id="tailwind-hamburger" theme="tailwindHamburger">
+<Dropdown theme="tailwindHamburger">
     <a href="/">Home</a>
     <a href="/">Products</a>
     <a href="/">Services</a>
@@ -59,7 +59,7 @@ Use built in themes or create your own
 ![Tailwind Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-textbox.PNG)
 
 ```
-<Dropdown theme="tailwind" collapse={false} is="section" id="tailwind-text" text="Tailwind Hidden Text">
+<Dropdown theme="tailwind" collapse={false} is="section" text="Tailwind Hidden Text">
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
 </Dropdown>
 ```
@@ -92,6 +92,15 @@ Use built in themes or create your own
 **Using Props**:
 
 Style using the `theme` prop using the built in themes: `inline`, `tailwind`, `tailwindHamburger` or by making your own
+
+_Make sure to add the module to tailwind.config.cjs if using the tailwind theme_
+```
+module.exports = {
+  content: [
+    './node_modules/@astro-bryceguy/dropdown/theme.js',
+  ]
+}
+```
 
 **Community Themes**:
 
@@ -187,7 +196,7 @@ summary + *:focus-within > *:focus-within {
         {text}
         <slot name="toggle-after" />
     </summary>
-    <slot nmae="before" >
+    <slot name="before" >
     <{is}>
         <slot name="content-before" />
         {options}
