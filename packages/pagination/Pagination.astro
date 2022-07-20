@@ -4,7 +4,7 @@ import * as themes from './themes.js';
 
 //This componenet is a fork of https://github.com/iozcelik/SarissaPagination
 export interface Props {
-	url: string;
+	url?: string;
 	total: string|number;
 	current: string|number;
 	start?: string|number;
@@ -17,7 +17,7 @@ export interface Props {
 	[attrs: string]: any;
 }
 const {
-	url,
+	url="",
 	total,
 	current,
 	start=2,

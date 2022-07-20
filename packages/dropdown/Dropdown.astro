@@ -32,29 +32,49 @@ const {
     theme={}
 } = Astro.props as Props
 
-let theme_object = {
-    container: {},
-    toggle: {},
-    content: {},
-    options: {},
-    ...theme
+interface Theme {
+    container: {[attrs: string]: any};
+    toggle: {[attrs: string]: any};
+    content: {[attrs: string]: any};
+    options: {[attrs: string]: any};
 }
 
+const {
+    container,
+    toggle,
+    content,
+    options: option_attrs
+} = theme as Theme
+
+let theme_object = {
+    container: {
+        id: id,
+        value: value,
+        ...container
+    },
+    toggle: {
+        id: `${id}-toggle`,
+        ...toggle
+    },
+    content: {
+        id: `${id}-content`,
+        ...content
+    },
+    options: {...option_attrs},
+} as Theme
+
 //Load theme if specified
-Object.entries(themes).forEach(([key, value]) => {
-	if (theme === key) theme_object = {...theme_object, ...value};
-})
+if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
+	let _theme:Theme = themes[theme]
+	Object.entries(_theme).forEach(([key, value]) => {
+		theme_object[key] = {...theme_object[key], ...value}
+	})
+}
 ---
 
-<Details
-    id={id}
-	value={value}
-    {...theme_object.container}
->
+<Details {...theme_object.container}>
 	<slot name="first" />
-    <Summary
-		id={`${id}-toggle`}
-		{...theme_object.toggle}
+    <Summary {...theme_object.toggle}
         define:vars={{
 			open,
             collapse
@@ -82,10 +102,8 @@ Object.entries(themes).forEach(([key, value]) => {
 		<slot name="toggle-after" />
     </Summary>
 	<slot name="before">
-    <XElement
+    <XElement {...theme_object.content}
         @is={is}
-        id={`${id}-content`}
-        {...theme_object.content}
         define:vars={{
 			open,
             lock,
@@ -109,7 +127,6 @@ Object.entries(themes).forEach(([key, value]) => {
         <slot name="content-before" />
         {Object.entries(options).map(([k,v], i) => {
             return  <Button
-                        id={`${id}-item-${i}`}
                         {...theme_object.options}
                         define:vars={{
                             k,
