@@ -6,6 +6,11 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 
 [Tailwindcss](https://tailwindcss.com) is an easy way to style [astro-json-elements](https://github.com/BryceRussell/astro-json-element) without having to create global stylesheet or use inline styles
 
+## Changes
+
+- Moved props for customizing elements to theme prop
+- Added ability to load built in themes using a string of its name
+
 ## Features
 
 - Customize how many page numbers are shown at the start, middle, and end
@@ -43,7 +48,7 @@ npm i @astro-bryceguy/pagination
 <Pagination url="/posts" total="9999" current="1000" theme="inline"></Pagination>
 <Pagination url="/posts" total="9999" current="1000" commas={false} theme="inline"></Pagination>
 <Pagination url="/posts" total="12" current="6" collapse={false} theme="inline"></Pagination>
-<Pagination url= "/posts" total= "11" current= "5" start="0" end="0" middle="1" theme="simple"/>
+<Pagination url="/posts" total= "11" current= "5" start="0" end="0" middle="1" theme="simple"/>
 ```
 
 ## Slots
@@ -100,6 +105,14 @@ number of pages to display at the end
 
 number of pages to display on either side of the current active page
 
+### `tab`
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+Add tabindex attribute to page links
+
 ### `commas`
 
 **Type**: `boolean`
@@ -124,11 +137,7 @@ if link element will appear for every page number in the total
 
 use astro-json-element to define the container element for your rating, overwrites theme prop container object
 
-**Example**:
-
-```
-<Pagination tag="div" id="page-navigation"/>
-```
+**Example**: `<Pagination tag="div" id="page-navigation"/>`
 
 ### `theme`
 

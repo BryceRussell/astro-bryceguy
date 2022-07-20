@@ -10,6 +10,7 @@ export interface Props {
 	start?: string|number;
 	end?: string|number;
 	middle?: string|number;
+	tab?: boolean;
 	commas?: boolean;
 	collapse?: boolean;
 	theme?: string|Theme;
@@ -22,6 +23,7 @@ const {
 	start=2,
 	end=2,
 	middle=2,
+	tab=true,
 	commas=true,
 	collapse=true,
 	theme={},
@@ -59,13 +61,12 @@ var theme_object = {
 	},
     link: {
 		tag: "a",
-		tabindex: "0",
+		tabindex: tab?"0":null,
 		...link
 	},
     active: {
 		tag: "a",
 		text: commas?addCommas(current):current.toString(),
-		tabindex: "0",
 		...active
 	},
     disabled: {
@@ -106,8 +107,7 @@ var pages = Array.from({ length: +total }, (v, i) => i + 1).map((i) => {
 });
 
 function addCommas(num) {
-    if (typeof num == 'number') return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    if (typeof num == 'string') return num.replace(/[^\d]/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    if (num) return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     return "0"
 }
 ---
