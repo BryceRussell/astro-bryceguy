@@ -3,18 +3,16 @@ export const inline = {
         style: "display:flex;justify-content:center;align-items:center;gap:.25rem;"
     },
     link: {
-        style: "cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;",
+        style: "position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;",
         onmouseover: "this.style.textDecoration='underline';",
         onmouseout: "this.style.textDecoration='none';",
     },
     active: {
-        style: "cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;border:1px solid #ccc;color:#0EA5E9;",
-        onmouseover: "this.style.textDecoration='underline';",
-        onmouseout: "this.style.textDecoration='none';",
+        style: "position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;border:1px solid #ccc;color:#0EA5E9;"
     },
     disabled: {
         text: "...",
-        style: "cursor:pointer;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;cursor:default;opacity:.25;",
+        style: "position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;opacity:.25;",
     },
     first: {},
     before: {},

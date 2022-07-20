@@ -8,8 +8,9 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 
 ## Changes
 
-- Moved props for customizing elements to theme prop
+- Added tab navigation option
 - Added ability to load built in themes using a string of its name
+- Moved `link`, `active`, `disabled`, `first`, `before`, `after`, and `last` props into the `theme` prop
 
 ## Features
 
@@ -111,7 +112,7 @@ number of pages to display on either side of the current active page
 
 **Default**: `true`
 
-Add tabindex attribute to page links
+Add tabindex="0" to all links except active and disabled links
 
 ### `commas`
 

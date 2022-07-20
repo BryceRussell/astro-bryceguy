@@ -70,7 +70,7 @@ var theme_object = {
 		...active
 	},
     disabled: {
-		tag: "a",
+		tag: "span",
 		...disabled
 	},
     first: {...first},
@@ -80,7 +80,7 @@ var theme_object = {
 } as Theme
 
 //Load theme from themes.js if specified
-if (typeof theme === "string" && themes.hasOwnProperty(theme)) {
+if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
 	let _theme:Theme = themes[theme]
 	Object.entries(_theme).forEach(([key, value]) => {
 		theme_object[key] = {...theme_object[key], ...value}
