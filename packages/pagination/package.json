@@ -31,6 +31,6 @@
     "Pagination.astro"
   ],
   "dependencies": {
-    "astro-json-element": "^0.1.0"
+    "astro-json-element": "^1.1.1"
   }
 }

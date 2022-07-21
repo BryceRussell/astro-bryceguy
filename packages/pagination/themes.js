@@ -1,9 +1,9 @@
 export const inline = {
     container: {
-        style: "display:flex;justify-content:center;align-items:center;gap:.25rem;"
+        style: "font-family:Arial;display:flex;justify-content:center;align-items:center;gap:.25rem;"
     },
     link: {
-        style: "position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;",
+        style: "position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 1px solid #ccc;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;color:#000;",
         onmouseover: "this.style.textDecoration='underline';",
         onmouseout: "this.style.textDecoration='none';",
     },
