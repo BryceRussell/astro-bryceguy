@@ -2,13 +2,20 @@
 
 A easy to use dropdown component made using XElement
 
+# Changes
+
+- Added unique ids allowing for dropdowns inside of dropdowns
+- Added collapse on pressing esc
+
 ## Features
 
+- Dropdowns in dropdowns
 - Can be used as a user selection input
 - Tab navigable
 - Toggle focus opening
 - Toggle focus locking
 - Toggle collapse on focus lost
+- Collapse on pressing esc
 - Customizable
 - Themes
 
@@ -214,7 +221,7 @@ summary + *:focus-within > *:focus-within {
 
 **Default**: `menu`
 
-Defines the dropdown content element's tag (the element being hidden). Default assumes a menu element for navigations/selection list, if using for different purpose redefine as a 'section' or 'div' for HTML semantics
+Defines the dropdown content element's tag (the element being hidden). If your creating a navigation use `nav`, if using the `options` prop use `menu`, etc
 
 #### `id`
 
@@ -248,6 +255,22 @@ Each key/value pair creates a button inside of the content element turning the d
 
 `key`: Defines the name/text inside of the button
 `value`: Defines the value that will be applied to the dropdown element
+
+#### `tab`
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+Adds `tabindex="0"` attribute to all children of the dropdown's content element, allows the content of the dropdown to be tab navigable
+
+#### `esc`
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+Escape key will close the dropdown if true
 
 #### `open`
 

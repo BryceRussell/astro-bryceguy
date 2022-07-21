@@ -10,10 +10,26 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 	</head>
 	<body class="font-sans min-h-screen flex flex-col justify-center items-center gap-3 mb-28 p-5 justify-center [&>h2]:mt-7 [&>h2]:text-2xl [&>h2]:font-bold">
 		<h2>Default style</h2>
-		<Dropdown open={true} id="default-nav" text="Navigation">
+		<Dropdown open={true} lock={true} id="default-nav" text="Navigation" theme="tailwind">
 			<a href="/">Link 1</a>
 			<a href="/">Link 2</a>
 			<a href="/">Link 3</a>
+			<Dropdown open={true} id="default-nav-2" text="Navigation" theme="tailwind">
+				<a href="/">Link 1</a>
+				<a href="/">Link 2</a>
+				<a href="/">Link 3</a>
+				<Dropdown open={true} id="default-nav-2" text="Navigation" theme="tailwind">
+					<a href="/">Link 1</a>
+					<a href="/">Link 2</a>
+					<a href="/">Link 3</a>
+				</Dropdown>
+				<div tabindex="-1">
+					<p tabindex="0">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, magnam!</p>
+					<p tabindex="0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, saepe.</p>
+					<p tabindex="0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, architecto?</p>
+				</div>
+			</Dropdown>
+			<div></div>
 		</Dropdown>
 		<Dropdown open={true} lock={true} id="default-input" text="Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} ></Dropdown>
 		<Dropdown collapse={false}  is="div" id="default-text" text="Hidden Text">
@@ -24,7 +40,7 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 			<a href="/">Link 1</a>
 			<a href="/">Link 2</a>
 			<a href="/">Link 3</a>
-			<p>Non-button test</p>
+			<div tabindex="0">Div<span tabindex="0">Span</span><p tabindex="0">P</p></div>
 		</Dropdown>
 		<Dropdown lock={true} theme='inline' id="inline-input" text="Inline Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} >
 		</Dropdown>
@@ -131,6 +147,13 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
             >
             </Dropdown>
         </div>
+		<Dropdown />
+		<Dropdown />
+		<Dropdown />
+		<Dropdown />
+		<Dropdown />
+		<Dropdown />
+		<Dropdown />
 		<Dropdown />
 	</body>
 </html>

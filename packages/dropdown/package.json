@@ -30,7 +30,7 @@
     "themes.js",
     "Dropdown.astro"
   ],
-  "devDependencies": {
+  "dependencies": {
     "astro-xelement": "^3.2.0"
   }
 }

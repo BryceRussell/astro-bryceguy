@@ -10,26 +10,31 @@ const {
 
 interface Props {
     is?: string;
-    id: string;
+    id?: string;
     text?: string;
     value?: string;
     options?: {};
+    tab?: boolean;
+    esc?: boolean;
 	open?: boolean;
     lock?: boolean;
     collapse?: boolean;
     theme?: string|{};
 }
-
 const {
-    is="menu",
-    id,
+    is="div",
+    //Has super small chance to get same id, probably fine
+    id=`dropdown-${Math.random().toString(36).substring(2, 7).toUpperCase()}`,
     text,
     value,
     options={},
+    tab=true,
+    esc=true,
 	open=false,
     lock=false,
     collapse=true,
-    theme={}
+    theme={},
+    ...attrs
 } = Astro.props as Props
 
 interface Theme {
@@ -50,7 +55,8 @@ let theme_object = {
     container: {
         id: id,
         value: value,
-        ...container
+        ...container,
+        ...attrs
     },
     toggle: {
         id: `${id}-toggle`,
@@ -72,12 +78,21 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
 }
 ---
 
-<Details {...theme_object.container}>
+<Details
+    {...theme_object.container}
+    @do={(element, store) => {
+        store.element = element
+    }}
+>
 	<slot name="first" />
     <Summary {...theme_object.toggle}
         define:vars={{
+            esc,
 			open,
             collapse
+        }}
+        @keydown={(e) => {
+            if (e.key === "Escape") e.target.parentElement.removeAttribute('open')
         }}
         @mousedown:prevent={(e) => {
             //Stop double toggling on click/focus when the 'open' prop is true
@@ -85,14 +100,16 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
         }}
         @click:prevent={(e) => {
             e.target.parentElement.toggleAttribute('open')
-            //Reassign focus after toggle when the 'open' prop is true
+            //Restore click functionality for dropdowns with open=true
             if (open) e.target.focus()
         }}
         @focus={(e) => {
-            //Opens dropdown on focus when using tab navigation when 'open' prop is true 
-            if (open) e.target.parentElement.open = true   
+            console.log(e)
+            //Opens dropdown on focus when using tab navigation when 'open' prop is true
+            if (open) e.target.parentElement.open = true;
         }}
         @focusout={(e) => {
+            console.log(e)
             //Collapse dropdown if it looses focus
 			if (collapse && !e.target.nextElementSibling.contains(e.relatedTarget)) e.target.parentElement.removeAttribute('open')
         }}
@@ -105,22 +122,31 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
     <XElement {...theme_object.content}
         @is={is}
         define:vars={{
+            id,
+            tab,
+            esc,
 			open,
             lock,
             collapse
         }}
         @do={(element) => {
-            //Make all child elements inside the dropdown content element tab navigatable
-            Array.from(element.children).forEach(child => { child.setAttribute("tabindex","0") });
+            //Make all child elements except other dropdowns inside the dropdown content element tab navigatable
+            if (tab) Array.from(element.children).forEach(child => { if (child.tagName !== "DETAILS" && !child.tabindex) child.setAttribute("tabindex","0") })
+        }}
+        @keydown={(e) => {
+            if (e.key === "Escape") e.target.parentElement.previousElementSibling.focus()
         }}
         @focusout={(e) => {
+            console.log(e)
+            let container = document.getElementById(id)
             //This took me three days to write idk how to explain it
-            if (collapse && !e.target.parentElement.contains(e.relatedTarget)) {
+            if (collapse && !container.contains(e.relatedTarget)) {
                 if (lock) {
-                    if (e.relatedTarget) e.relatedTarget.focus()
-                    else if (!open) e.target.parentElement.parentElement.open = true;
-                    e.target.parentElement.previousElementSibling.focus()
-                } else e.target.parentElement.parentElement.removeAttribute('open');
+                    if (e.relatedTarget && !esc) e.relatedTarget.focus()
+                    else if (!open) container.open = true
+                    document.getElementById(`${id}-toggle`).focus()
+                //Closes on focus lost
+                } else container.removeAttribute("open")
             }
         }}
     >
@@ -139,7 +165,8 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
 							//Change the dropdown toggle textContent to match name of option
                             e.path[1].previousElementSibling.textContent = k;
 							//Close dropdown
-                            e.path[2].removeAttribute('open');
+                            e.path[1].previousElementSibling.focus();
+                            e.path[2].removeAttribute('open')
                         }}
                     >
                         {k}
