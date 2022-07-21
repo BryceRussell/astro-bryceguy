@@ -219,9 +219,9 @@ summary + *:focus-within > *:focus-within {
 
 **Type**: `string`
 
-**Default**: `menu`
+**Default**: `div`
 
-Defines the dropdown content element's tag (the element being hidden). If your creating a navigation use `nav`, if using the `options` prop use `menu`, etc
+Defines the dropdown content element's tag (the element being hidden) for semantics. If your creating a navigation use `nav`, if using the `options` prop use `menu`, etc
 
 #### `id`
 

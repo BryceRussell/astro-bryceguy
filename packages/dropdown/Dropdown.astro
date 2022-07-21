@@ -92,7 +92,7 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
             collapse
         }}
         @keydown={(e) => {
-            if (e.key === "Escape") e.target.parentElement.removeAttribute('open')
+            if (esc && e.key === "Escape") e.target.parentElement.removeAttribute('open')
         }}
         @mousedown:prevent={(e) => {
             //Stop double toggling on click/focus when the 'open' prop is true
@@ -135,7 +135,7 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
         }}
         @keydown={(e) => {
             console.log(e)
-            if (e.key === "Escape") { 
+            if (esc && e.key === "Escape") { 
                 if (e.target.parentElement.previousElementSibling.tagName === "SUMMARY") e.target.parentElement.previousElementSibling.focus()
                 else e.path.filter(element => element.tagName==="DETAILS")[1].firstElementChild.focus()
             }
@@ -143,13 +143,13 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
         @focusout={(e) => {
             console.log(e)
             let container = document.getElementById(id)
-            //This took me three days to write idk how to explain it
             if (collapse && !container.contains(e.relatedTarget)) {
                 if (lock) {
-                    if (e.relatedTarget && !esc && !open) e.relatedTarget.focus()
-                    else if (!open) container.open = true
+                    if (!open) {
+                        if (e.relatedTarget && !esc) e.relatedTarget.focus()
+                        else container.open = true
+                    }
                     document.getElementById(`${id}-toggle`).focus()
-                //Closes on focus lost
                 } else container.removeAttribute("open")
             }
         }}
