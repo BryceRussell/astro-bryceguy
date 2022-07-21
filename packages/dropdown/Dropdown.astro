@@ -164,13 +164,14 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
                         }}
                         @click={(e) => {
 							//Set the value of the dropdown and dropdown toggle to option value
-                            e.path[2].value = v;
-                            e.path[1].previousElementSibling.value = v;
+                            let dropdown = e.path.filter(element => element.tagName==="DETAILS")[0]
+                            dropdown.value = v;
+                            dropdown.firstElementChild.value = v;
 							//Change the dropdown toggle textContent to match name of option
-                            e.path[1].previousElementSibling.textContent = k;
+                            dropdown.firstElementChild.textContent = k;
 							//Close dropdown
-                            e.path[1].previousElementSibling.focus();
-                            e.path[2].removeAttribute('open')
+                            dropdown.firstElementChild.focus();
+                            dropdown.removeAttribute('open')
                         }}
                     >
                         {k}
