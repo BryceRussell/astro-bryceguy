@@ -10,23 +10,22 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 	</head>
 	<body class="font-sans min-h-screen flex flex-col justify-center items-center gap-3 mb-28 p-5 justify-center [&>h2]:mt-7 [&>h2]:text-2xl [&>h2]:font-bold">
 		<h2>Default style</h2>
-		<Dropdown open={true} lock={true} id="default-nav" text="Navigation" theme="tailwind">
+		<Dropdown open={true} lock={true} text="Recursive Test" theme="inline">
 			<a href="/">Link 1</a>
 			<a href="/">Link 2</a>
 			<a href="/">Link 3</a>
-			<Dropdown open={true} id="default-nav-2" text="Navigation" theme="tailwind">
+			<Dropdown open={true} text="Dropdown 2" theme="inline">
 				<a href="/">Link 1</a>
 				<a href="/">Link 2</a>
 				<a href="/">Link 3</a>
-				<Dropdown open={true} id="default-nav-2" text="Navigation" theme="tailwind">
+				<Dropdown open={true} force={true} text="Dropdown 3" theme="inline">
 					<a href="/">Link 1</a>
 					<a href="/">Link 2</a>
 					<a href="/">Link 3</a>
 				</Dropdown>
-				<div tabindex="-1">
-					<p tabindex="0">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis, magnam!</p>
-					<p tabindex="0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, saepe.</p>
-					<p tabindex="0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis, architecto?</p>
+				<div tabindex="2">
+					<p tabindex="0">Lorem ipsum dolor sit amet consectetur</p>
+					<p tabindex="0">Lorem ipsum dolor sit amet consectetur</p>
 				</div>
 			</Dropdown>
 			<div></div>

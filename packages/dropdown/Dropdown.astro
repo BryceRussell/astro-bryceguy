@@ -134,7 +134,11 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
             if (tab) Array.from(element.children).forEach(child => { if (child.tagName !== "DETAILS" && !child.tabindex) child.setAttribute("tabindex","0") })
         }}
         @keydown={(e) => {
-            if (e.key === "Escape") e.target.parentElement.previousElementSibling.focus()
+            console.log(e)
+            if (e.key === "Escape") { 
+                if (e.target.parentElement.previousElementSibling.tagName === "SUMMARY") e.target.parentElement.previousElementSibling.focus()
+                else e.path.filter(element => element.tagName==="DETAILS")[1].firstElementChild.focus()
+            }
         }}
         @focusout={(e) => {
             console.log(e)
@@ -142,7 +146,7 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
             //This took me three days to write idk how to explain it
             if (collapse && !container.contains(e.relatedTarget)) {
                 if (lock) {
-                    if (e.relatedTarget && !esc) e.relatedTarget.focus()
+                    if (e.relatedTarget && !esc && !open) e.relatedTarget.focus()
                     else if (!open) container.open = true
                     document.getElementById(`${id}-toggle`).focus()
                 //Closes on focus lost
