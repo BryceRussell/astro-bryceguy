@@ -70,7 +70,11 @@ npm i @astro-bryceguy/pagination
 
 **Type**: `string`
 
+**Default**: `/`
+
 root url for page link: `blog/posts` > `blog/posts/1, blog/posts/2`, etc
+
+`'${url}/${page.number}'`
 
 ### `total`
 
