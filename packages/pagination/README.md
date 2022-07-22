@@ -8,6 +8,8 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 
 ## Changes
 
+- Added tailwind theme, update/fixed inline theme
+- Made url optional default to `/{page_number}`
 - Added tab navigation option
 - Added ability to load built in themes using a string of its name
 - Moved `link`, `active`, `disabled`, `first`, `before`, `after`, and `last` props into the `theme` prop
