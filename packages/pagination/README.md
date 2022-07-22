@@ -116,6 +116,14 @@ number of pages to display on either side of the current active page
 
 Add tabindex="0" to all links except active and disabled links
 
+### `tab`
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+Adds `tabindex="0"` to all navigable link elements if true
+
 ### `commas`
 
 **Type**: `boolean`
