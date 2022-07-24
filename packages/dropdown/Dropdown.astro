@@ -1,16 +1,13 @@
 ---
 import XElement from 'astro-xelement'
 import * as themes from './themes.js'
-
 const {
     details: Details,
     summary: Summary,
     button: Button
 } = XElement
-
 interface Props {
     is?: string;
-    id?: string;
     text?: string;
     value?: string;
     options?: {};
@@ -23,8 +20,6 @@ interface Props {
 }
 const {
     is="div",
-    //Has super small chance to get same id, probably fine
-    id=`dropdown-${Math.random().toString(36).substring(2, 7).toUpperCase()}`,
     text,
     value,
     options={},
@@ -36,39 +31,32 @@ const {
     theme={},
     ...attrs
 } = Astro.props as Props
-
 interface Theme {
     container: {[attrs: string]: any};
     toggle: {[attrs: string]: any};
     content: {[attrs: string]: any};
     options: {[attrs: string]: any};
 }
-
 const {
     container,
     toggle,
     content,
     options: option_attrs
 } = theme as Theme
-
+//set defaults
 let theme_object = {
     container: {
-        id: id,
         value: value,
         ...container,
         ...attrs
     },
     toggle: {
-        id: `${id}-toggle`,
+        value: value,
         ...toggle
     },
-    content: {
-        id: `${id}-content`,
-        ...content
-    },
+    content: {...content},
     options: {...option_attrs},
 } as Theme
-
 //Load theme if specified
 if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
 	let _theme:Theme = themes[theme]
@@ -78,12 +66,7 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
 }
 ---
 
-<Details
-    {...theme_object.container}
-    @do={(element, store) => {
-        store.element = element
-    }}
->
+<Details {...theme_object.container}>
 	<slot name="first" />
     <Summary {...theme_object.toggle}
         define:vars={{
@@ -92,26 +75,31 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
             collapse
         }}
         @keydown={(e) => {
-            if (esc && e.key === "Escape") e.target.parentElement.removeAttribute('open')
+            let dropdowns = e.path.filter(element => element.tagName==="DETAILS")
+            if (esc && e.key === "Escape") {
+                if (dropdowns[0].open === true) dropdowns[0].removeAttribute("open")
+                else if (dropdowns[1]) dropdowns[1].firstElementChild.focus()
+                else dropdowns[0].firstElementChild.blur()
+            }
         }}
         @mousedown:prevent={(e) => {
             //Stop double toggling on click/focus when the 'open' prop is true
             if (!open) e.target.focus()
         }}
         @click:prevent={(e) => {
-            e.target.parentElement.toggleAttribute('open')
+            if (document.activeElement === e.target) e.target.parentElement.toggleAttribute('open')
             //Restore click functionality for dropdowns with open=true
             if (open) e.target.focus()
         }}
         @focus={(e) => {
-            console.log(e)
+            e.stopPropagation();
             //Opens dropdown on focus when using tab navigation when 'open' prop is true
             if (open) e.target.parentElement.open = true;
         }}
         @focusout={(e) => {
-            console.log(e)
+            e.stopPropagation();
             //Collapse dropdown if it looses focus
-			if (collapse && !e.target.nextElementSibling.contains(e.relatedTarget)) e.target.parentElement.removeAttribute('open')
+			if (collapse && !e.target.closest("details").contains(e.relatedTarget)) e.target.closest("details").removeAttribute('open')
         }}
     >
 		<slot name="toggle-before" />
@@ -122,7 +110,6 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
     <XElement {...theme_object.content}
         @is={is}
         define:vars={{
-            id,
             tab,
             esc,
 			open,
@@ -134,23 +121,15 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
             if (tab) Array.from(element.children).forEach(child => { if (child.tagName !== "DETAILS" && !child.tabindex) child.setAttribute("tabindex","0") })
         }}
         @keydown={(e) => {
-            console.log(e)
-            if (esc && e.key === "Escape") { 
-                if (e.target.parentElement.previousElementSibling.tagName === "SUMMARY") e.target.parentElement.previousElementSibling.focus()
-                else e.path.filter(element => element.tagName==="DETAILS")[1].firstElementChild.focus()
-            }
+            let dropdown = e.target.closest("details")
+            if (esc && e.key === "Escape" && dropdown && dropdown.open === true) dropdown.firstElementChild.focus()
         }}
         @focusout={(e) => {
-            console.log(e)
-            let container = document.getElementById(id)
-            if (collapse && !container.contains(e.relatedTarget)) {
-                if (lock) {
-                    if (!open) {
-                        if (e.relatedTarget && !esc) e.relatedTarget.focus()
-                        else container.open = true
-                    }
-                    document.getElementById(`${id}-toggle`).focus()
-                } else container.removeAttribute("open")
+            e.stopPropagation();
+            let dropdowns = e.path.filter(element => element.tagName==="DETAILS")
+            if (!dropdowns[0].contains(e.relatedTarget)) {
+                if (lock) dropdowns[0].firstElementChild.focus()
+                else if (collapse) dropdowns.forEach(dropdown => dropdown.removeAttribute("open"))
             }
         }}
     >
@@ -164,7 +143,7 @@ if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
                         }}
                         @click={(e) => {
 							//Set the value of the dropdown and dropdown toggle to option value
-                            let dropdown = e.path.filter(element => element.tagName==="DETAILS")[0]
+                            let dropdown = e.target.closest("details")
                             dropdown.value = v;
                             dropdown.firstElementChild.value = v;
 							//Change the dropdown toggle textContent to match name of option

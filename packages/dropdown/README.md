@@ -2,14 +2,14 @@
 
 A easy to use dropdown component made using XElement
 
-# Changes
+## Changes
 
-- Added unique ids allowing for dropdowns inside of dropdowns
-- Added collapse on pressing esc
+- WIP dropdowns in dropdowns: working on proper collpasing
+- Patched problems with collpasing
 
 ## Features
 
-- Dropdowns in dropdowns
+- Dropdowns in dropdowns WIP
 - Can be used as a user selection input
 - Tab navigable
 - Toggle focus opening
@@ -227,7 +227,7 @@ Defines the dropdown content element's tag (the element being hidden) for semant
 
 **Type**: `string`
 
-Set the id of the dropdown, used to create id for toggle and content elements. , use `id` prop to retrieve value set using the `value` prop or an clicking an option created using the `options` prop
+Use the id of the dropdown to get its value if using as a user selection input
 
 `document.getElementByID('id').value`
 

@@ -10,64 +10,58 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 	</head>
 	<body class="font-sans min-h-screen flex flex-col justify-center items-center gap-3 mb-28 p-5 justify-center [&>h2]:mt-7 [&>h2]:text-2xl [&>h2]:font-bold">
 		<h2>Default style</h2>
-		<Dropdown open={true} lock={true} text="Recursive Test" theme="inline">
-			<a href="/">Link 1</a>
-			<a href="/">Link 2</a>
-			<a href="/">Link 3</a>
-			<Dropdown open={true} text="Dropdown 2" theme="inline">
-				<a href="/">Link 1</a>
-				<a href="/">Link 2</a>
-				<a href="/">Link 3</a>
-				<Dropdown open={true} force={true} text="Dropdown 3" theme="inline">
-					<a href="/">Link 1</a>
-					<a href="/">Link 2</a>
-					<a href="/">Link 3</a>
-				</Dropdown>
-				<Dropdown lock={true} theme='inline' id="inline-input" text="Inline Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} >
-				</Dropdown>
-				<div tabindex="2">
-					<p tabindex="0">Lorem ipsum dolor sit amet consectetur</p>
-					<p tabindex="0">Lorem ipsum dolor sit amet consectetur</p>
-				</div>
-			</Dropdown>
-			<div></div>
-		</Dropdown>
-		<Dropdown open={true} lock={true} id="default-input" text="Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} ></Dropdown>
-		<Dropdown collapse={false}  is="div" id="default-text" text="Hidden Text">
+		<header>
+			<h1>Title</h1>
+			<nav>
+				<li><a href="">Link 1</a></li>
+				<li><a href="">Link 2</a></li>
+				<li><a href="">Link 3</a></li>
+				<li>
+					<Dropdown lock={true} theme='inline' text="Inline Navigation">
+						<a href="/">Link 1</a>
+						<a href="/">Link 2</a>
+						<a href="/">Link 3</a>
+						<div tabindex="0">Div<span tabindex="0">Span</span><p tabindex="0">P</p></div>
+					</Dropdown>
+				</li>
+			</nav>
+		</header>
+		<Dropdown open={true} lock={true} text="Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} ></Dropdown>
+		<Dropdown collapse={false}  is="div" text="Hidden Text">
 			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
 		</Dropdown>
 		<h2>Inline theme</h2>
-		<Dropdown theme='inline' id="inline-navigation" text="Inline Navigation">
+		<Dropdown theme='inline' text="Inline Navigation">
 			<a href="/">Link 1</a>
 			<a href="/">Link 2</a>
 			<a href="/">Link 3</a>
 			<div tabindex="0">Div<span tabindex="0">Span</span><p tabindex="0">P</p></div>
 		</Dropdown>
-		<Dropdown lock={true} theme='inline' id="inline-input" text="Inline Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} >
+		<Dropdown lock={true} theme='inline' text="Inline Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} >
 		</Dropdown>
-		<Dropdown collapse={false}  theme='inline' is="div" id="inline-text" text="Inline Hidden Text">
+		<Dropdown collapse={false}  theme='inline' is="div" text="Inline Hidden Text">
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam quaerat nisi quas ratione ducimus dolor, culpa dolore quibusdam dolores. Earum nostrum vel excepturi soluta accusantium?</p>
 		</Dropdown>
 		<h2>Tailwind Theme</h2>
-        <Dropdown id="tailwind-hamburger" theme="tailwindHamburger">
+        <Dropdown theme="tailwindHamburger">
 			<a href="/">Home</a>
 			<a href="/">Products</a>
 			<a href="/">Services</a>
 			<a href="/">About</a>
 			<a href="/">Contact Us</a>
 		</Dropdown>
-		<Dropdown theme="tailwind" id="tailwind-navigation" text="Tailwind Navigation">
+		<Dropdown theme="tailwind" text="Tailwind Navigation">
 			<a href="/">Link 1</a>
 			<a href="/">Link 2</a>
 			<a href="/">Link 3</a>
 		</Dropdown>
-		<Dropdown lock={true} theme="tailwind" id="tailwind-input" text="Tailwind Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} >
+		<Dropdown lock={true} open={true} theme="tailwind" text="Tailwind Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} >
 		</Dropdown>
-		<Dropdown theme="tailwind" collapse={false} is="div" id="tailwind-text" text="Tailwind Hidden Text">
+		<Dropdown theme="tailwind" collapse={false} is="div" text="Tailwind Hidden Text">
 			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>
 		</Dropdown>
         <h2>Custom Theme</h2>
-        <Dropdown id="custom-hamburger" theme={{
+        <Dropdown theme={{
 			container: {
 				class: 'group flex items-center',
 			},
@@ -85,7 +79,7 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">About</a>
 			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">Contact Us</a>
 		</Dropdown>
-		<Dropdown id="custom-nav" text="Settings" theme={{
+		<Dropdown text="Settings" theme={{
 			container: {
 				class: 'group flex items-center',
 			},
@@ -105,7 +99,7 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">Files</a>
 			<a href="/" class="px-2 py-0.5 hover:bg-gray-50">Theme</a>
 		</Dropdown>
-        <Dropdown open={true} collapse={false} is="section" id="custom-text" text="Hidden Textbox" theme={{
+        <Dropdown open={true} collapse={false} is="section" text="Hidden Textbox" theme={{
 			container: {
 				class: 'group flex items-center w-6/12',
 			},
@@ -123,7 +117,6 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
             <span slot="first" class="">My favorite color: </span>
             <Dropdown
                 lock={true}
-                id="custom-input"
                 text="Choose your favorite color"
                 value="option-1"
                 options={{
@@ -148,6 +141,27 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
             >
             </Dropdown>
         </div>
+		<Dropdown open={true} lock={true} text="Recursive Test" theme="inline">
+			<a href="/">Link 1</a>
+			<a href="/">Link 2</a>
+			<a href="/">Link 3</a>
+			<Dropdown open={true} lock={true} text="Dropdown 2" theme="inline">
+				<a href="/">Link 1</a>
+				<a href="/">Link 2</a>
+				<a href="/">Link 3</a>
+				<Dropdown open={true} text="Dropdown 3" theme="inline">
+					<a href="/">Link 1</a>
+					<a href="/">Link 2</a>
+					<a href="/">Link 3</a>
+				</Dropdown>
+				<Dropdown open={true} theme='inline' text="Inline Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} >
+				</Dropdown>
+				<div tabindex="2">
+					<p tabindex="0">Lorem ipsum dolor sit amet consectetur</p>
+					<p tabindex="0">Lorem ipsum dolor sit amet consectetur</p>
+				</div>
+			</Dropdown>
+		</Dropdown>
 		<Dropdown />
 		<Dropdown />
 		<Dropdown />
