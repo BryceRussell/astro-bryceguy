@@ -56,7 +56,7 @@ export const tailwind = {
         class: "font-[Arial] flex justify-center items-center gap-1"
     },
     link: {
-        class: "relative inline-flex items-center flex-nowrap py-[.2rem] px-[.6rem] rounded-[3px] border-2 border-gray-100 text-sm text-black hover:text-sky-600",
+        class: "relative inline-flex items-center flex-nowrap py-[.2rem] px-[.6rem] rounded-[3px] border-2 border-gray-100 text-sm text-black focus:border-sky-600 hover:text-sky-600",
     },
     active: {
         class: "relative inline-flex items-center flex-nowrap py-[.2rem] px-[.6rem] rounded-[3px] border-2 border-sky-600 text-sm text-sky-600",
