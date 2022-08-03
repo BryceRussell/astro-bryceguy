@@ -37,6 +37,8 @@ __Define default icon svgs:__
 
 If these icons are not added the default style of the icon will load in as a black box and there will be console errors
 
+Download the icons folder above and put inside your projects src folder if using the default icons
+
 Define the default icon svgs inside the `src/icons` folder using the names `star-active`, `star-half`, and `star-inactive`.
 
 ```
@@ -57,7 +59,7 @@ __Default Styling:__
 ![default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/default.PNG)
 
 ```
-<Rating rate="4.5" total="56" defaults={true}/>
+<Rating rate="4.5" total="56"/>
 ```
 
 ## astro-icon
@@ -70,28 +72,32 @@ The default icon names: `star-active`, `star-half`, and `star-inactive` take adv
 
 ```
 //Using tailwindcss classes to style
-<Rating {...{
-    rate: "4.5",
-    max: "9",
-    class: "flex items-center gap-1",
-    icon: {
-        class: "text-pink-300 w-4 h-4"
-    },
-    active: {
-        name: "line-md:heart-filled"
-    },
-    half: {
-        name: "line-md:heart-filled-half"
-    },
-    inactive: {
-        name: "line-md:heart"
-    },
-}}/>
+<Rating
+    rate="4.5"
+    max="9"
+    theme={
+        container: {
+            style: "display:flex;align-items:center;color:#F9A8D4;"
+        },			
+        icon: {
+            style: "height:1rem;width:1rem;"
+        },
+        active: {
+            name: "line-md:heart-filled"
+        },
+        half: {
+            name: "line-md:heart-filled-half"
+        },
+        inactive: {
+            name: "line-md:heart"
+        }
+    }
+/>
 ```
 
 ## API
 
-#### `max`
+### `max`
 
 **Type**: `string | number`
 
@@ -99,7 +105,7 @@ The default icon names: `star-active`, `star-half`, and `star-inactive` take adv
 
 Max number of stars to display
 
-#### `rate`
+### `rate`
 
 **Type**: `string | number`
 
@@ -107,109 +113,54 @@ Max number of stars to display
 
 A fraction of max, number of activated stars
 
+### `theme`
 
-#### `total`
+**Type**: `string` | `object`
 
-**Type**: `string | number`
+**Themes**: `inline`, `flip`, `hearts`
 
+Theme objects allow you to customize your elements with astro-json-element props and attributes
 
-Total number of ratings
-
-if `defaults` is true it creates a span element that displays the total: (1,503)
-
-Use `_span` key to override the default span element with a [astro-json-element](https://github.com/BryceRussell/astro-json-element#readme) child
-
-Remove commas by setting `commas` to false
-
-#### `icons`
-
-**Type**: `object`
-
-**Default**:
 ```
-{
-    tag: "div",
-    style: icons&&"display:flex;align-items:center;",
-    ...icons
+interface Theme = {
+    container?: {};
+    icon?: {};
+    active?: {};
+    half?: {};
+    inactive?: {};
 }
 ```
+#### `container`
 
-astro-json-element `div` element  that hols all icons svgs
+**Type**: `astro-json-element`
+
+Define what attributes/props the rating container will have
 
 #### `icon`
 
-**Type**: `object`
-
-**Default**:
-```
-{
-    style: `min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`
-}
-```
-
-Attributes to apply to all icon scs
-
+Define what attribute all icons will have, Overwritten by theme props `active`, `half`, `inactive`
 
 #### `active`
 
-**Type**: `object`
+**Type**: `astro-icon`
 
-**Default**:
-```
-active: {
-    name: "star-active"
-}
-```
-
-Attributes to apply to all active stars
+Attributes/props to apply to all active star icons, overwrites icon attrs
 
 #### `half`
 
-**Type**: `object`
+**Type**: `astro-icon`
 
-**Default**:
-```
-half: {
-    name: "star-half"
-}
-```
-
-Attributes to apply to all half stars
+Attributes/props to apply to all half star icons, overwrites icon attrs
 
 #### `inactive`
 
-**Type**: `object`
+**Type**: `astro-icon`
 
-**Default**:
-```
-inactive: {
-    name: "star-inactive"
-}
-```
+Attributes/props to apply to all inactive star icons, overwrites icon attrs
 
-Attributes to apply to all inactive stars
+### `...attrs`
 
-#### `commas`
-
-**Type**: `boolean`
-
-**Default**:`true`
-
-Toggles commas on string numbers for the default span element `_span` when using the `total` prop and `defaults` set to true
-
-#### `defaults`
-
-**Type**: `boolean`
-
-**Default**:`false`
-
-If true use the built in default in-line styling and `_span` element for displaying total number of ratings
-
-#### `...attrs`
-
-**Type**: `{}`
-
-Any of the other keys not above will be added as a prop to the main rating container's astro-json-element
+All other props will be spread to the ratings container
 
 
 ## Examples
@@ -217,105 +168,92 @@ Any of the other keys not above will be added as a prop to the main rating conta
 ![custom_1](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_1.PNG)
 
 ```
-<Rating {...{
-    rate: "3",
-    max: "5",
-    tag: "section",
-    class: "flex flex-col-reverse items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300",
-    icon: {
-        class: "text-blue-300 w-4 h-4"
-    },
-    active: {
-        name: "mdi:star"
-    },
-    half: {
-        name: "mdi:star-half-full"
-    },
-    inactive: {
-        name: "mdi:star-outline"
-    }
-}}/>
+<Rating
+    rate="3"
+    max="5"
+    theme={{
+        container: {
+            class: "flex items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300"
+        },
+        icon: {
+            class: "text-blue-300 w-4 h-4"
+        },
+        active: {
+            name: "mdi:star"
+        },
+        half: {
+            name: "mdi:star-half-full"
+        },
+        inactive: {
+            name: "mdi:star-outline"
+        }
+    }}
+/>
 ```
 
 ![custom_2](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_2.PNG)
 
 
 ```
-<Rating {...{
-    rate: "7.5",
-    max: "10",
-    class: "flex flex-col-reverse items-end gap-1 py-1 px-2 bg-neutral-50",
-    _span: {
-        tag: "span",
-        text: "873",
-        class: "text-xs text-blue-300"
-    },
-    icons: {
-        class: "flex flex-row-reverse items-center"
-    },
-    icon: {
-        class: "text-yellow-300 w-4 h-4"
-    },
-    half: {
-        style: "transform:scale(-1, 1);"
-    }
-}}/>
+<div class="flex flex-col items-end gap-1 py-1 px-2 bg-neutral-50">
+    <Rating
+        rate="7.5"
+        max="10"
+        theme={{
+            container: {
+                class: "flex flex-row-reverse items-center"
+            },
+            icon: {
+                class: "text-yellow-300 w-4 h-4"
+            },
+            half: {
+                style: "transform:scale(-1, 1);"
+            }
+        }}
+    />
+    <span class="leading-none text-xs text-blue-300">873</span>
+</div>
 ```
 
 ![custom_3](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_3.PNG)
 
 ```
-<Rating {...{
-    rate: "2.5",
-    max: "5",
-    class: "flex flex-row-reverse items-center gap-1 py-1 px-2 rounded-md border",
-    _span: {
-        tag: "span",
-        text: "72",
-        class: "text-xs text-blue-300"
-    },
-    icons: {
-        class: "flex items-center"
-    },
-    icon: {
-        class: "text-yellow-300 w-4 h-4",
-    },
-    active: {
-        name: "mdi:star"
-    },
-    half: {
-        name: "mdi:star-half-full"
-    },
-    inactive: {
-        name: "mdi:star-outline"
-    },
-}}/>
+<div class="flex flex-row-reverse items-center gap-1 py-1 px-2 rounded-md border">
+    <Rating
+        rate="2.5"
+        max="5"
+        theme={{
+            container: {
+                class: "flex items-center"
+            },	
+            icon: {
+                class: "text-yellow-300 w-4 h-4",
+            },
+            active: {
+                name: "mdi:star"
+            },
+            half: {
+                name: "mdi:star-half-full"
+            },
+            inactive: {
+                name: "mdi:star-outline"
+            }
+        }}
+    />
+    <span class="leading-none text-xs text-blue-300">(72)</span>
+</div>
 ```
 
 ![custom_4](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/custom_4.PNG)
 
 
 ```
-<Rating {...{
-    rate: "2.5",
-    max: "3",
-    class: "flex flex-col-reverse items-center py-1 px-2 rounded-md border border-pink-300",
-    _span: {
-        tag: "span",
-        text: "Healthy!",
-        class: "text-xs text-pink-300"
-    },
-    icon: {
-        class: "text-pink-300 w-4 h-4"
-    },
-    active: {
-        name: "line-md:heart-filled"
-    },
-    half: {
-        name: "line-md:heart-filled-half"
-    },
-    inactive: {
-        name: "line-md:heart"
-    }
-}}/>
+<div class="flex flex-col items-center py-1 px-2 rounded-md border border-pink-300 text-pink-300">
+    <span class="mb-1 leading-none text-sm">Healthy!</span>
+    <Rating
+        rate="2.5"
+        max="3"
+        theme="hearts"
+    />
+</div>
 ```

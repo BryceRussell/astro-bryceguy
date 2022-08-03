@@ -11,166 +11,143 @@ import { Rating } from '@astro-bryceguy/rating';
 	<body style="display:flex;justify-content:center;width:100%;">
 		<ul style="display:flex;gap:1rem;align-items:center;margin:3rem;">
 			<div class="flex flex-col items-end gap-1">
-				<h2 class="m-auto font-bold">Default Style</h2>
+				<h2 class="m-auto font-bold">Inline Theme</h2>
 				<Rating />
-				<Rating defaults={true}/>
-				<Rating rate="2.5" defaults={true}/>
-				<Rating rate="4.5" total="56" defaults={true}/>
-				<Rating max="10" rate="5" total="2635" commas={false} defaults={true}/>
-				<Rating max="10" rate="10" total="1289" defaults={true}/>
-				<Rating max="12" rate="6" defaults={true}/>
-				<Rating max="3" rate="1.5" defaults={true}/>
+				<Rating rate="2.5" />
+				<Rating rate="4.5" total="56" />
+				<Rating max="10" rate="5" total="2635" commas={false} />
+				<Rating max="10" rate="10" total="1289" />
+				<Rating max="12" rate="6" />
+				<Rating max="3" rate="1.5" />
 			</div>
 			<div class="flex flex-col items-end gap-1">
-				<h2 class="m-auto font-bold">astro-icon Support</h2>
+				<h2 class="m-auto font-bold">astro-icon</h2>
 				<!-- Phosphor Icons with Tailwindcss -->
-				<Rating {...{
-					rate: "4.5",
-					max: "9",
-					class: "flex items-center gap-1",
-					icons: {
-						class: "flex items-center"
-					},
-					icon: {
-						class: "text-yellow-400 w-4 h-4"
-					},
-					active: {
-						name: "ph:star-fill"
-					},
-					half: {
-						name: "ph:star-half-fill"
-					},
-					inactive: {
-						name: "ph:star"
-					},
-				}}/>
+				<Rating
+					rate="4.5"
+					max="9"
+					theme={{
+						container: {
+							class: "flex items-center gap-1"
+						},
+						icon: {
+							class: "text-yellow-400 w-4 h-4"
+						},
+						active: {
+							name: "ph:star-fill"
+						},
+						half: {
+							name: "ph:star-half-fill"
+						},
+						inactive: {
+							name: "ph:star"
+						}
+					}}
+				/>
 				<!-- Material Design Icons with Tailwindcss -->
-				<Rating {...{
-					rate: "4.5",
-					max: "9",
-					class: "flex items-center gap-1",
-					icons: {
-						class: "flex items-center"
-					},
-					icon: {
-						class: "text-yellow-400 w-4 h-4"
-					},
-					active: {
-						name: "mdi:star"
-					},
-					half: {
-						name: "mdi:star-half-full"
-					},
-					inactive: {
-						name: "mdi:star-outline"
-					},
-				}}/>
+				<Rating
+					rate="4.5"
+					max="9"
+					theme={{
+						container: {
+							class: "flex items-center gap-1"
+						},
+						icon: {
+							class: "text-yellow-400 w-4 h-4"
+						},
+						active: {
+							name: "mdi:star"
+						},
+						half: {
+							name: "mdi:star-half-full"
+						},
+						inactive: {
+							name: "mdi:star-outline"
+						}
+					}}
+				/>
 				<!-- Material Line Icons with Tailwindcss -->
-				<Rating {...{
-					rate: "4.5",
-					max: "9",
-					class: "flex items-center gap-1",
-					icon: {
-						class: "text-pink-300 w-4 h-4"
-					},
-					active: {
-						name: "line-md:heart-filled"
-					},
-					half: {
-						name: "line-md:heart-filled-half"
-					},
-					inactive: {
-						name: "line-md:heart"
-					},
-				}}/>
+				<Rating
+					rate="4.5"
+					max="9"
+					theme="hearts"
+					class="text-pink-300"
+				/>
 			</div>
 			<!-- Tailwindcss Custom Styling -->
 			<div class="flex flex-col items-end gap-1">
-				<h2 class="m-auto font-bold">Customize Elements</h2>
-				<Rating {...{
-					rate: "3",
-					max: "5",
-					tag: "section",
-					class: "flex flex-col-reverse items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300",
-					icon: {
-						class: "text-blue-300 w-4 h-4"
-					},
-					active: {
-						name: "mdi:star"
-					},
-					half: {
-						name: "mdi:star-half-full"
-					},
-					inactive: {
-						name: "mdi:star-outline"
-					}
-				}}/>
-				<Rating {...{
-					rate: "7.5",
-					max: "10",
-					class: "flex flex-col-reverse items-end gap-1 py-1 px-2 bg-neutral-50",
-					_span: {
-						tag: "span",
-						text: "873",
-						class: "text-xs text-blue-300"
-					},
-					icons: {
-						class: "flex flex-row-reverse items-center"
-					},
-					icon: {
-						class: "text-yellow-300 w-4 h-4"
-					},
-					half: {
-						style: "transform:scale(-1, 1);"
-					}
-				}}/>
-				<Rating {...{
-					rate: "2.5",
-					max: "5",
-					class: "flex flex-row-reverse items-center gap-1 py-1 px-2 rounded-md border",
-					_span: {
-						tag: "span",
-						text: "72",
-						class: "text-xs text-blue-300"
-					},
-					icons: {
-						class: "flex items-center"
-					},
-					icon: {
-						class: "text-yellow-300 w-4 h-4",
-					},
-					active: {
-						name: "mdi:star"
-					},
-					half: {
-						name: "mdi:star-half-full"
-					},
-					inactive: {
-						name: "mdi:star-outline"
-					},
-				}}/>
-				<Rating {...{
-					rate: "2.5",
-					max: "3",
-					class: "flex flex-col-reverse items-center py-1 px-2 rounded-md border border-pink-300",
-					_span: {
-						tag: "span",
-						text: "Healthy!",
-						class: "text-xs text-pink-300"
-					},
-					icon: {
-						class: "text-pink-300 w-4 h-4"
-					},
-					active: {
-						name: "line-md:heart-filled"
-					},
-					half: {
-						name: "line-md:heart-filled-half"
-					},
-					inactive: {
-						name: "line-md:heart"
-					}
-				}}/>
+				<h2 class="m-auto font-bold">Customizable Themes</h2>
+				<Rating
+					rate="3"
+					max="5"
+					theme={{
+						container: {
+							class: "flex items-center py-2 px-3 rounded-md bg-neutral-50 border border-blue-300"
+						},
+						icon: {
+							class: "text-blue-300 w-4 h-4"
+						},
+						active: {
+							name: "mdi:star"
+						},
+						half: {
+							name: "mdi:star-half-full"
+						},
+						inactive: {
+							name: "mdi:star-outline"
+						}
+					}}
+				/>
+				<div class="flex flex-col items-end gap-1 py-1 px-2 bg-neutral-50">
+					<Rating
+						rate="7.5"
+						max="10"
+						theme={{
+							container: {
+								class: "flex flex-row-reverse items-center"
+							},
+							icon: {
+								class: "text-yellow-300 w-4 h-4"
+							},
+							half: {
+								style: "transform:scale(-1, 1);"
+							}
+						}}
+					/>
+					<span class="leading-none text-xs text-blue-300">873</span>
+				</div>
+				<div class="flex flex-row-reverse items-center gap-1 py-1 px-2 rounded-md border">
+					<Rating
+						rate="2.5"
+						max="5"
+						theme={{
+							container: {
+								class: "flex items-center"
+							},	
+							icon: {
+								class: "text-yellow-300 w-4 h-4",
+							},
+							active: {
+								name: "mdi:star"
+							},
+							half: {
+								name: "mdi:star-half-full"
+							},
+							inactive: {
+								name: "mdi:star-outline"
+							}
+						}}
+					/>
+					<span class="leading-none text-xs text-blue-300">(72)</span>
+				</div>
+				<div class="flex flex-col items-center py-1 px-2 rounded-md border border-pink-300 text-pink-300">
+					<span class="mb-1 leading-none text-sm">Healthy!</span>
+					<Rating
+						rate="2.5"
+						max="3"
+						theme="hearts"
+					/>
+				</div>
 			<div/>
 		</ul>
 	</body>

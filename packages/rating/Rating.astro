@@ -2,102 +2,85 @@
 import { Element } from 'astro-json-element';
 import { Icon } from 'astro-icon';
 
+import * as themes from './themes.js';
+
 export interface Props {
     max?: string|number;
     rate?: string|number;
-    total?: string|number;
-    icons?: {};
-    icon?: {};
-    active?: {};
-    half?: {};
-    inactive?: {};
-    commas?: boolean;
-    defaults?: boolean;
+    theme?: string|Theme;
     [attrs: string]: any;
 }
+
 const { 
     max=5,
     rate=0,
-    total,
-    icons={},
+    theme="inline",
+    ...attrs
+} = Astro.props as Props;
+
+interface Theme {
+    container?: {[attrs: string]: any};
+    icon?: {[attrs: string]: any};
+    active?: {[attrs: string]: any};
+    half?: {[attrs: string]: any};
+    inactive?: {[attrs: string]: any};
+}
+
+const {
+    container={},
     icon={},
     active={},
     half={},
     inactive={},
-    commas=true,
-    defaults=false,
-    ...attrs
-} = Astro.props as Props;
+} = theme as Theme
 
-//Default login
-const default_attrs = {
-	tag: "div",
-    style: defaults&&"display:flex;align-items:center;gap:.25rem;",
-    _span: defaults&&total&&{
-        tag: "span",
-        text: `(${commas?addCommas(total):total})`,
-        style: "line-height:1;font-size:14px;color:#ccc;",
+
+
+//Define default values
+var theme_object = {
+    container: {
+        ...container,
+        ...attrs
     },
-	...attrs
-};
+    icon: {...icon},
+    active: {
+        name: "star-active",
+        ...active
+    },
+    half: {
+        name: "star-half",
+        ...half
+    },
+    inactive: {
+        name: "star-inactive",
+        ...inactive
+    }
+}
 
-const default_icons = {
-	tag: "div",
-    style: isEmpty(icons)&&"display:flex;align-items:center;",
-    ...icons
-};
-
-const default_icon = {
-    style: isEmpty(icon)&&`min-height:.5rem;min-width:.5rem;${defaults?"height:1rem;width:1rem;":""}`,
-	...icon
-};
-
-const default_active = {
-    name: "star-active",
-    ...default_icon,
-    ...active
-};
-const default_half = {
-    name: "star-half",
-    ...default_icon,
-    ...half,
-};
-
-const default_inactive = {
-    name: "star-inactive",
-    ...default_icon,
-    ...inactive
-};
+//Load theme from themes.js if specified
+if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
+	let _theme:Theme = themes[theme]
+	Object.entries(_theme).forEach(([key, value]) => {
+		theme_object[key] = {...theme_object[key], ...value}
+	})
+}
 
 //Clac
 const activeStars = Math.floor(+rate);
-const halfStars = +rate - activeStars
+const halfStars = +rate - activeStars;
 const inactiveStars = Math.floor(+max - +rate);
-
-//Utility
-function addCommas(num) {
-    if (typeof num == 'number') return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    if (typeof num == 'string') return num.replace(/[^\d]/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    return "0"
-}
-
-function isEmpty(obj) {
-    let empty = true
-    obj.constructor === Object?Object.entries(obj).length === 0?empty = true:empty = false:empty = true
-    return empty;
-}
 ---
 
-<Element {...default_attrs}>
-    <Element {...default_icons}>
-        {[...Array(activeStars)].map(() => {
-            return <Icon {...default_active}/>
-        })}
-        
-        {halfStars > 0 && <Icon {...default_half}/>}
-
-        {inactiveStars > 0 && [...Array(inactiveStars)].map(() => {
-            return <Icon {...default_inactive}/>
-        })}
-    </Element>
+<Element {...theme_object.container}>
+    <slot name="before-active"/>
+    {[...Array(activeStars)].map(() => {
+        return <Icon {...{...theme_object.icon, ...theme_object.active}}/>
+    })}
+     <slot name="before-half"/>
+    {halfStars > 0 && <Icon {...{...theme_object.icon, ...theme_object.half}}/>}
+    <slot name="before-inactive"/>
+    {inactiveStars > 0 && [...Array(inactiveStars)].map(() => {
+        return <Icon {...{...theme_object.icon, ...theme_object.inactive}}/>
+    })}
+    <slot />
 </Element>
