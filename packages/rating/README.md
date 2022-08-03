@@ -39,7 +39,7 @@ If these icons are not added the default style of the icon will load in as a bla
 
 Download the icons folder above and put inside your projects src folder if using the default icons
 
-Define the default icon svgs inside the `src/icons` folder using the names `star-active`, `star-half`, and `star-inactive`.
+The default icon names are `star-active`, `star-half`, and `star-inactive` take advantage of the [local icons](https://github.com/natemoo-re/astro-icon#local-icons) feature in astro-icon to serve a local icon svg by default
 
 ```
 src/
@@ -59,14 +59,12 @@ __Default Styling:__
 ![default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/default.PNG)
 
 ```
-<Rating rate="4.5" total="56"/>
+<Rating max="5" rate="4.5"/>
 ```
 
 ## astro-icon
 
 Use [astro-icons](https://github.com/natemoo-re/astro-icon#readme) to customize the icons
-
-The default icon names: `star-active`, `star-half`, and `star-inactive` take advantage of the [local icons](https://github.com/natemoo-re/astro-icon#local-icons) feature in astro-icon to serve a local icon svg by default
 
 ![hearts](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/hearts.PNG)
 
@@ -95,6 +93,20 @@ The default icon names: `star-active`, `star-half`, and `star-inactive` take adv
 />
 ```
 
+## Slots
+
+```
+<container>
+    <slot name="before-active"/>
+    { active stars }
+    <slot name="before-half"/>
+    { half star }
+    <slot name="before-inactive"/>
+    { inactive stars }
+    <slot />
+</container>
+```
+
 ## API
 
 ### `max`
@@ -111,7 +123,7 @@ Max number of stars to display
 
 **Default**: `0`
 
-A fraction of max, number of activated stars
+A number less than max, represents number of activated stars
 
 ### `theme`
 
