@@ -2,6 +2,10 @@
 
 A easy to use dropdown component made using XElement
 
+# NOTE
+
+This componenet is subject to change, I plan on splitting some of the functionality into different types of dropdown componenets
+
 ## Changes
 
 - WIP dropdowns in dropdowns: working on proper collpasing
