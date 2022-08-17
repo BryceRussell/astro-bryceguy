@@ -56,6 +56,6 @@ Uses star icons to display the rating of a product, post, comment, etc.
 
 ### Example
 
-![Rating](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/rating.PNG)
+![Rating](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/examples.PNG)
 
 
