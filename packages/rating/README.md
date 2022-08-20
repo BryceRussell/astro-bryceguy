@@ -31,6 +31,16 @@ export default defineConfig({
 });
 ```
 
+**Built in tailwindcss themes**:
+
+If your using a built in theme that uses tailwind, add the package to your tailwindcss config so it picks up the classes
+
+```
+{
+    content: ['./node_modules/@astro-bryceguy/**/*.js']
+}
+```
+
 __Define default icon svgs:__
 
 [Icon Defaults](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/rating/icons)
