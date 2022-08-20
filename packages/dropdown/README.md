@@ -31,6 +31,16 @@ This componenet is subject to change, I plan on splitting some of the functional
 npm i @astro-bryceguy/dropdown
 ```
 
+**Built in tailwindcss themes**:
+
+If your using a built in theme that uses tailwind, add the package to your tailwindcss config so it picks up the classes
+
+```
+{
+    content: ['./node_modules/@astro-bryceguy/**/*.js']
+}
+```
+
 **Basic Dropdowns:**
 
 ![Basic Textbox](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/default-textbox.PNG)
