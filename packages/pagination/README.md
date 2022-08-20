@@ -30,6 +30,18 @@ __Install package:__
 npm i @astro-bryceguy/pagination
 ```
 
+**Built in tailwindcss themes**:
+
+If your using a built in theme that uses tailwind, add the package to your tailwindcss config so it picks up the classes
+
+```
+{
+    content: ['./node_modules/@astro-bryceguy/**/*.js']
+}
+``` 
+
+**Using**:
+
 ![Default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/pagination/examples/default.PNG)
 
 ```
