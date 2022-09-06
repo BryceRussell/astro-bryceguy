@@ -9,8 +9,6 @@ A component that uses stars to display a rating for reviews, products, comments,
 - Uses [astro-icon](https://github.com/natemoo-re/astro-icon) to serve thousands of popular icon svgs
 - Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-elements](https://github.com/BryceRussell/astro-json-element)
 
-__NOTE:__ astro-json-element objects can only be styled using inline styles or global stylesheets and classes, this project uses [Tailwindcss](https://github.com/withastro/astro/tree/main/packages/integrations/tailwind#readme) to make styling easier
-
 ## How to use
 
 __Install:__
