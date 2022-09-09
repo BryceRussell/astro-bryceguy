@@ -179,6 +179,7 @@ Theme objects allow you to customize your elements with [astro-json-element](htt
 ```
 theme = {
     container?: {};
+    wrapper?: {};
     link?: {};
     active?: {};
     disabled?: {};
@@ -188,6 +189,14 @@ theme = {
     last?: {};
 }
 ```
+
+#### `container` 
+
+Define the element that contains all other elements
+
+#### `wrapper`
+
+Define an element that wraps all `link` elements
 
 #### `link`
 

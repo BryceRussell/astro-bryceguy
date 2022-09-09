@@ -32,6 +32,7 @@ const {
 
 const {
 	container={},
+	wrapper={},
 	link={},
 	active={},
 	disabled={},
@@ -43,6 +44,7 @@ const {
 
 interface Theme {
 	container?: {[attrs: string]: any};
+	wrapper?: {[attrs: string]: any};
 	link?: {[attrs: string]: any};
 	active?: {[attrs: string]: any};
 	disabled?: {[attrs: string]: any};
@@ -59,6 +61,10 @@ var theme_object = {
 		...container,
 		...attrs
 	},
+	wrapper: {
+		tag: undefined,
+		...wrapper
+	},
     link: {
 		tag: "a",
 		tabindex: tab?"0":null,
@@ -66,7 +72,6 @@ var theme_object = {
 	},
     active: {
 		tag: "a",
-		text: commas?addCommas(current):current.toString(),
 		...active
 	},
     disabled: {
@@ -105,35 +110,35 @@ var pages = Array.from({ length: +total }, (v, i) => i + 1).map((i) => {
 	};
 	return page;
 });
-
-function addCommas(num) {
-    if (num) return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    return "0"
-}
 ---
 
 <Element {...theme_object.container}>
 	<slot name="first"/>
 	{pages.map((page, i) => {
+		let link_props;
 		const default_link = {
-			text: commas?addCommas(page.number):page.number.toString(),
+			text: commas?Intl.NumberFormat('en-us').format(+page.number):page.number.toString(),
 			href: `${url}/${page.number}`,
 			...theme_object.link
 		};
 		//Active
-		if (page.active) return <Element {...theme_object.active}/>
+		if (page.active) link_props = {...default_link, ...theme_object.active}
 		//Disabled
-		else if (page.number != 1 && page.disable && !pages[i-1].disable) return <Element {...theme_object.disabled}/>
+		else if (page.number != 1 && page.disable && !pages[i-1].disable) link_props = {...theme_object.disabled}
 		//Firt link
-		else if (!page.disable && page.number == 1) return <Element {...{...default_link, ...theme_object.first}}/>
+		else if (!page.disable && page.number == 1) link_props = {...default_link, ...theme_object.first}
 		//Link Before Active Link
-		else if (!page.disable && page.number == +current - 1) return <Element {...{...default_link, ...theme_object.before}}/>
+		else if (!page.disable && page.number == +current - 1) link_props = {...default_link, ...theme_object.before}
 		//Link After Active Link
-		else if (!page.disable && page.number == +current + 1) return <Element {...{...default_link, ...theme_object.after}}/>
+		else if (!page.disable && page.number == +current + 1) link_props = {...default_link, ...theme_object.after}
 		///Last link
-		else if (!page.disable && page.number == +total) return <Element {...{...default_link, ...theme_object.last}}/>
+		else if (!page.disable && page.number == +total) link_props = {...default_link, ...theme_object.last}
 		//Links (default, first, last)
-		else if (!page.disable) return <Element {...default_link}/>
+		else if (!page.disable) link_props = {...default_link}
+		//return link wrapped in parent
+		if (link_props) return theme_object.wrapper.tag?
+			<Element {...theme_object.wrapper}><Element {...link_props}/></Element>:
+			<Element {...link_props}/>
 	})}
 	<slot />
 </Element>
