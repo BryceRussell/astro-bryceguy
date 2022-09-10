@@ -124,6 +124,14 @@ number of pages to display at the end
 
 number of pages to display on either side of the current active page
 
+### `index`
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+The first link will link to the index instead of page 1, `href` will look like `${url}/` instead of `${url}/1`
+
 ### `tab`
 
 **Type**: `boolean`
@@ -131,14 +139,6 @@ number of pages to display on either side of the current active page
 **Default**: `true`
 
 Add tabindex="0" to all links except active and disabled links
-
-### `tab`
-
-**Type**: `boolean`
-
-**Default**: `true`
-
-Adds `tabindex="0"` to all navigable link elements if true
 
 ### `commas`
 

@@ -10,6 +10,7 @@ export interface Props {
 	start?: string|number;
 	end?: string|number;
 	middle?: string|number;
+	index?: boolean;
 	tab?: boolean;
 	commas?: boolean;
 	collapse?: boolean;
@@ -23,6 +24,7 @@ const {
 	start=2,
 	end=2,
 	middle=2,
+	index=false,
 	tab=true,
 	commas=true,
 	collapse=true,
@@ -126,7 +128,7 @@ var pages = Array.from({ length: +total }, (v, i) => i + 1).map((i) => {
 		//Disabled
 		else if (page.number != 1 && page.disable && !pages[i-1].disable) link_props = {...theme_object.disabled}
 		//Firt link
-		else if (!page.disable && page.number == 1) link_props = {...default_link, ...theme_object.first}
+		else if (!page.disable && page.number == 1) link_props = {...default_link, href: index?`${url}/`:default_link.href, ...theme_object.first}
 		//Link Before Active Link
 		else if (!page.disable && page.number == +current - 1) link_props = {...default_link, ...theme_object.before}
 		//Link After Active Link

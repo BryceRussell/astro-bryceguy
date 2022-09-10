@@ -3,7 +3,7 @@ export const inline = {
         style: "font-family:Arial;display:flex;justify-content:center;align-items:center;gap:.25rem;"
     },
     link: {
-        style: "position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 2px solid #F4F4F5;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;color:#000;",
+        style: "text-decoration:none;position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 2px solid #F4F4F5;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;color:#000;",
     },
     active: {
         style: "position:relative;display:inline-flex;align-items:center;padding:.2rem.6rem;border-radius:.2rem;border: 2px solid #F4F4F5;flex-wrap:nowrap;line-height:1.25rem;font-size:.875rem;font-weight:500;border-color:#0284C7;color:#0284C7;"
