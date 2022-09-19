@@ -2,26 +2,6 @@
 
 Bryce's WIP Astro component library
 
-## Dropdown
-
-A easy to use dropdown component made using XElement
-
-[__README__](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/dropdown#readme)
-
-## Features
-
-- Can be used as a user selection input
-- Tab navigatable
-- Toggle focus opening
-- Toggle focus locking
-- Toggle collapse on focus lost
-- Customizable
-- Themes
-
-### Example
-
-![Dropdown](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-hamburger.PNG)
-
 ## Pagination
 
 Customizeable page navigation
