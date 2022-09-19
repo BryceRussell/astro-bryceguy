@@ -1,6 +1,12 @@
 # astro-bryceguy
 
-Bryce's WIP Astro component library
+This is my Astro component library
+
+These components are static, rendered using SSG or SSR, if your looking for client-side components for interactivity using JS here are a few Astro wrappers for popular web components:
+
+- [astro-github-elements](https://github.com/BryceRussell/astro-github-elements)
+
+
 
 ## Pagination
 
