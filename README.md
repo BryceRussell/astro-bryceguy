@@ -2,9 +2,9 @@
 
 This is my Astro component library
 
-These components are static, rendered using SSG or SSR, if your looking for client-side components for interactivity using JS here are a few Astro wrappers for popular web components:
+**NOTE**: These components are static, rendered using SSG or SSR, if your looking for client-side js components for interactivity here are some Astro wrappers for popular web components:
 
-- [astro-github-elements](https://github.com/BryceRussell/astro-github-elements)
+- [astro-github-elements](https://github.com/BryceRussell/astro-github-elements) Collection of Astro component wrappers for the [github-elements project](https://github.com/github/github-elements)
 
 
 
