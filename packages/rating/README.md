@@ -2,6 +2,13 @@
 
 A component that uses stars to display a rating for reviews, products, comments, etc
 
+## Changes
+
+- Created built in themes `inline`, `flip`, and `hearts`
+- Moved `icon`, `active`, `half`, `inactive` props to the `theme` prop
+- Added slots
+- Removed total prop
+
 ## Features
 
 - Shows a rate (2/5, 7.5/10, etc) using stars
@@ -67,7 +74,7 @@ __Default Styling:__
 ![default](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/rating/examples/default.PNG)
 
 ```
-<Rating max="5" rate="4.5"/>
+<Rating max="5" rate="2.5"/>
 ```
 
 ## astro-icon

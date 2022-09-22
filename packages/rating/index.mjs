@@ -1,1 +1,3 @@
-export { default as Rating } from './Rating.astro';
+import Rating from './Rating.astro'
+
+export { Rating };
