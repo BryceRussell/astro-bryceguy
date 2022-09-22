@@ -1,0 +1,56 @@
+---
+import { Element } from 'astro-json-element';
+import * as themes from './themes.js';
+
+interface Props {
+    legend?: string;
+    theme?: {};
+}
+
+const {
+    legend,
+    theme={},
+    ...attrs
+} = Astro.props as Props
+
+interface Theme {
+    legend?: {[attrs: string]: any};
+	fieldset?: {[attrs: string]: any};
+}
+
+const {
+    legend:legend_theme={},
+	fieldset:fieldset_theme={},
+} = theme as Theme
+
+//Theme/Element defaults
+var theme_object = {
+    legend: {
+        tag: 'legend',
+        text: legend,
+        ...legend_theme
+    },
+    fieldset: {
+		tag: "fieldset",
+		...fieldset_theme,
+		...attrs
+	}
+} as Theme
+
+//Load theme from themes.js if specified
+if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
+	let _theme:Theme = themes[theme]
+	Object.entries(_theme).forEach(([key, value]) => {
+		theme_object[key] = {...theme_object[key], ...value}
+	})
+}
+---
+
+<Element {...theme_object.fieldset}>
+    {legend &&
+        <Element {...theme_object.legend}>
+            <slot name="legend"/>
+        </Element>
+    }
+    <slot />
+</Element>

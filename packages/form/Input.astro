@@ -1,0 +1,56 @@
+---
+import { Element } from 'astro-json-element';
+import * as themes from './themes.js';
+
+interface Props {
+    label?: string;
+    theme?: {};
+}
+
+const {
+    label,
+    theme={},
+    ...attrs
+} = Astro.props as Props
+
+interface Theme {
+    label?: {[attrs: string]: any};
+	input?: {[attrs: string]: any};
+}
+
+const {
+    label:label_theme={},
+	input:input_theme={},
+} = theme as Theme
+
+//Theme/Element defaults
+var theme_object = {
+    label: {
+        tag: 'label',
+        text: label,
+        ...label_theme
+    },
+    input: {
+		tag: "input",
+		...input_theme,
+		...attrs
+	}
+} as Theme
+
+//Load theme from themes.js if specified
+if (typeof theme === "string" && {...themes}.hasOwnProperty(theme)) {
+	let _theme:Theme = themes[theme]
+	Object.entries(_theme).forEach(([key, value]) => {
+		theme_object[key] = {...theme_object[key], ...value}
+	})
+}
+---
+
+{label &&
+    <Element {...theme_object.label}>
+        <slot name="label"/>
+    </Element>
+}
+<Element {...theme_object.input}>
+    <slot />
+</Element>
