@@ -4,7 +4,7 @@ A easy to use dropdown component made using XElement
 
 # SUBJECT TO CHANGE
 
-This was a project that I created for fun to explore how astro-xelement works if you need a dropdown component for production purposes you are probably better off using a more popular and stable library for a dropdown, astro-xelement doesnt work with SSR so I am either going to re-write this component as an astro compatible web component or just delete it because there are plenty of other libraries out there with stable dropdown components that will work SSR
+This was a project that I created for fun to explore how astro-xelement works. If you need a dropdown component you are probably better off using a more popular and stable library, I am either going to re-write this component as an astro compatible web component or delete it and create some Astro component wrappers for popular dropdown web componenets
 
 ## Changes
 
