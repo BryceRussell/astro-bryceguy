@@ -1,26 +1,12 @@
 # astro-bryceguy
 
-Bryce's WIP Astro component library
+This is my Astro component library
 
-## Dropdown
+These components are static, rendered using SSG or SSR, if your looking for client-side components for interactivity using JS here are a few Astro wrappers for popular web components:
 
-A easy to use dropdown component made using XElement
+- [astro-github-elements](https://github.com/BryceRussell/astro-github-elements)
 
-[__README__](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/dropdown#readme)
 
-## Features
-
-- Can be used as a user selection input
-- Tab navigatable
-- Toggle focus opening
-- Toggle focus locking
-- Toggle collapse on focus lost
-- Customizable
-- Themes
-
-### Example
-
-![Dropdown](https://raw.githubusercontent.com/BryceRussell/astro-bryceguy/master/packages/dropdown/examples/tailwind-hamburger.PNG)
 
 ## Pagination
 
