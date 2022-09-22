@@ -1,1 +1,4 @@
-export { default as Pagination } from './Pagination.astro';
+import Pagination from './Pagination.astro';
+import AdvancedPagination from './AdvancedPagination.astro';
+
+export { AdvancedPagination, Pagination };

@@ -8,6 +8,8 @@ A pagination component that uses [astro-json-element](https://github.com/BryceRu
 
 ## Changes
 
+- Added `index` prop sets the first links `href` to `${url}/` instead of `${url}/1`
+- Added a `wrapper` object to `theme` prop for wrapping links in a parent element
 - Added tailwind theme, update/fixed inline theme
 - Made url optional default to `/{page_number}`
 - Added tab navigation option
