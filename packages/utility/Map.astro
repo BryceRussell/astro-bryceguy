@@ -1,0 +1,47 @@
+---
+//console.log(Astro.slots)
+export interface Props {
+	from?: any;
+	of?: any;
+	filter?: any;
+	sort?: any;
+	slice?: any;
+	reverse?: boolean;
+	[index: number]: any; 
+}
+
+const {
+	from,
+	of,
+	filter,
+	sort,
+	reverse,
+	...input
+} = Astro.props as Props
+
+console.log(input)
+
+var array = input? Object.values(input).reverse():
+			from?Array.from(from):
+			of?Array.of(of):
+			[];
+
+Object.keys(Astro.props).forEach((key) => {
+	switch (key) {
+		case "reverse": array = array.reverse()
+			break;
+		case "filter": array = array.filter(i => filter(i))
+			break;
+		case "sort": array = array.sort((a, b) => sort(a, b))
+			break;
+	}
+})
+
+console.log(array)
+---
+
+{ Object.keys(Astro.slots).filter(i => Number.isInteger(+i)).map(async(i) => await Astro.slots.render(i, [array.at(+i)]) )}
+
+{ array.map(async(i) => await Astro.slots.render('default', [i]) )}
+
+{await Astro.slots.render('last', [array.pop()])}
