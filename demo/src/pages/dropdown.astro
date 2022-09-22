@@ -10,22 +10,6 @@ import { Dropdown } from '@astro-bryceguy/dropdown';
 	</head>
 	<body class="font-sans min-h-screen flex flex-col justify-center items-center gap-3 mb-28 p-5 justify-center [&>h2]:mt-7 [&>h2]:text-2xl [&>h2]:font-bold">
 		<h2>Default style</h2>
-		<header>
-			<h1>Title</h1>
-			<nav>
-				<li><a href="">Link 1</a></li>
-				<li><a href="">Link 2</a></li>
-				<li><a href="">Link 3</a></li>
-				<li>
-					<Dropdown lock={true} theme='inline' text="Inline Navigation">
-						<a href="/">Link 1</a>
-						<a href="/">Link 2</a>
-						<a href="/">Link 3</a>
-						<div tabindex="0">Div<span tabindex="0">Span</span><p tabindex="0">P</p></div>
-					</Dropdown>
-				</li>
-			</nav>
-		</header>
 		<Dropdown open={true} lock={true} text="Input" value="option-1" options={{'Option 1': 'option-1', 'Option 2': 'option-2', 'Option 3': 'option-3', 'Option 4': 'option-4', 'Option 5': 'option-5'}} ></Dropdown>
 		<Dropdown collapse={false}  is="div" text="Hidden Text">
 			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non commodi repellat officiis dolorum quis magnam pariatur saepe dignissimos veniam? Perspiciatis culpa autem id vitae ducimus odit exercitationem commodi eos dolorum, magni, quos facilis repellat optio maxime sunt blanditiis similique architecto provident magnam illum. Eum quidem soluta pariatur vero, enim architecto?</p>

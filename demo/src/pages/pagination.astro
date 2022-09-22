@@ -1,6 +1,6 @@
 ---
 import { Element } from 'astro-json-element';
-import { Pagination } from '@astro-bryceguy/pagination';
+import { AdvancedPagination, Pagination } from '@astro-bryceguy/pagination';
 ---
 
 <html lang="en">
@@ -10,21 +10,46 @@ import { Pagination } from '@astro-bryceguy/pagination';
 		<title>Welcome to Astro</title>
 	</head>
 	<body style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin:3rem;">
-		<Element {...{
-			tag: 'section'
-		}}/>
-		<Pagination url="/posts" total="12" current="6" />
-		<Pagination url="/posts" total="22" current="11" theme="tailwind" />
-		<Pagination url="/posts" total="22" current="11" start="5" end="1" middle="1" theme="inline" />
-		<Pagination url="/posts" total="22" current="11" start="1" end="5" middle="1" theme="inline" />
-		<Pagination url="/posts" total="22" current="11" start="5" end="5" middle="1" theme="inline" />
-		<Pagination url="/posts" total="22" current="11" start="1" end="1" middle="5" theme="inline" />
-		<Pagination url="/posts" total="9999" current="1000" theme="inline" />
-		<Pagination url="/posts" total="9999" current="1000" commas={false} theme="inline" />
-		<Pagination url="/posts" total="12" current="6" collapse={false} theme="inline" />
-		<Pagination url= "/posts" total= "11" current= "5" start="0" end="0" middle="1" theme="simple"/>
-		<!-- Custom Tailwindcss Example -->
-		<Pagination url="/posts" total="9999" current="1000"
+
+		<nav style="display:flex;flex-direction:column;gap:1rem;">
+			<AdvancedPagination total="22" current="11">
+				<f slot="active">{(page) => <span>{page.number}</span>}</f>
+				<f slot="disabled">{() => <span>...</span>}</f>
+				{(page) => <a href={page.href}>{page.number}</a>}
+			</AdvancedPagination>
+		</nav>
+
+		<Pagination  total="22" current="11" theme="tailwind"/>
+
+		<!-- <Pagination total="12" current="6" index />
+		<Pagination total="22" current="11" theme="tailwind" />
+		<Pagination total="22" current="11" start="5" end="1" middle="1" theme="inline" />
+		<Pagination total="22" current="11" start="1" end="5" middle="1" theme="inline" />
+		<Pagination total="22" current="11" start="5" end="5" middle="1" theme="inline" />
+		<Pagination total="22" current="11" start="1" end="1" middle="5" theme="inline" />
+		<Pagination total="9999" current="1000" theme="inline" />
+		<Pagination total="9999" current="1000" commas={false} theme="inline" />
+		<Pagination total="12" current="6" collapse={false} theme="inline" />
+		<Pagination total= "11" current= "5" start="0" end="0" middle="1" theme="simple"/>
+		<Pagination total={234} current={111} start="1" end="1" middle="1" 
+                    theme={{
+                        container: {
+                            tag: 'ul',
+                            class: 'nav-paged',
+                        },
+                        active: {
+                            class: 'current'
+                        },
+                        disabled: {
+                            text: '...',
+                            class: 'dots'
+                        },
+                        wrapper: {
+                            tag: 'li'
+                        }
+                    }}
+        />
+		<Pagination total="9999" current="1000"
 			theme={{
 				container: {
 					class: "flex items-center gap-1"
@@ -38,10 +63,10 @@ import { Pagination } from '@astro-bryceguy/pagination';
 				disabled: {
 					text: "",
 					class: "leading-none flex items-center px-3"
-				}
+				},
 			}}
 		/>
-		<Pagination url="/posts" total="31" current="9" start="1" end="1" middle="3"
+		<Pagination total="31" current="9" start="1" end="1" middle="3"
 			theme={{
 				container: {
 					style: "display:flex;align-items:center;gap:.25rem;"
@@ -64,6 +89,6 @@ import { Pagination } from '@astro-bryceguy/pagination';
 					text: ""
 				}
 			}}
-		/>
+		/> -->
 	</body>
 </html>

@@ -1,0 +1,20 @@
+---
+import { Map } from '@astro-bryceguy/utility';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Welcome to Astro</title>
+	</head>
+	<body style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin:3rem;">
+        <ul>
+            <Map {...Array.from({ length: 12 }, (v, i) => i + 1)} reverse>
+                <f slot="2">{item => <div>{item}</div>}</f>
+                <!-- {(item) => <li>{item}</li>} -->
+                <f slot="last">{item => <div>{item}</div>}</f>
+            </Map>
+        </ul>
+	</body>
+</html>
