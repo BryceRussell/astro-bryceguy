@@ -8,7 +8,7 @@ Paginate an array
 
 Astro's `paginate()` function from `getStaticPaths()` inside of a component. 
 
-[How do I use?](/Paginate.md)
+[How do I use?](Paginate.md)
 
 **Example**:
 
@@ -31,7 +31,7 @@ Astro's `paginate()` function from `getStaticPaths()` inside of a component.
 
 Create link navigation using objects
 
-[How do I use?](/Pagination.md)
+[How do I use?](Pagination.md)
 
 **Example**:
 
@@ -45,7 +45,7 @@ Create link navigation using objects
 
 Create link navigation using slots
 
-[How do I use?](/AdvancedPagination.md)
+[How do I use?](AdvancedPagination.md)
 
 **Example**:
 
