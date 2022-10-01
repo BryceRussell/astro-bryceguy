@@ -2,7 +2,7 @@
 
 This is a refactored version of the `<Pagination>` component that uses slot functions to control how the navigtion is rendered
 
-![advanced pagination example](/examples/advanced.png)
+![advanced pagination example](examples/advanced.png)
 
 **Example**:
 
