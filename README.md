@@ -10,18 +10,15 @@ This is my Astro component library
 
 ## Pagination
 
-Customizeable page navigation
+A collection of components to paginate data and create link navigations
 
 [__README__](https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/pagination#readme)
 
 ### Features
 
-- Customize how many page numbers are shown at the start, middle, and end
-- Fully customize every elements tag, text, innerHTML, and attributes using [astro-json-element](https://github.com/BryceRussell/astro-json-element)
+- Customize how many page numbers are shown at the start, middle, and end of your pagination
+- Fully customize element tag, text, innerHTML, and attributes using [astro-json-element](https://github.com/BryceRussell/astro-json-element)
 - Add commas to page numbers
-- String number compatibility
-
-This component is a fork/refactor of [https://github.com/iozcelik/SarissaPagination](https://github.com/iozcelik/SarissaPagination)
 
 ### Example
 
