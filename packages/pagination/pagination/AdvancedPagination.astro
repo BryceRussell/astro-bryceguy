@@ -1,7 +1,4 @@
 ---
-import { Element } from 'astro-json-element';
-import * as themes from './themes.js';
-
 export interface Props {
 	url?: string;
 	total: string|number;
@@ -9,6 +6,7 @@ export interface Props {
 	start?: string|number;
 	end?: string|number;
 	middle?: string|number;
+	index?: boolean;
 	commas?: boolean;
 	collapse?: boolean;
 }
@@ -19,6 +17,7 @@ const {
 	start=2,
 	end=2,
 	middle=2,
+	index,
 	commas=true,
 	collapse=true
 } = Astro.props as Props;
@@ -28,6 +27,7 @@ function disabled(page: number) {
 	if(!collapse) return false;
 	//Skip current page
 	else if(+current === page) return false
+
 	//Calc End Pages
 	else if(page <= +start || page >= +total - (+end - 1)) return false;
 	//Calc Middle Pages
@@ -37,7 +37,7 @@ function disabled(page: number) {
 }
 ---
 
-{ Array.from({ length: +total }, (_, i) => i + 1).map(async(i) => {
+{ Array.from({ length: +total }, (_, i) => i + 1).map((i) => {
 	let slot: string;
 	//Active
 	if (+current === i) slot = 'active';
@@ -58,13 +58,11 @@ function disabled(page: number) {
 	}
 
 	const page = {
-		number: commas?
-			Intl.NumberFormat('en-us').format(i):
-			i,
-		href: `${url}/${i}`,
+		number: commas?Intl.NumberFormat('en-us').format(i):i,
+		href: i === 1?index?`${url}/`:`${url}/${i}`:`${url}/${i}`,
 		slot: slot
 	}
 
-	if (slot in Astro.slots) return await Astro.slots.render(slot, [page])
-	if (slot) return await Astro.slots.render('default', [page])
+	if (slot in Astro.slots) return <Fragment set:html={Astro.slots.render(slot, [page])}/>
+	if (slot) return <Fragment set:html={Astro.slots.render('default', [page])}/>
 })}
