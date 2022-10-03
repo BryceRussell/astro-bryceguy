@@ -6,9 +6,9 @@ export interface Props {
 }
 
 const {
-    data,
+    data=[],
     size=10,
-    page
+    page=1
 } = Astro.props
 
 function paginate(data:any[]) {
@@ -29,5 +29,7 @@ function paginate(data:any[]) {
     })
 }
 ---
-
-<Fragment set:html={Astro.slots.render('default', [paginate(data)[+page - 1]])}/>
+{() => {
+    if (Number.isInteger(+page) && page in Astro.slots) return <Fragment set:html={Astro.slots.render(''+page, [paginate(data)[+page - 1]])}/>
+    return <Fragment set:html={Astro.slots.render('default', [paginate(data)[+page - 1]])}/>
+}}

@@ -5,7 +5,10 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   root: './demo',
   srcDir: './demo/src',
-  integrations: [tailwind()],
+  //integrations: [tailwind()],
+  markdown: {
+    syntaxHighlight: false,
+  },
   vite: {
     ssr: {
       external: ["svgo"],
