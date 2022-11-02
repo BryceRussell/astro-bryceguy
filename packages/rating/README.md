@@ -1,4 +1,9 @@
-# @astro-bryceguy/rating
+# @astro-bryceguy/rating (Deprecated)
+
+### **NOTE**
+This component is old and deprecated, you can find a better version of this component here: [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
+
+---
 
 A component that uses stars to display a rating for reviews, products, comments, etc
 
