@@ -1,4 +1,9 @@
-# @astro-bryceguy/pagination
+# @astro-bryceguy/pagination (Deprecated)
+
+### **NOTE**
+This component is old and deprecated, you can find a better version of this component here: [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
+
+---
 
 This is a collection of components for paginating data and creating link navigation
 
