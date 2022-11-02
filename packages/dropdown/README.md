@@ -1,10 +1,13 @@
-# @astro-bryceguy/dropdown
+# @astro-bryceguy/dropdown(Deprecated)
+
+### **NOTE**
+This component is old and deprecated, you can find a better version of this component here: [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
+
+---
 
 A easy to use dropdown component made using XElement
 
-# SUBJECT TO CHANGE
-
-This was a project that I created for fun to explore how astro-xelement works. If you need a dropdown component you are probably better off using a more popular and stable library, I am either going to re-write this component as an astro compatible web component or delete it and create some Astro component wrappers for popular dropdown web componenets
+This was a project that I created for fun to explore how astro-xelement works. If you need a dropdown component you are probably better off using a more popular/stable/kown library
 
 ## Changes
 
