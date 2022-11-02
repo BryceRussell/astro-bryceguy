@@ -1,7 +1,6 @@
 # @astro-bryceguy/pagination (Deprecated)
 
-### **NOTE**
-This component is old and deprecated, you can find a better version of this component here: [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
+**NOTE** This package is old and deprecated, you can find a better version of these components here: [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
 
 ---
 
