@@ -2,7 +2,7 @@
   "author": "Bryce Russell",
   "license": "MIT",
   "name": "@astro-bryceguy/dropdown",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Easy to use dropdown component made using XElement",
   "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/dropdown#readme",
   "repository": {

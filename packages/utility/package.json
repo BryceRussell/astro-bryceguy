@@ -2,7 +2,7 @@
   "author": "Bryce Russell",
   "license": "MIT",
   "name": "@astro-bryceguy/utility",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A collection of utility components",
   "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/utility#readme",
   "repository": {
