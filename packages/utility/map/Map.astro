@@ -1,8 +1,6 @@
 ---
-//console.log(Astro.slots)
 export interface Props {
 	from?: any;
-	of?: any;
 	filter?: any;
 	sort?: any;
 	slice?: any;
@@ -12,18 +10,14 @@ export interface Props {
 
 const {
 	from,
-	of,
 	filter,
 	sort,
 	reverse,
 	...input
 } = Astro.props as Props
 
-console.log(input)
-
-var array = input? Object.values(input).reverse():
+var array = input? Object.values(input):
 			from?Array.from(from):
-			of?Array.of(of):
 			[];
 
 Object.keys(Astro.props).forEach((key) => {
@@ -36,12 +30,15 @@ Object.keys(Astro.props).forEach((key) => {
 			break;
 	}
 })
-
-console.log(array)
 ---
 
-{ Object.keys(Astro.slots).filter(i => Number.isInteger(+i)).map(async(i) => await Astro.slots.render(i, [array.at(+i)]) )}
+{
+	Object.keys(Astro.slots)
+		.filter(i => Number.isInteger(+i))
+		.sort((a, b) => +a - +b)
+		.map(async(i) => <Fragment set:html={Astro.slots.render(i, [array.at(+i)])}/>
+)}
 
-{ array.map(async(i) => await Astro.slots.render('default', [i]) )}
+{ array.map(async(i) => <Fragment set:html={Astro.slots.render('default', [i])}/> )}
 
-{await Astro.slots.render('last', [array.pop()])}
+<Fragment set:html={Astro.slots.render('last', [array.pop()])}/>

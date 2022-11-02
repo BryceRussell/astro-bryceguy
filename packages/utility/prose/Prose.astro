@@ -1,0 +1,111 @@
+---
+
+---
+<style is:global>
+	@import 'https://fonts.googleapis.com/css?family=Inter';
+	:root {
+		--primary: #db2c00;
+		--lighter: #f5f5f5;
+		--light: #ccc;
+		--dark: #333;
+		--darker: #222;
+		--fluid-0: clamp(.8rem, .06vw + .78rem, .83rem);
+		--fluid-1: clamp(.88rem, .21vw + .83rem, 1rem);
+		--fluid-2: clamp(.96rem, .4vw + .88rem, 1.2rem);
+		--fluid-3: clamp(1.06rem, .64vw + .93rem, 1.44rem);
+		--fluid-4: clamp(1.16rem, .94vw + .98rem, 1.73rem);
+		--fluid-5: clamp(1.28rem, 1.32vw + 1.02rem, 2.07rem);
+		--fluid-6: clamp(1.41rem, 1.8vw + 1.05rem, 2.49rem);
+		--fluid-7: clamp(1.55rem, 2.39vw + 1.07rem, 2.99rem);
+		--fluid-8: clamp(1.71rem, 3.13vw + 1.08rem, 3.58rem);
+		--fluid-9: clamp(1.88rem, 4.04vw + 1.07rem, 4.3rem);
+	} body {
+		height: 100%;
+		font-family: "Inter", "Helvetica", "Arial", sans-serif;
+		line-height: 1.5;
+		font-size: var(--fluid-1);
+		color: var(--dark);
+	} main {
+		height: 100%;
+		max-width: 80ch;
+		padding: 2ch;
+		margin: 0 auto;
+	}
+	::selection {
+		background-color: var(--primary);
+		color: #fff;
+	}
+	h1,h2,h3,h4,h5,h6,strong {
+		color: var(--darker);
+	}
+	h1 {
+		padding-bottom: .3em;
+		border-bottom: 2px solid var(--lighter);
+		font-size: var(--fluid-7);
+	} h2 {
+		padding-bottom: .3em;
+		border-bottom: 2px solid var(--lighter);
+		font-size: var(--fluid-6);
+	} h3 {
+		font-size: var(--fluid-5);
+	} h4 {
+		font-size: var(--fluid-4);
+	} h5 {
+		font-size: var(--fluid-3);
+	} h6 {
+		font-size: var(--fluid-2);
+	}
+	a {
+		text-decoration: none;
+		color: var(--primary);
+	} a:hover {
+		text-decoration: underline;
+	}
+	blockquote {
+		margin: .5em 0 .5em 2em;
+		padding: .5em 1em;
+		border-left: 3px solid var(--primary);
+	} * :not(pre) > code {
+		padding: 2px 4px;
+		vertical-align: text-bottom;
+		background-color: var(--lighter);
+		border-bottom: 1px solid var(--light);
+	} pre {
+		overflow-x: auto;
+		padding: 1em;
+		background-color: var(--lighter);
+		border-left: 2px solid var(--primary);
+		border-bottom: 1px solid var(--light);
+	}
+	img {
+		max-width: 100%;
+  		height: auto;
+	}
+	hr {
+		border: none;
+		height: 2px;
+		background-color: var(--lighter);
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing:0;
+	} th {
+		border-bottom: 2px solid var(--primary);
+		padding: .3em .5em;
+	} td {
+		padding: .3em .5em;
+		border: 1px solid var(--light);
+	}
+</style>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+	</head>
+	<body >
+		<main>
+			<slot></slot>
+		</main>
+	</body>
+</html>

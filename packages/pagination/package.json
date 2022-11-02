@@ -2,7 +2,7 @@
   "author": "Bryce Russell",
   "license": "MIT",
   "name": "@astro-bryceguy/pagination",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "This is a collection of components for paginating data and creating link navigation",
   "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/pagination#readme",
   "repository": {

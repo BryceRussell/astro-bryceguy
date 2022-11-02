@@ -17,7 +17,7 @@ Astro's `paginate()` function from `getStaticPaths()` inside of a component.
 **Example**:
 
 ```tsx
-<Paginate page="2" data={await fetch('https://jsonplaceholder.typicode.com/posts').then(response => response.json())}>
+<Paginate page={Astro.params.page} data={await fetch('https://jsonplaceholder.typicode.com/posts').then(response => response.json())}>
     {page => (
         <section>
             { page.data.map(post => (

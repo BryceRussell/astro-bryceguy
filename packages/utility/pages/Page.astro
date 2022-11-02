@@ -1,0 +1,117 @@
+---
+
+---
+<style is:global>
+	@import 'https://fonts.googleapis.com/css?family=Inter';
+	html {
+		height: 100%;
+		--color-primary: #0096db;
+		--color-lighter: #f5f5f5;
+		--color-light: #ccc;
+		--color-dark: #444;
+		--color-darker: #222;
+
+		--fluid-sm: clamp(0.8rem, 0.06vw + 0.78rem, 0.83rem);
+		--fluid-base: clamp(0.88rem, 0.21vw + 0.83rem, 1rem);
+		--fluid-md: clamp(0.96rem, 0.4vw + 0.88rem, 1.2rem);
+		--fluid-lg: clamp(1.06rem, 0.64vw + 0.93rem, 1.44rem);
+		--fluid-xl: clamp(1.16rem, 0.94vw + 0.98rem, 1.73rem);
+		--fluid-2xl: clamp(1.28rem, 1.32vw + 1.02rem, 2.07rem);
+		--fluid-3xl: clamp(1.41rem, 1.8vw + 1.05rem, 2.49rem);
+		--fluid-4xl: clamp(1.55rem, 2.39vw + 1.07rem, 2.99rem);
+		--fluid-5xl: clamp(1.71rem, 3.13vw + 1.08rem, 3.58rem);
+		--fluid-6xl: clamp(1.88rem, 4.04vw + 1.07rem, 4.3rem);
+	} body {
+		height: 100%;
+		font-family: "Inter", "Helvetica", "Arial", sans-serif;
+		line-height: 1.5;
+		
+		font-size: var(--fluid-base);
+		color: var(--color-dark);
+	} main {
+		height: 100%;
+		max-width: 80ch;
+		padding: 2ch;
+		margin: 0 auto;
+	}
+</style>
+
+<style is:global>
+	h1,h2,h3,h4,h5,h6 {
+		color: var(--color-darker);
+	}
+	h1 {
+		padding-bottom: 0.25em;
+		border-bottom: 2px solid var(--color-lighter);
+		font-size: var(--fluid-4xl);
+	} h2 {
+		padding-bottom: 0.25em;
+		border-bottom: 2px solid var(--color-lighter);
+		font-size: var(--fluid-3xl);
+	} h3 {
+		font-size: var(--fluid-2xl);
+	} h4 {
+		font-size: var(--fluid-xl);
+	} h5 {
+		font-size: var(--fluid-lg);
+	} h6 {
+		font-size: var(--fluid-md);
+	}
+
+	strong {
+		color: var(--color-darker);	
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--color-primary);
+	} a:hover {
+		text-decoration: underline;
+	}
+
+	blockquote {
+		margin: 0.5em 0 0.5em 2em;
+		padding: 0.5em 1em;
+		border-left: 3px solid var(--color-primary);
+	} * :not(pre) > code {
+		padding: 2px 4px;
+		vertical-align: text-bottom;
+		background-color: var(--color-lighter);
+		border-bottom: 1px solid var(--color-light);
+	} pre {
+		overflow-x: auto;
+		padding: 1em;
+		background-color: var(--color-lighter);
+		border-left: 2px solid var(--color-primary);
+		border-bottom: 1px solid var(--color-light);
+	}
+
+	hr {
+		border: none;
+		height: 2px;
+		background-color: var(--color-lighter);
+	}
+
+	table {
+		border-spacing:0;
+		border-collapse: collapse;
+	} th {
+		border-bottom: 2px solid var(--color-primary);
+		padding: 0.25em 0.5em;
+	} td {
+		padding: 0.25em 0.5em;
+		border: 2px solid var(--color-light);
+	}
+</style>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+	</head>
+	<body >
+		<main>
+			<slot></slot>
+		</main>
+	</body>
+</html>

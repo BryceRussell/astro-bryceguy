@@ -2,7 +2,7 @@
   "author": "Bryce Russell",
   "license": "MIT",
   "name": "@astro-bryceguy/utility",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of utility components",
   "homepage": "https://github.com/BryceRussell/astro-bryceguy/tree/master/packages/utility#readme",
   "repository": {
@@ -20,10 +20,5 @@
     "utility"
   ],
   "type": "module",
-  "main": "./index.mjs",
-  "exports": "./index.mjs",
-  "files": [
-    "index.mjs",
-    "Map.astro"
-  ]
+  "main": "./index.mjs"
 }

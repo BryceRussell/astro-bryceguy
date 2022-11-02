@@ -15,7 +15,7 @@ A component based abtraction of JSX Mapping and the `Array.prototype` object, si
 
 Pass an array of data, reverse/filter/sort it, iterate over it in a slot function
 
-**Example**:
+## `<Map>`
 
 ```tsx
 <Map

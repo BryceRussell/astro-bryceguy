@@ -1,20 +1,22 @@
 ---
-import { Map } from '@astro-bryceguy/utility';
+import Prose from '@astro-bryceguy/utility/prose/Prose.astro';
+import Map from '@astro-bryceguy/utility/map/Map.astro';
+import { Content } from './Markdown.md';
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Welcome to Astro</title>
 	</head>
-	<body style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin:3rem;">
-        <ul>
-            <Map {...Array.from({ length: 12 }, (v, i) => i + 1)} reverse>
-                <f slot="2">{item => <div>{item}</div>}</f>
-                <!-- {(item) => <li>{item}</li>} -->
-                <f slot="last">{item => <div>{item}</div>}</f>
+	<body >
+		<main>
+            <Map {...['one', 'two', 'three']}>
+                {(i) => <a>{i}</a>}
             </Map>
-        </ul>
+            <!-- <Prose>
+                <Content />
+            </Prose> -->
+		</main>
 	</body>
 </html>
