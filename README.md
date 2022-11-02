@@ -19,7 +19,7 @@ This is my Astro playground
 - **`<Breadcrumb>`**:  Site/URL hierarchy navigation 
 - **`<Rating>`**: Display a ratio of elements 1/5, 2.5/5, 8/10. Useful for star ratings on products, posts, comments, etc
 - **`<Icon>`**: Component wrapper for [`iconify-icon`](https://docs.iconify.design/iconify-icon/) web component, type support and automatic client side importing
-- ...
+- ... and Tons More
 
 
 
