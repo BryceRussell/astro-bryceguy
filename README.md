@@ -15,12 +15,12 @@ This is my Astro playground
 
 **Components**:
 
-- **`<A>`**: Active link, use slots for an alternative render if `href` prop matches `Astro.url.pathname`
-- **`<Paginate>`**: SSR version of Astro's static `paginate()`
-- **`<Pagination>`**: MPA link navigation for paginated routes
-- **`<Breadcrumb>`**:  Site/URL hierarchy navigation 
-- **`<Rating>`**: Display a ratio of elements 1/5, 2.5/5, 8/10. Useful for star ratings on products, posts, comments, etc
-- **`<Icon>`**: Component wrapper for [`iconify-icon`](https://docs.iconify.design/iconify-icon/) web component, type support and automatic client side importing
+- **`<Link>`**: Detect if a link is 'active'
+- **`<Navigation>`**: Useful for generating a list if links from a config file, active link support
+- **`<Breadcrumb>`**: Site/URL hierarchy navigation
+- **`<Paginate>`**: Paginate an array of data (SSR version of Astro's SSG `paginate()`)
+- **`<Pagination>`**: Multi page link navigation for paginated routes
+- **`<Rating>`**: Display a ratio of elements, useful for star ratings on products, posts, comments, etc
 - ... and Tons More
 
 
