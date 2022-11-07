@@ -2,12 +2,14 @@
 
 This is my Astro playground
 
+**NOTE**: These packages are deprecated and have been moved to `astro-headless-ui`
+
 - **`@astro-bryceguy/pagination`**: [Documentation](/packages/pagination)
 - **`@astro-bryceguy/rating`**: [Documentation](/packages/rating)
 - **`@astro-bryceguy/dropdown`**: [Documentation](/packages/dropdown)
 - **`@astro-bryceguy/utility`**: [Documentation](/packages/utility)
 
-**NOTE**: These packages are deprecated and have been moved to:
+**NOTE**: These packages are deprecated and have been moved to `astro-headless-ui`
 
 ## [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
 
