@@ -15,5 +15,8 @@
   "workspaces": [
     "./packages/*",
     "./demo"
-  ]
+  ],
+  "dependencies": {
+    "astro-headless-ui": "^0.0.12"
+  }
 }

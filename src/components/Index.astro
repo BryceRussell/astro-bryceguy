@@ -1,0 +1,55 @@
+---
+const {
+    
+} = Astro.props
+
+interface Entries {
+    [title: string]: string[] | (string|number)[][] | (string|(string|number)[])[];
+}
+
+const test: Entries = {
+    carrots: [
+        ['types ', 90, '-', 94],
+        'colors, 95'
+    ],
+    grapes: [
+        'colors, 101-102, 104',
+        'flavors, 103-105'
+    ],
+    apples: [
+        'trees, 57-64',
+        'types, 64, 68-69'
+    ],
+    apricot: [
+        'trees, 48-50',
+        'types, 51'
+    ]
+}
+
+const abcs = [...'abcdefghijklmnopqrstuvwxyz'];
+
+const sorted = Object.entries(test)
+    .sort(([key1, val1], [key2, val2]) => key1.localeCompare(key2))
+    .reduce(function(obj, [key, val]) {
+        const first = key.slice(0, 1)
+        if (!obj[first]) obj[first] = []
+        obj[first].push({ [key]: val });
+        return obj;
+    }, {});
+---
+
+{ abcs.map((letter) => {
+    if (Object.keys(sorted).includes(letter)) return (
+        <h2>{letter.toUpperCase()}</h2>
+        <dl>
+            { sorted[letter].map((obj) => {
+                return Object.entries(obj).map(([title, entries]) => <>
+                    <dt>{title}</dt>
+                    {entries.map((v) => {
+
+                    })}
+                </>)
+            })}
+        </dl>
+    )
+})}
