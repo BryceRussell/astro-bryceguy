@@ -6,8 +6,6 @@ This is my Astro playground for testing components
 
 **Note**: These packages have been deprecated, refactored, and moved to  [`astro-headless-ui`](https://github.com/BryceRussell/astro-headless-ui)
 
-**NOTE**: These packages are deprecated and have been moved to `astro-headless-ui`
-
 - **`@astro-bryceguy/pagination`**: [Documentation](/packages/pagination)
 - **`@astro-bryceguy/rating`**: [Documentation](/packages/rating)
 - **`@astro-bryceguy/dropdown`**: [Documentation](/packages/dropdown)
