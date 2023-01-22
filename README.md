@@ -1,6 +1,6 @@
 # astro-bryceguy
 
-This is an old monorepo for a few Astro component packages, these packages have been all been depreciated or removed. All components have been updated and moved to [`astro-headless-ui`](https://github.com/BryceRussell/astro-headless-ui) library
+This is an old monorepo for a few Astro component packages I made, these packages have been all been depreciated and moved to [`astro-headless-ui`](https://github.com/BryceRussell/astro-headless-ui)
 
 ## [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
 
