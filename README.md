@@ -1,31 +1,30 @@
 # astro-bryceguy
 
-This is my Astro playground for testing components
-
-## Packages
-
-**Note**: These packages have been deprecated, refactored, and moved to  [`astro-headless-ui`](https://github.com/BryceRussell/astro-headless-ui)
-
-- **`@astro-bryceguy/pagination`**: [Documentation](/packages/pagination)
-- **`@astro-bryceguy/rating`**: [Documentation](/packages/rating)
-- **`@astro-bryceguy/dropdown`**: [Documentation](/packages/dropdown)
-- **`@astro-bryceguy/utility`**: [Documentation](/packages/utility)
+This is an old monorepo for a few Astro component packages, these packages have been all been depreciated or removed. All components have been updated and moved to [`astro-headless-ui`](https://github.com/BryceRussell/astro-headless-ui) library
 
 ## [astro-headless-ui](https://github.com/BryceRussell/astro-headless-ui)
 
 **[`<AnimatedSpriteSheet>`](https://github.com/BryceRussell/astro-headless-ui/wiki/AnimatedSpriteSheet)**
+**[`<IconSwitcher>`](https://github.com/BryceRussell/astro-headless-ui/wiki/IconSwitcher)**
 **[`<Rating>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Rating)**
 **[`<Link>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Link)**
 **[`<Navigation>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Navigation)**
 **[`<Breadcrumb>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Breadcrumb)**
 **[`<Paginate>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Paginate)**
 **[`<Pagination>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Pagination)**
-**`<Map>`**
-**`<NoScriptProp>`**
-**`<ScrollProp>`**
-**`<MouseProp>`**
-**`<NetworkProp>`**
-**`...and more`**
+**[`<Show>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Show)**
+**[`<Switch>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Switch)**
+**[`<Map>`](https://github.com/BryceRussell/astro-headless-ui/wiki/Map)**
+**[`<DarkThemeToggle>`](https://github.com/BryceRussell/astro-headless-ui/wiki/DarkThemeToggle)**
+**[`<CodeCopy>`](https://github.com/BryceRussell/astro-headless-ui/wiki/CodeCopy)**
+**[`...and more`](https://github.com/BryceRussell/astro-headless-ui/wiki)**
+
+## Old Packages
+
+- **[`@astro-bryceguy/pagination`](/packages/pagination)**
+- **[`@astro-bryceguy/rating`](/packages/rating)**
+- **[`@astro-bryceguy/dropdown`](/packages/dropdown)**
+- **[`@astro-bryceguy/utility`](/packages/utility)**
 
 
 
